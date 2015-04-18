@@ -39,3 +39,20 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 
 
 
+## Übersicht
+
+####Woche 01 (03/23) Einführungsveranstaltung
+####Woche 02 (04/13) Praxisbeispiele / Grundlagen Canvas Element
+####Woche 03 (04/20)
+####Woche 04 (04/27) 
+####Woche 05 (05/04) 
+####Woche 06 (05/11) 
+####Woche 07 (05/18) 
+####Woche 08 (05/25) Entfällt (Pfingstmontag)
+####Woche 07 (06/01) 
+####Woche 07 (06/08) 
+####Woche 07 (06/15) 
+####Woche 07 (06/22) 
+####Woche 07 (06/29) 
+
+
