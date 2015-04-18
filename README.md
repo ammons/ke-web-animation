@@ -2,7 +2,7 @@
 # K+E Digitale Leinwände (SS-2015)
 ========================
 
-Hochschule Mainz / Konzeption & Entwurf - Digitale Leinwände (Stefan Ammon)
+Sammlung zum Kurs Konzeption & Entwurf - "Digitale Leinwände" an der Hochschule-Mainz (Stefan Ammon)
 
 ####Links zu den Beispielen:
 
