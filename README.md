@@ -25,25 +25,35 @@ Konzeption & Entwurf - Digitale Leinwände (Stefan Ammon)
 
 ---
 #### Kursinhalt
-Seit einiger Zeit kursiert ein ›Buzzword‹ unter Designern, das Spannung und Substanz verspricht, aber auch für Missverständnis sorgt: das Storytelling. Mit Nicola Ammon von GARDENERS und Stefan Ammon von MESO Web Scapes werden Sie untersuchen, was es mit diesem Begriff im Bereich des Design überhaupt auf sich hat und welche verschiedenen Varianten des Storytelling sinnvoll sind, um dann eine eigene ›Erzählung‹ auszuarbeiten.
-Dabei soll es im Besonderen um die Möglichkeiten des interaktiven Erzählens gehen. Gefragt sind weniger fiktive Themen als solche, zu denen Sie vielfältiges dokumentarisches Material finden können. Große Zeitungen, wie die NEW YORK TIMES, THE GUARDIAN oder die NZZ haben in ihren digitalen Ausgaben gezeigt, wie man aus Texten in angemessener Typografie und in Kombination mit Video, Ton und Fotografie ein spannendes, neues Editorial- Design entwickelt.
-Verschiedene Visualisierungsmethoden zur Entwicklung werden dabei besprochen. Nach der Konzeption und Visualisierung einer eigenen Geschichte werden Sie Techniken zu deren Umsetzung kennen lernen (Flexible Layouts, Webtypografie etc.).
-Abgerundet wird der Kurs durch eine Exkursion zu Agenturen und Büros in Frankfurt.
-
-#### Lehrform
-Workshops, Vorlesungen, Arbeitsbesprechungen, Exkursion
-
-#### Qualifikationsziel
-- Visualisierungsmethoden kennen lernen 
-- Aktuelles Webdesign kennen lernen und erproben 
-- Interaktives Storytelling erproben
-
-#### Leistungsnachweis
-- Zwischenpräsentation
-- Endpräsentation
-- Ausgearbeitetes Konzept zu einer interaktiven Erzählung Umsetzung in interaktiver Form
+So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind auch deren Einschränkungen in Punkto Browser- und Plattform-Kompatibilität. Mit dem <Canvas> HTML Element steht für den 2D Bereich jetzt schon ein sehr offenes Experimentierfeld zur Verfügung und sobald WebGL durchgängig von allen Browser unterstützt wird stehen uns damit auch dreidimensionale Gestaltungswege offen. Unbeeindruckt von aktuellen Kompatibilitätszwängen wollen wir untersuchen welche gestalterischen Möglichkeiten sich daraus ergeben, welche „Tools“ und „Workflows“ bereits existieren und wie man dieses HTML-Element mit den herkömmlichen Elementen verknüpfen kann. Dafür entwi- ckeln wir konzeptionelle Studien.
 
 
+#### Lehrform:
+Seminar, Workshop
+
+#### Qualifikationsziel:
+- Überblick aktueller Webtechnologien
+- Erlernen prototypischer Umsetzungstrategien 
+- Umsetzung gestalterischer Ideen mit den Mitteln der Webentwicklung
+- Sammeln praktischer Erfahrungen mit den Tools und Workflows der Webentwicklung
+- Einschätzung und Bewertung von Innovationen im Netz
+
+#### Kursleiter:
+Stefan Ammon
+
+#### Zeit:
+montags, 09:30 - 13:30 uhr
+
+#### Ort:
+Raum H2.03
+
+#### Teilnehmer:
+20
+
+#### Leistungsnachweis:
+• Ideensammlung
+• Konzeption und praktische Umsetzung
+• Präsentation und Dokumentation der individuellen Ergebnisse
 
 
 
