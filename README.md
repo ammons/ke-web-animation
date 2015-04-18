@@ -51,9 +51,9 @@ Raum H2.03
 20
 
 #### Leistungsnachweis:
-• Ideensammlung
-• Konzeption und praktische Umsetzung
-• Präsentation und Dokumentation der individuellen Ergebnisse
+- Ideensammlung
+- Konzeption und praktische Umsetzung
+- Präsentation und Dokumentation der individuellen Ergebnisse
 
 
 
