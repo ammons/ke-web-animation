@@ -5,7 +5,7 @@ __Sammlung zum Kurs Konzeption & Entwurf - "Digitale Leinwände" an der Hochschu
 
 
 ### Informationen zum Kurs
----
+------
 
 
 #### Kursinhalt
