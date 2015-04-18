@@ -3,6 +3,8 @@ K+E Digitale Leinwände (SS-2015)
 __Sammlung zum Kurs Konzeption & Entwurf - "Digitale Leinwände" an der Hochschule-Mainz (Stefan Ammon)__
 
 
+
+
 #### Kursinhalt
 So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind auch deren Einschränkungen in Punkto Browser- und Plattform-Kompatibilität. Mit dem <Canvas> HTML Element steht für den 2D Bereich jetzt schon ein sehr offenes Experimentierfeld zur Verfügung und sobald WebGL durchgängig von allen Browser unterstützt wird stehen uns damit auch dreidimensionale Gestaltungswege offen. Unbeeindruckt von aktuellen Kompatibilitätszwängen wollen wir untersuchen welche gestalterischen Möglichkeiten sich daraus ergeben, welche „Tools“ und „Workflows“ bereits existieren und wie man dieses HTML-Element mit den herkömmlichen Elementen verknüpfen kann. Dafür entwi- ckeln wir konzeptionelle Studien.
 
