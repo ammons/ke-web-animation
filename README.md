@@ -1,5 +1,5 @@
-# ke-canvas
-K+E Digitale Leinwände SS15
+
+# K+E Digitale Leinwände SS15
 ========================
 
 Konzeption & Entwurf - Digitale Leinwände (Stefan Ammon)
