@@ -55,4 +55,13 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 ####Woche 07 (06/22) 
 ####Woche 07 (06/29) 
 
+## Tools
+#### Code Editoren:
+- Sublime Text  http://www.sublimetext.com/
+- Webstorm  https://www.jetbrains.com/webstorm/?fromMenu
+- Brackets  http://brackets.io/
+
+#### Browser
+- Google Chrome  https://www.google.de/chrome/browser/desktop/
+- Mozilla Firefox  https://www.mozilla.org/de/firefox/new/
 
