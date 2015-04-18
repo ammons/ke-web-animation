@@ -1,8 +1,8 @@
 
-# K+E Digitale Leinwände SS15
+# K+E Digitale Leinwände (SS-2015)
 ========================
 
-Konzeption & Entwurf - Digitale Leinwände (Stefan Ammon)
+Hochschule Mainz / Konzeption & Entwurf - Digitale Leinwände (Stefan Ammon)
 
 ####Links zu den Beispielen:
 
@@ -29,7 +29,7 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 
 
 #### Lehrform:
-Seminar, Workshop
+- Seminar, Workshop
 
 #### Qualifikationsziel:
 - Überblick aktueller Webtechnologien
@@ -39,16 +39,16 @@ Seminar, Workshop
 - Einschätzung und Bewertung von Innovationen im Netz
 
 #### Kursleiter:
-Stefan Ammon
+- Stefan Ammon
 
 #### Zeit:
-montags, 09:30 - 13:30 uhr
+- montags, 09:30 - 13:30 uhr
 
 #### Ort:
-Raum H2.03
+- Raum H2.03
 
 #### Teilnehmer:
-20
+- 20
 
 #### Leistungsnachweis:
 - Ideensammlung
