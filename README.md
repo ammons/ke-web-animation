@@ -1,4 +1,4 @@
-K+E Digitale Leinwände (SS-2015)
+K+E "Digitale Leinwände" (SS-2015)
 ===================================
 __Sammlung zum Kurs Konzeption & Entwurf - "Digitale Leinwände" an der Hochschule-Mainz (Stefan Ammon)__
 
