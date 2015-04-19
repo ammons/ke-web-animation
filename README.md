@@ -79,18 +79,15 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 
 ## Ressourcen
 
-**Knowledge Base**
-
-1. [HTML5 Canvas Cheat Sheet](http://www.selfhtml5.org/wp-content/uploads/2010/07/HTML5_Canvas_Cheat_Sheet.png)
-
-**Turtorials**
+**Canvas-2D Turtorials**
 - [html5canvastutorials.com](http://www.html5canvastutorials.com/tutorials/html5-canvas-element/)
 - [Peter Körner: Eine kleine CANVAS Einführung](http://www.peterkroener.de/eine-kleine-canvas-einfuehrung/)
 - [Canvas Tutorial](http://canvas.quaese.de/)
 - [HTML5 Doctor <CANVAS>](http://html5doctor.com/an-introduction-to-the-canvas-2d-api/)
 - https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+- [HTML5 Canvas Cheat Sheet](http://www.selfhtml5.org/wp-content/uploads/2010/07/HTML5_Canvas_Cheat_Sheet.png)
 
-**Definition**
+**Canvas-2D Definition**
 - http://www.w3.org/wiki/HTML/Elements/canvas
 - http://www.w3.org/TR/2dcontext/
 - http://de.wikipedia.org/wiki/Canvas_(HTML-Element)
@@ -106,7 +103,6 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 -  GIT http://rogerdudler.github.io/git-guide/
 - [Github Tutorial for Beginners (Mac & PC)](https://www.youtube.com/watch?v=0fKg7e37bQE) 
 - [Github Tutorial by Github](https://try.github.io/levels/1/challenges/1) 
-
 
 **Further Reading**
 - https://www.khanacademy.org/computing/computer-programming
