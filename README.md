@@ -73,9 +73,25 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 1. [HTML5 Canvas Cheat Sheet](http://www.selfhtml5.org/wp-content/uploads/2010/07/HTML5_Canvas_Cheat_Sheet.png)
 
 **Turtorials**
-
 1. [html5canvastutorials.com](http://www.html5canvastutorials.com/tutorials/html5-canvas-element/)
 2. [Peter Körner: Eine kleine CANVAS Einführung](http://www.peterkroener.de/eine-kleine-canvas-einfuehrung/)
 3. [Canvas Tutorial](http://canvas.quaese.de/)
+4. [HTML5 Doctor <CANVAS>](http://html5doctor.com/an-introduction-to-the-canvas-2d-api/)
+5. https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
 
+**Definition**
+1. http://www.w3.org/wiki/HTML/Elements/canvas
+2. http://www.w3.org/TR/2dcontext/
+2. http://de.wikipedia.org/wiki/Canvas_(HTML-Element)
+3. http://en.wikipedia.org/wiki/Canvas_element
+5. https://html.spec.whatwg.org/#the-canvas-element
+
+**P5.js**
+- http://risd-creative-programming.github.io/s15-codeasmedium/examples.html
+- http://coursescript.com/notes/interactivecomputing/
+- https://github.com/processing/p5.js/wiki/Education
+
+
+**Further Reading**
+https://www.khanacademy.org/computing/computer-programming
 
