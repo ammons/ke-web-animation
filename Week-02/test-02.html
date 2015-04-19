@@ -11,23 +11,31 @@
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
 
-    var OffX = c.offsetTop;
-    var OffY = c.offsetLeft;
-
     ctx.fillStyle = "#00ff00";
     ctx.fillRect(0, 0, 100, 1000);
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, 100, 100);
 
+
+    function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        };
+    }
+
     c.addEventListener("mousedown", function (e) {
-        //draw("blue", e.x, e.y, 30, 30);
-        ctx.clearRect(e.x - 10, e.y - 10, 10, 10);
-        console.log("helo ", e);
+        var mousePos = getMousePos(c, e);
+
+        draw("blue", mousePos.x, mousePos.y, 30, 30);
+        ctx.clearRect(mousePos.x, mousePos.y, 10, 10);
+        console.log("helo ", e, "mousePosX: " + mousePos.x, "mousePosX: " + mousePos.y);
     });
 
     var draw = function (color, posx, posy, width, height) {
         ctx.fillStyle = color;
-        ctx.fillRect(posx - OffX, posy - OffY, width, height);
+        ctx.fillRect(posx, posy, width, height);
     }
 
 

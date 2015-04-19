@@ -1,0 +1,32 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="global.css"/>
+    <title>Document</title>
+</head>
+<body>
+<canvas id="myCanvas" width="300" height="225"></canvas>
+
+<script>
+    function canvasToImg() {
+        var canvas = document.getElementById("myCanvas");
+        var ctx=canvas.getContext("2d");
+
+        //draw a red box
+        ctx.fillStyle="#FF0000";
+        ctx.fillRect(10,10,30,30);
+
+        var url = canvas.toDataURL();
+
+        var newImg = document.createElement("img"); // create img tag
+        newImg.src = url;
+        document.body.appendChild(newImg); // add to end of your document
+
+        ctx.clearRect();
+    }
+
+    canvasToImg(); //execute the function
+</script>
+
+</body>
+</html>
