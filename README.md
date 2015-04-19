@@ -43,7 +43,7 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 
 ####Woche 01 (03/23) Einführungsveranstaltung
 ####Woche 02 (04/13) Praxisbeispiele / Grundlagen Canvas Element
-####Woche 03 (04/20)
+####Woche 03 (04/20) Grundlagen Canvas Element II / p5.js Experimente
 ####Woche 04 (04/27) 
 ####Woche 05 (05/04) 
 ####Woche 06 (05/11) 
@@ -99,6 +99,9 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - [HTML5 Doctor <CANVAS>](http://html5doctor.com/an-introduction-to-the-canvas-2d-api/)
 - https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
 - [HTML5 Canvas Cheat Sheet](http://www.selfhtml5.org/wp-content/uploads/2010/07/HTML5_Canvas_Cheat_Sheet.png)
+- [Safari HTML5 Canvas Guide](https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/HTML-canvas-guide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40010542-CH1-SW1)
+- http://creativejs.com/2011/08/31-days-of-canvas-tutorials/
+- http://www.w3schools.com/html/html5_canvas.asp
 
 **Canvas-2D Definition**
 - http://www.w3.org/wiki/HTML/Elements/canvas
@@ -115,6 +118,14 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - Code Examples
 	- https://github.com/shiffman/The-Nature-of-Code-Examples-p5.js
 - https://github.com/processing/p5.js-editor
+
+**Other Canvas-2D Frameworks**
+##### Paper.js
+- http://paperjs.org/
+- http://www.staggeringbeauty.com/
+##### Two.js
+- https://jonobr1.github.io/two.js/ 
+- http://javascreen.tristanbagot.com/
 
 **Code Versionierung**
 -  [A GIT Guide](http://rogerdudler.github.io/git-guide/)
@@ -147,3 +158,7 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - http://worrydream.com/LearnableProgramming/
 - http://worrydream.com/
 - brad Victor Talk https://vimeo.com/36579366
+
+**Inspiration**
+- http://bdadam.com/blog/panning-and-scrolling-background-images-using-the-canvas-element.html
+- https://paul.kinlan.me/canvas-on-the-background/
