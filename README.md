@@ -120,10 +120,10 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - https://github.com/processing/p5.js-editor
 
 **Other Canvas-2D Frameworks**
-	**Paper.js**
+- **Paper.js**
 	- http://paperjs.org/
 	- http://www.staggeringbeauty.com/
-	**Two.js**
+- **Two.js**
 	- https://jonobr1.github.io/two.js/ 
 	- http://javascreen.tristanbagot.com/
 
