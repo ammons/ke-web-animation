@@ -49,13 +49,15 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 ####Woche 06 (05/11) 
 ####Woche 07 (05/18) 
 ####Woche 08 (05/25) Entfällt (Pfingstmontag)
-####Woche 07 (06/01) 
-####Woche 07 (06/08) 
-####Woche 07 (06/15) 
-####Woche 07 (06/22) 
-####Woche 07 (06/29) 
+####Woche 09 (06/01) 
+####Woche 10 (06/08) 
+####Woche 11 (06/15) 
+####Woche 12 (06/22) 
+####Woche 13 (06/29) 
+
 
 ## Tools
+
 #### Code Editoren:
 - Sublime Text  http://www.sublimetext.com/
 - Webstorm  https://www.jetbrains.com/webstorm/?fromMenu
@@ -65,6 +67,9 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - Google Chrome  https://www.google.de/chrome/browser/desktop/
 - Mozilla Firefox  https://www.mozilla.org/de/firefox/new/
 
+#### Code-Versionierung
+- Git
+- Github
 
 ## Ressourcen
 
@@ -90,6 +95,10 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - http://risd-creative-programming.github.io/s15-codeasmedium/examples.html
 - http://coursescript.com/notes/interactivecomputing/
 - https://github.com/processing/p5.js/wiki/Education
+
+**Code Versionierung**
+- http://rogerdudler.github.io/git-guide/
+- [Github Tutorial for Beginners (Mac & PC)](https://www.youtube.com/watch?v=0fKg7e37bQE) 
 
 
 **Further Reading**
