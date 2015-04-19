@@ -61,7 +61,9 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 
 #### Code Editoren:
 - Sublime Text  http://www.sublimetext.com/
-- Webstorm  https://www.jetbrains.com/webstorm/?fromMenu
+- Webstorm  
+	- https://www.jetbrains.com/webstorm/?fromMenu
+	- https://www.jetbrains.com/student/
 - Brackets  http://brackets.io/
 
 #### Browser
@@ -74,7 +76,8 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 
 #### Code-Versionierung
 - [Git](http://git-scm.com/)
-- [Github](https://github.com/) 
+- [Github](https://github.com/)
+- [Github Education Pack](https://education.github.com/pack)
 
 #### Local Server
 - https://github.com/processing/p5.js/wiki/Local-server
