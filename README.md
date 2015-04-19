@@ -76,5 +76,6 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 
 1. [html5canvastutorials.com](http://www.html5canvastutorials.com/tutorials/html5-canvas-element/)
 2. [Peter Körner: Eine kleine CANVAS Einführung](http://www.peterkroener.de/eine-kleine-canvas-einfuehrung/)
+3. [Canvas Tutorial](http://canvas.quaese.de/)
 
 
