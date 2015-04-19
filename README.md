@@ -56,6 +56,7 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 ####Woche 13 (06/29) 
 
 
+
 ## Tools
 
 #### Code Editoren:
@@ -70,6 +71,11 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 #### Code-Versionierung
 - Git
 - Github
+
+#### Local Server
+- https://github.com/processing/p5.js/wiki/Local-server
+
+
 
 ## Ressourcen
 
@@ -97,10 +103,19 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - https://github.com/processing/p5.js/wiki/Education
 
 **Code Versionierung**
-- http://rogerdudler.github.io/git-guide/
+-  GIT http://rogerdudler.github.io/git-guide/
 - [Github Tutorial for Beginners (Mac & PC)](https://www.youtube.com/watch?v=0fKg7e37bQE) 
+- [Github Tutorial by Github](https://try.github.io/levels/1/challenges/1) 
 
 
 **Further Reading**
-https://www.khanacademy.org/computing/computer-programming
+- https://www.khanacademy.org/computing/computer-programming
+- https://www.khanacademy.org/computing/computer-programming/docs/pjs
+- https://www.khanacademy.org/computing/computer-programming/programming
+- https://www.khanacademy.org/computing/hour-of-code/hour-of-code-tutorial/v/anybody-can-learn-code
+- http://www.codecademy.com/en/tracks/javascript
 
+- http://ejohn.org/blog/introducing-khan-cs/
+- http://worrydream.com/LearnableProgramming/
+- http://worrydream.com/
+- brad Victor Talk https://vimeo.com/36579366
