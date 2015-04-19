@@ -206,6 +206,6 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - http://worrydream.com/
 - brad Victor Talk https://vimeo.com/36579366
 
-**Inspiration**
+**Inspirational**
 - http://bdadam.com/blog/panning-and-scrolling-background-images-using-the-canvas-element.html
 - https://paul.kinlan.me/canvas-on-the-background/
