@@ -61,7 +61,9 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 
 #### Code Editoren:
 - Sublime Text  http://www.sublimetext.com/
-- Webstorm  https://www.jetbrains.com/webstorm/?fromMenu
+- Webstorm  
+	- https://www.jetbrains.com/webstorm/?fromMenu
+	- https://www.jetbrains.com/student/
 - Brackets  http://brackets.io/
 
 #### Browser
@@ -74,7 +76,8 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 
 #### Code-Versionierung
 - [Git](http://git-scm.com/)
-- [Github](https://github.com/) 
+- [Github](https://github.com/)
+- [Github Education Pack](https://education.github.com/pack)
 
 #### Local Server
 - https://github.com/processing/p5.js/wiki/Local-server
@@ -120,6 +123,7 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - [Github Tutorial by Github](https://try.github.io/levels/1/challenges/1) 
 
 **Javascript**
+- https://github.com/processing/p5.js/wiki/JavaScript-basics
 - http://bonsaiden.github.io/JavaScript-Garden/
 - http://eloquentjavascript.net/1st_edition/contents.html
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript
@@ -139,7 +143,6 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - https://www.khanacademy.org/computing/computer-programming/programming
 - https://www.khanacademy.org/computing/hour-of-code/hour-of-code-tutorial/v/anybody-can-learn-code
 - http://www.codecademy.com/en/tracks/javascript
-
 - http://ejohn.org/blog/introducing-khan-cs/
 - http://worrydream.com/LearnableProgramming/
 - http://worrydream.com/
