@@ -68,6 +68,10 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - Google Chrome  https://www.google.de/chrome/browser/desktop/
 - Mozilla Firefox  https://www.mozilla.org/de/firefox/new/
 
+#### Browser Dev-Tools
+- https://developer.chrome.com/devtools
+- https://developer.mozilla.org/de/docs/Tools
+
 #### Code-Versionierung
 - [Git](http://git-scm.com/)
 - [Github](https://github.com/) 
@@ -107,12 +111,27 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - https://github.com/processing/p5.js/wiki/Education
 - Code Examples
 	- https://github.com/shiffman/The-Nature-of-Code-Examples-p5.js
+- https://github.com/processing/p5.js-editor
 
 **Code Versionierung**
 -  [A GIT Guide](http://rogerdudler.github.io/git-guide/)
 - [GIT Documentation](http://git-scm.com/documentation)
 - [Github Tutorial for Beginners (Mac & PC)](https://www.youtube.com/watch?v=0fKg7e37bQE) 
 - [Github Tutorial by Github](https://try.github.io/levels/1/challenges/1) 
+
+**Javascript**
+- http://bonsaiden.github.io/JavaScript-Garden/
+- http://eloquentjavascript.net/1st_edition/contents.html
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript
+- http://www.jstherightway.org/
+
+**Dev-Tools Tutorials** 
+- http://www.developerfusion.com/article/139949/debugging-javascript-with-firebug/
+- https://developer.chrome.com/extensions/tut_debugging
+
+**Creative Coding**
+- https://www.youtube.com/watch?v=eBV14-3LT-g
 
 **Further Reading**
 - https://www.khanacademy.org/computing/computer-programming
