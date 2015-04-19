@@ -142,7 +142,6 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - https://www.khanacademy.org/computing/computer-programming/programming
 - https://www.khanacademy.org/computing/hour-of-code/hour-of-code-tutorial/v/anybody-can-learn-code
 - http://www.codecademy.com/en/tracks/javascript
-
 - http://ejohn.org/blog/introducing-khan-cs/
 - http://worrydream.com/LearnableProgramming/
 - http://worrydream.com/
