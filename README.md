@@ -56,6 +56,10 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 ####Woche 13 (06/29) 
 
 
+## Evaluation
+- Regular Assignments 35%
+- Participation and Attendance 35%
+- Final Projects 30%
 
 ## Tools
 
@@ -111,6 +115,7 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - https://html.spec.whatwg.org/#the-canvas-element
 
 **P5.js**
+- http://hello.p5js.org/
 - https://github.com/processing/p5.js/wiki/p5.js-overview
 - http://risd-creative-programming.github.io/s15-codeasmedium/examples.html
 - http://coursescript.com/notes/interactivecomputing/
@@ -127,11 +132,53 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 	- https://jonobr1.github.io/two.js/ 
 	- http://javascreen.tristanbagot.com/
 
+**Canvas-3D Frameworks**
+- [Three.js](http://threejs.org/)
+- [Pixi.js](http://www.pixijs.com/)
+
+**Canvas-3D Anwednungsbeispiele**
+- https://boda.sensors.jp/
+- https://www.google.de/maps/
+- https://photosynth.net/preview/
+- https://streetart.withgoogle.com/de/audio-tours
+- http://a-way-to-go.com/
+- http://lights.helloenjoy.com/
+- http://bartekdrozdz.com/project/soundviz
+- http://www.findyourwaytooz.com/
+- http://www.ro.me/
+- http://spacecraftforall.com/a-new-orbit
+- http://riskeverything.nike.com/
+- http://alteredqualia.com/three/examples/webgl_materials_skin.html
+- http://www.overthetinyhills.com/
+
+**Beyond Canvas**
+- http://www.overthetinyhills.com/
+- http://learningthreejs.com/data/2013-04-30-closing-the-gap-between-html-and-webgl/index.html
+- http://learningthreejs.com/blog/2013/04/30/closing-the-gap-between-html-and-webgl/
+- http://acko.net/blog/making-mathbox/
+
+**Canvas IDE´s**
+- **Unity3D**
+	- https://www.youtube.com/watch?v=IH6_ZN5CcJg&t=21
+	- https://www.youtube.com/watch?v=tSfakMeW0lw&t=167
+- **Blender** 
+	- https://www.blend4web.com/en/
+- **Adobe Edge Animate**
+	- https://creative.adobe.com/de/products/animate
+- **Adobe Flash Professional**
+	- https://helpx.adobe.com/de/flash/
+
 **Code Versionierung**
 -  [A GIT Guide](http://rogerdudler.github.io/git-guide/)
 - [GIT Documentation](http://git-scm.com/documentation)
 - [Github Tutorial for Beginners (Mac & PC)](https://www.youtube.com/watch?v=0fKg7e37bQE) 
 - [Github Tutorial by Github](https://try.github.io/levels/1/challenges/1) 
+
+**Canvas Frameworks Others:**
+- http://www.vvvvjs.com/
+- http://impactjs.com/
+- http://createjs.com/Home
+
 
 **Javascript**
 - https://github.com/processing/p5.js/wiki/JavaScript-basics
