@@ -65,3 +65,16 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - Google Chrome  https://www.google.de/chrome/browser/desktop/
 - Mozilla Firefox  https://www.mozilla.org/de/firefox/new/
 
+
+## Ressourcen
+
+**Knowledge Base**
+
+1. [HTML5 Canvas Cheat Sheet](http://www.selfhtml5.org/wp-content/uploads/2010/07/HTML5_Canvas_Cheat_Sheet.png)
+
+**Turtorials**
+
+1. [html5canvastutorials.com](http://www.html5canvastutorials.com/tutorials/html5-canvas-element/)
+2. [Peter Körner: Eine kleine CANVAS Einführung](http://www.peterkroener.de/eine-kleine-canvas-einfuehrung/)
+
+
