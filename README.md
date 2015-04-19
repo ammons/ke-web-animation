@@ -69,11 +69,17 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - Mozilla Firefox  https://www.mozilla.org/de/firefox/new/
 
 #### Code-Versionierung
-- Git
-- Github
+- [Git](http://git-scm.com/)
+- [Github](https://github.com/) 
 
 #### Local Server
 - https://github.com/processing/p5.js/wiki/Local-server
+- SimpleHTTPServer
+	- https://github.com/lmccart/itp-creative-js/wiki/SimpleHTTPServer
+- Servi
+	- https://github.com/shiffman/servi.js
+	- https://github.com/antiboredom/servi.js/wiki/Setting-up-a-servi.js-project-without-the-servi-editor
+	- https://github.com/antiboredom/servi.js/wiki
 
 
 
@@ -95,12 +101,16 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - https://html.spec.whatwg.org/#the-canvas-element
 
 **P5.js**
+- https://github.com/processing/p5.js/wiki/p5.js-overview
 - http://risd-creative-programming.github.io/s15-codeasmedium/examples.html
 - http://coursescript.com/notes/interactivecomputing/
 - https://github.com/processing/p5.js/wiki/Education
+- Code Examples
+	- https://github.com/shiffman/The-Nature-of-Code-Examples-p5.js
 
 **Code Versionierung**
--  GIT http://rogerdudler.github.io/git-guide/
+-  [A GIT Guide](http://rogerdudler.github.io/git-guide/)
+- [GIT Documentation](http://git-scm.com/documentation)
 - [Github Tutorial for Beginners (Mac & PC)](https://www.youtube.com/watch?v=0fKg7e37bQE) 
 - [Github Tutorial by Github](https://try.github.io/levels/1/challenges/1) 
 
