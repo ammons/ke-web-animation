@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="global.css"/>
+    <title>Document</title>
+</head>
+<body>
+<canvas id="myCanvas" width="300" height="225"></canvas>
+
+<script>
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+
+    var OffX = c.offsetTop;
+    var OffY = c.offsetLeft;
+
+    ctx.fillStyle = "#00ff00";
+    ctx.fillRect(0, 0, 100, 1000);
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, 100, 100);
+
+    c.addEventListener("mousedown", function (e) {
+        //draw("blue", e.x, e.y, 30, 30);
+        ctx.clearRect(e.x - 10, e.y - 10, 10, 10);
+        console.log("helo ", e);
+    });
+
+    var draw = function (color, posx, posy, width, height) {
+        ctx.fillStyle = color;
+        ctx.fillRect(posx - OffX, posy - OffY, width, height);
+    }
+
+
+</script>
+</body>
+</html>

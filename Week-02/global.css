@@ -1,0 +1,12 @@
+body {
+    background-color: blueviolet;
+}
+canvas {
+    position: absolute;
+    left: 10;
+    top: 10;
+
+    /*border: solid;*/
+    border-color: black;
+    background: ;
+}
