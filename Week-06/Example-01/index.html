@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>Freilegen</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="p5.js"></script>
+</head>
+<body>
+
+<script>
+    var bugs = []; // array of Jitter objects
+
+    function setup() {
+        createCanvas(windowWidth, windowHeight);
+        background(100);
+        noStroke();
+        // Create objects
+        for (var c = 1; c < 10; c += 1) {
+            for (var r = 1; r < 10; r += 1) {
+                bugs.push(new Jitter(c * 50, r * 50, 5+c*3, 5+c*3));
+            }
+        }
+    }
+
+
+    function draw() {
+        background(0, 0, 100);
+        for (var i=0; i<bugs.length; i++) {
+            bugs[i].move();
+            bugs[i].display();
+        }
+    }
+
+    // Jitter class
+    function Jitter(x,y,w,h ) {
+        this.x = x;
+        this.y = y;
+        this.diameter = w;
+        this.speed = 1;
+        this.name = random(200);
+
+        this.move = function() {
+            this.x += random(-this.speed, this.speed);
+            this.y += random(-this.speed, this.speed);
+
+        };
+
+        this.display = function() {
+            ellipse(this.x, this.y, this.diameter, this.diameter);
+        };
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, this.x, this.y) < w/2) {
+                console.log(dist(mx, my, this.x, this.y));
+                return true;
+            } else {
+                return false;
+            }
+        };
+    }
+
+    function mouseClicked() {
+        for (var i=0; i<bugs.length; i++) {
+            if (bugs[i].contains(mouseX, mouseY)) {
+                console.log("Clicked " +i +  " " + this);
+            }
+        }
+    }
+
+</script>
+
+
+</body>
+</html>
