@@ -5,7 +5,7 @@
     <title>Document</title>
 </head>
 <body>
-<canvas id="myCanvas" width="300" height="225"></canvas>
+<canvas id="myCanvas" width="300" height="300"></canvas>
 
 <script>
     function canvasToImg() {
@@ -14,15 +14,18 @@
 
         //draw a red box
         ctx.fillStyle="#FF0000";
-        ctx.fillRect(10,10,30,30);
+        ctx.fillRect(10,10,300,300);
 
         var url = canvas.toDataURL();
 
         var newImg = document.createElement("img"); // create img tag
         newImg.src = url;
+        newImg.id = "hallo";
+        newImg.style.width = '100px';
+        newImg.style.height = '100px';
         document.body.appendChild(newImg); // add to end of your document
 
-        ctx.clearRect();
+        ctx.clearRect(10,10,300,300);
     }
 
     canvasToImg(); //execute the function

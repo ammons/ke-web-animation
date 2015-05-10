@@ -65,6 +65,7 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 	- https://www.jetbrains.com/webstorm/?fromMenu
 	- https://www.jetbrains.com/student/
 - Brackets  http://brackets.io/
+- VisualStudio Code https://code.visualstudio.com/
 
 #### Browser
 - Google Chrome  https://www.google.de/chrome/browser/desktop/

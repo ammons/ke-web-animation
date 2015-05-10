@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="lib/p5.min.js" type="text/javascript"></script>
+    <style> body {margin: 0px;} </style>
+
+</head>
+<body>
+<script>
+    function setup() {
+        createCanvas(windowWidth, windowHeight);
+
+        fill(255);
+        ellipse(200, 100, 100, 100);
+
+        for (var i=0; i<10; i++) {
+            //console.log(i);
+            ellipse(i*80, 100, 100, 100);
+        }
+
+    }
+
+    function draw() {
+        background(200, 80, 100);
+        //ellipse(mouseX, mouseY, mouseX, mouseY);
+        strokeWeight(10);
+
+
+//        for (var i=0; i<10; i++) {
+//            console.log(i);
+//            //ellipse(i, 100, 100, 100);
+//        }
+
+    }
+
+</script>
+</body>
+</html>
