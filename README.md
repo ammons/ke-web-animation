@@ -44,10 +44,10 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 ####Woche 01 (03/23) Einführungsveranstaltung
 ####Woche 02 (04/13) Praxisbeispiele / Grundlagen Canvas Element
 ####Woche 03 (04/20) Grundlagen Canvas Element II / p5.js Experimente
-####Woche 04 (04/27) 
-####Woche 05 (05/04) 
+####Woche 04 (04/27) Grundlagen Javascript Entwicklung / Projektbesprechung
+####Woche 05 (05/04) Grundlagen Generative Gestaltung / Projektbesprechung
 ####Woche 06 (05/11) 
-####Woche 07 (05/18) 
+####Woche 07 (05/18) Entfällt wegen Probevorlesungen
 ####Woche 08 (05/25) Entfällt (Pfingstmontag)
 ####Woche 09 (06/01) 
 ####Woche 10 (06/08) 
