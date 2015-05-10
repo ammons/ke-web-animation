@@ -4,7 +4,7 @@ __Sammlung zum Kurs Konzeption & Entwurf - "Digitale Leinwände" an der Hochschu
 
 
 
-## Informationen zum Kurs
+## Informationen zu unserem Kurs
 
 #### Kursinhalt
 So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind auch deren Einschränkungen in Punkto Browser- und Plattform-Kompatibilität. Mit dem <Canvas> HTML Element steht für den 2D Bereich jetzt schon ein sehr offenes Experimentierfeld zur Verfügung und sobald WebGL durchgängig von allen Browser unterstützt wird stehen uns damit auch dreidimensionale Gestaltungswege offen. Unbeeindruckt von aktuellen Kompatibilitätszwängen wollen wir untersuchen welche gestalterischen Möglichkeiten sich daraus ergeben, welche „Tools“ und „Workflows“ bereits existieren und wie man dieses HTML-Element mit den herkömmlichen Elementen verknüpfen kann. Dafür entwickeln wir konzeptionelle Studien.
@@ -43,7 +43,7 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 
 ####Woche 01 (03/23) Einführungsveranstaltung
 ####Woche 02 (04/13) Praxisbeispiele / Grundlagen Canvas Element
-####Woche 03 (04/20)
+####Woche 03 (04/20) Grundlagen Canvas Element II / p5.js Experimente
 ####Woche 04 (04/27) 
 ####Woche 05 (05/04) 
 ####Woche 06 (05/11) 
@@ -56,6 +56,10 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 ####Woche 13 (06/29) 
 
 
+## Evaluation
+- Regular Assignments 35%
+- Participation and Attendance 35%
+- Final Projects 30%
 
 ## Tools
 
@@ -100,6 +104,9 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - [HTML5 Doctor <CANVAS>](http://html5doctor.com/an-introduction-to-the-canvas-2d-api/)
 - https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
 - [HTML5 Canvas Cheat Sheet](http://www.selfhtml5.org/wp-content/uploads/2010/07/HTML5_Canvas_Cheat_Sheet.png)
+- [Safari HTML5 Canvas Guide](https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/HTML-canvas-guide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40010542-CH1-SW1)
+- http://creativejs.com/2011/08/31-days-of-canvas-tutorials/
+- http://www.w3schools.com/html/html5_canvas.asp
 
 **Canvas-2D Definition**
 - http://www.w3.org/wiki/HTML/Elements/canvas
@@ -109,6 +116,7 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - https://html.spec.whatwg.org/#the-canvas-element
 
 **P5.js**
+- http://hello.p5js.org/
 - https://github.com/processing/p5.js/wiki/p5.js-overview
 - http://risd-creative-programming.github.io/s15-codeasmedium/examples.html
 - http://coursescript.com/notes/interactivecomputing/
@@ -117,11 +125,61 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 	- https://github.com/shiffman/The-Nature-of-Code-Examples-p5.js
 - https://github.com/processing/p5.js-editor
 
+**Other Canvas-2D Frameworks**
+- **Paper.js**
+	- http://paperjs.org/
+	- http://www.staggeringbeauty.com/
+- **Two.js**
+	- https://jonobr1.github.io/two.js/ 
+	- http://javascreen.tristanbagot.com/
+
+**Canvas-3D Frameworks**
+- [Three.js](http://threejs.org/)
+- [Pixi.js](http://www.pixijs.com/)
+
+**Canvas-3D Anwednungsbeispiele**
+- https://boda.sensors.jp/
+- https://www.google.de/maps/
+- https://photosynth.net/preview/
+- https://streetart.withgoogle.com/de/audio-tours
+- http://a-way-to-go.com/
+- http://lights.helloenjoy.com/
+- http://bartekdrozdz.com/project/soundviz
+- http://www.findyourwaytooz.com/
+- http://www.ro.me/
+- http://spacecraftforall.com/a-new-orbit
+- http://riskeverything.nike.com/
+- http://alteredqualia.com/three/examples/webgl_materials_skin.html
+- http://www.overthetinyhills.com/
+
+**Beyond Canvas**
+- http://www.overthetinyhills.com/
+- http://learningthreejs.com/data/2013-04-30-closing-the-gap-between-html-and-webgl/index.html
+- http://learningthreejs.com/blog/2013/04/30/closing-the-gap-between-html-and-webgl/
+- http://acko.net/blog/making-mathbox/
+
+**Canvas IDE´s**
+- **Unity3D**
+	- https://www.youtube.com/watch?v=IH6_ZN5CcJg&t=21
+	- https://www.youtube.com/watch?v=tSfakMeW0lw&t=167
+- **Blender** 
+	- https://www.blend4web.com/en/
+- **Adobe Edge Animate**
+	- https://creative.adobe.com/de/products/animate
+- **Adobe Flash Professional**
+	- https://helpx.adobe.com/de/flash/
+
 **Code Versionierung**
 -  [A GIT Guide](http://rogerdudler.github.io/git-guide/)
 - [GIT Documentation](http://git-scm.com/documentation)
 - [Github Tutorial for Beginners (Mac & PC)](https://www.youtube.com/watch?v=0fKg7e37bQE) 
 - [Github Tutorial by Github](https://try.github.io/levels/1/challenges/1) 
+
+**Canvas Frameworks Others:**
+- http://www.vvvvjs.com/
+- http://impactjs.com/
+- http://createjs.com/Home
+
 
 **Javascript**
 - https://github.com/processing/p5.js/wiki/JavaScript-basics
@@ -148,3 +206,7 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 - http://worrydream.com/LearnableProgramming/
 - http://worrydream.com/
 - brad Victor Talk https://vimeo.com/36579366
+
+**Inspirational**
+- http://bdadam.com/blog/panning-and-scrolling-background-images-using-the-canvas-element.html
+- https://paul.kinlan.me/canvas-on-the-background/
