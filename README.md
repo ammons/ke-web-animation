@@ -50,7 +50,7 @@ So vielfältig die Möglichkeiten in der Webentwicklung sind so komplex sind a
 ####Woche 07 (05/18) Entfällt wegen Probevorlesungen
 ####Woche 08 (05/25) Entfällt (Pfingstmontag)
 ####Woche 09 (06/01) 
-####Woche 10 (06/08) 
+####[Woche 10 (06/08)](https://github.com/ammons/ke-canvas/wiki/Week-10-(06-08))
 ####Woche 11 (06/15) 
 ####Woche 12 (06/22) 
 ####Woche 13 (06/29) 
