@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Three.js</title>
+    <script src="js/three.min.js"></script>
+    <script src="js/dat.gui.min.js"></script>
+    <script src="js/stats.min.js"></script>
+
+    <script src="js/TimelineLite.min.js"></script>
+    <script src="js/TweenLite.min.js"></script>
+    <script src="js/EasePack.min.js"></script>
+
+    <script src="js/controls/OrbitControls.js"></script>
+
+    <style>
+        body { margin: 0; }
+        canvas { width: 100%; height: 100% }
+    </style>
+
+    <script>
+        window.onload = function() {
+
+            var controls;
+            var mouse = new THREE.Vector2();
+            var raycaster = new THREE.Raycaster();
+            var INTERSECTED = null;
+
+            // Setup a timeline object with 0.2s stagger. Also reverse on complete.
+            var tl = new TimelineLite({ onComplete:reverse });
+            tweens = [];
+
+            // Insert our tweens. The sequence will auto start, and stagger with a 0.2s delay in between.
+            //tl.insertMultiple(meshes, 0, 'start', 0.2);
+
+            // Reverse the timeline when complete.
+            function reverse() {
+                tl.reverse();
+            }
+
+            ////////////////////////////////////////////////////
+            /// dat.gui init ///////////////////////////////////
+            ////////////////////////////////////////////////////
+
+            guiVals = {};
+            guiVals.rotXSpeed = 0.01;
+            guiVals.rotYSpeed = 0.01;
+            guiVals.fov = 430.0;
+            guiVals.mX = mouse.x = .10;
+            guiVals.mY = mouse.y = .12;
+
+            var gui = new dat.GUI();
+            gui.add(guiVals, 'rotXSpeed', -0.1, 0.1).listen();
+            gui.add(guiVals, 'rotYSpeed', -0.1, 0.1).listen();
+            gui.add(guiVals, 'fov', 0, 1000);
+            gui.add(guiVals, 'mX', -0.0000001, 1.0000000).listen();
+            gui.add(guiVals, 'mY', -0.0000001, 1.0000000).listen();
+
+            guiVals.rotXSpeed = 0.0;
+            guiVals.rotYSpeed = 0.0;
+
+
+            ////////////////////////////////////////////////////
+            /// main ///////////////////////////////////////////
+            ////////////////////////////////////////////////////
+
+            var renderer = new THREE.WebGLRenderer( {antialias:true} );
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.setClearColor( 0x440044, 0.99);
+            renderer.sortObjects = false;
+            document.body.appendChild( renderer.domElement );
+
+            var scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2( 0x880088, 0.006 );
+
+            var camera = new THREE.PerspectiveCamera(
+                    guiVals.fov,             // Field of view
+                    window.innerWidth / window.innerHeight,      // Aspect ratio
+                    0.1,            // Near plane
+                    10000           // Far plane
+            );
+            camera.position.set( 0, 80, 200 );
+            camera.lookAt( scene.position );
+
+            controls = new THREE.OrbitControls( camera );
+            //controls.damping = 0.2;
+            //controls.autoRotate = true;
+            //controls.autoRotateSpeed = 1;
+            //controls.addEventListener( 'change', render );
+
+
+
+            /// geometry ///////////////////////////////////////
+
+            group = new THREE.Object3D();//create an empty container
+
+            ob = null;
+            meshList = [];
+            gridOffset = 0;
+            gridStepSize = 5;
+            gridSize = 30;
+            gridInc = gridOffset + gridStepSize;
+
+            var geometry = new THREE.BoxGeometry( gridStepSize, gridStepSize, gridStepSize );
+            var material = new THREE.MeshLambertMaterial( { color: Math.random() * 0xFF0000 } );
+
+
+            function randomInteger (randNumMin,randNumMax ){
+                return randInt = (Math.floor(Math.random() * (randNumMax - randNumMin + 1)) + randNumMin)
+            }
+
+            for (c=1; c<gridSize; c++ ){
+                for (r=1; r<gridSize; r++ ) {
+                    var geometry = new THREE.BoxGeometry( gridStepSize, gridStepSize, gridStepSize );
+                    var material = new THREE.MeshLambertMaterial( { color: 0xFF0000 } );
+                    ob = new THREE.Mesh(geometry, material );
+                    ob.position.x = (c * gridInc) + -((gridSize/2)*gridInc);
+                    ob.position.y = (r * gridInc) + -((gridSize/2)*gridInc);
+                    ob.position.z = randomInteger(-gridSize/2,gridSize/2)*gridInc;
+                    ob.name = "myMesh "+c+" "+r;
+                    ob.rotation.z = Math.random()*Math.PI;
+                    ob.rotation.y = Math.random()*Math.PI;
+                    ob.scale.x = ob.scale.y = ob.scale.z = Math.random()*Math.PI*3;
+                    ob.rotation.y = Math.random()*Math.PI;
+                    group.add(ob);   //add a mesh with geometry to it
+
+                    // Push our tween on to an array for later.
+                    tweens.push(
+                        TweenLite.to(ob.rotation, 5, { y: -Math.PI, ease: Bounce.easeOut}),
+                        TweenLite.to(ob.scale, 5, { y: 1, x:1, z:1, ease: Bounce.easeOut})
+                    );
+                }
+            }
+            scene.add( group );   //when done, add the group to the scene
+
+//console.log(scene.children[0].children[0]);
+
+            /// light ///////////////////////////////////////
+
+            var light1 = new THREE.PointLight( 0xFFFF00, 2, 100 );
+            light1.position.set( -30, 20, 100 );
+            var light2 = new THREE.PointLight( 0xFFFF00, 2, 100 );
+            light2.position.set( 30, 50, 20 );
+            var light3 = new THREE.AmbientLight( 0x444444 );
+            light3.position.set( 1, 1, 1 );
+            scene.add( light1 );
+            scene.add( light2 );
+            scene.add( light3 );
+
+
+            /// helpers ///////////////////////////////////////
+            //scene.add(new THREE.AxisHelper(50));
+            scene.add(new THREE.GridHelper(100,5));
+
+ //           raycastUpdate();
+
+            ////////////////////////////////////////////////////
+            //// Mainloop //////////////////////////////////////
+            ////////////////////////////////////////////////////
+
+            function render() {
+                requestAnimationFrame( render );
+
+                cameraUpdate();
+                //raycastUpdate();
+
+                group.rotation.x += guiVals.rotXSpeed;
+                group.rotation.y += guiVals.rotYSpeed;
+
+                renderer.render( scene, camera );
+            }
+            render();
+
+            function raycastUpdate() {
+                raycaster.setFromCamera( mouse, camera );
+                intersects = raycaster.intersectObjects( group.children );
+
+
+                if ( intersects.length > 0 ) {
+
+                    if ( INTERSECTED != intersects[ 0 ].object ) {
+
+                        if ( INTERSECTED ) {
+                            console.log("name: " + intersects[ 0 ].object.name + " length: " + intersects.length);
+                            INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
+                            INTERSECTED.scale.x = INTERSECTED.scale.y = INTERSECTED.scale.z = 3;
+                            //INTERSECTED.material.color.setRGB(Math.random(), Math.random(), Math.random());
+                        }
+
+                        INTERSECTED = intersects[ 0 ].object;
+                        INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
+                        INTERSECTED.material.color.setHex( 0x00ff00 );
+
+                    }
+
+                } else {
+
+                    if ( INTERSECTED ) {
+                        INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
+                        INTERSECTED.scale.x = INTERSECTED.scale.y = INTERSECTED.scale.z = 1;
+                    }
+
+                    INTERSECTED = null;
+
+                }
+
+            }
+
+            function cameraUpdate() {
+                camera.fov = guiVals.fov;
+                camera.lookAt( scene.position );
+                camera.updateProjectionMatrix();
+                camera.updateMatrixWorld();
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                controls.update();
+            }
+            //animate();
+
+
+            ////////////////////////////////////////////////////
+            //// ResizeWindow //////////////////////////////////
+            ////////////////////////////////////////////////////
+
+            var tanFOV = Math.tan( ( ( Math.PI / 180 ) * camera.fov / 2 ) );
+            var windowHeight = window.innerHeight;
+
+            window.addEventListener( 'resize', onWindowResize, false );
+            function onWindowResize( event ) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                //adjust the FOV
+                //camera.fov = ( 360 / Math.PI ) * Math.atan( tanFOV * ( window.innerHeight / windowHeight ) );
+                //camera.updateProjectionMatrix();
+                //camera.lookAt( scene.position );
+                renderer.setSize( window.innerWidth, window.innerHeight );
+                //renderer.render( scene, camera );
+            }
+            ////////////////////////////////////////////////////
+            //// MouseMove /////////////////////////////////////
+            ////////////////////////////////////////////////////
+
+            window.addEventListener( 'mousemove', onMouseMove, false );
+            function onMouseMove( event ) {
+                event.preventDefault();
+                //console.log("move" + event.pageX + " " + event.pageY);
+                mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+                mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+                guiVals.mX = mouse.x;
+                guiVals.mY = mouse.y;
+                raycastUpdate();
+
+                //console.log("x: " + mouse.x + " y: "+mouse.y)
+            }
+
+        };
+    </script>
+
+</head>
+<body></body>
+</html>

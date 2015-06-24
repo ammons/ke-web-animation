@@ -14,6 +14,9 @@
         window.onload = function() {
 
             var controls;
+            var raycaster = new THREE.Raycaster();
+            var mouse = new THREE.Vector2();
+
 
             ////////////////////////////////////////////////////
             /// dat.gui init ///////////////////////////////////
@@ -41,7 +44,7 @@
             document.body.appendChild( renderer.domElement );
 
             var scene = new THREE.Scene();
-            scene.fog = new THREE.FogExp2( 0x440044, 0.006 );
+            scene.fog = new THREE.FogExp2( 0xEE00EE, 0.006 );
 
             var camera = new THREE.PerspectiveCamera(
                     text.fov,             // Field of view
@@ -80,14 +83,13 @@
                 for (r=1; r<gridSize; r++ ) {
                     meshList[c] = new THREE.Mesh(geometry, material);
                     meshList[c].position.x = (c * gridInc) + -((gridSize/2)*gridInc);
-                    meshList[c].position.y = (r * gridInc);
+                    meshList[c].position.y = (r * gridInc) + -((gridSize/2)*gridInc);
                     meshList[c].position.z = randomInteger(-gridSize/2,gridSize/2)*gridInc;
                    // meshList[c].rotation.z = Math.random()*Math.PI;
                    // meshList[c].rotation.y = Math.random()*Math.PI;
                     group.add(meshList[c]);   //add a mesh with geometry to it
                 }
             }
-            console.log(meshList.length);
             scene.add( group );   //when done, add the group to the scene
 
 

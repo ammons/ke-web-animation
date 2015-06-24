@@ -1,0 +1,66 @@
+{
+	"project": {
+		"vr": false
+	},
+	"camera": {
+		"metadata": {
+			"version": 4.3,
+			"type": "Object",
+			"generator": "ObjectExporter"
+		},
+		"object": {
+			"uuid": "8125585B-BC1E-47C7-ABA3-A0654FEB8E32",
+			"type": "PerspectiveCamera",
+			"name": "Camera",
+			"fov": 50,
+			"aspect": 1.043968432919955,
+			"near": 1,
+			"far": 100000,
+			"matrix": [0.5813590884208679,-7.937192569862361e-11,-0.8136470913887024,0,0.14102527499198914,0.9848647117614746,0.10076399147510529,0,0.8013322949409485,-0.17332486808300018,0.5725600719451904,0,202.3531951904297,-43.76816177368164,144.5834197998047,1]
+		}
+	},
+	"scene": {
+		"metadata": {
+			"version": 4.3,
+			"type": "Object",
+			"generator": "ObjectExporter"
+		},
+		"geometries": [
+			{
+				"uuid": "5F7FC6B4-886C-43DE-BCA4-C79D015E5811",
+				"type": "BoxGeometry",
+				"width": 100,
+				"height": 100,
+				"depth": 100,
+				"widthSegments": 1,
+				"heightSegments": 1,
+				"depthSegments": 1
+			}],
+		"materials": [
+			{
+				"uuid": "FEB825E9-C010-45BD-ACF7-30B418234FFF",
+				"type": "MeshBasicMaterial",
+				"color": 16777215,
+				"blending": 5,
+				"side": 1,
+				"opacity": 0.56,
+				"transparent": true
+			}],
+		"object": {
+			"uuid": "7DEAEA2F-AAEB-483D-9F4A-A3BD4D371592",
+			"type": "Scene",
+			"name": "Scene",
+			"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+			"children": [
+				{
+					"uuid": "BED89441-622E-4323-B711-2B2F5378BCE5",
+					"type": "Mesh",
+					"name": "Box 1",
+					"geometry": "5F7FC6B4-886C-43DE-BCA4-C79D015E5811",
+					"material": "FEB825E9-C010-45BD-ACF7-30B418234FFF",
+					"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,4.904831409454346,-7.852294445037842,-2.5120186805725098,1]
+				}]
+		}
+	},
+	"scripts": {}
+}
