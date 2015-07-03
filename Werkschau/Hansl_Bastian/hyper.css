@@ -1,0 +1,277 @@
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('fonts/pressstart2p-regular-webfont.eot');
+    src: url('fonts/pressstart2p-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/pressstart2p-regular-webfont.woff2') format('woff2'),
+         url('fonts/pressstart2p-regular-webfont.woff') format('woff'),
+         url('fonts/pressstart2p-regular-webfont.ttf') format('truetype'),
+         url('fonts/pressstart2p-regular-webfont.svg#press_start_2pregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,.note,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{
+	margin:0;
+	padding:0;
+	border:none;
+	outline:0;
+	text-decoration:none;
+	color:#ffffff;
+	font-family: 'Press Start 2P', sans-serif;
+	font-weight: 400;
+	font-size: 20pt;
+	list-style:none;
+	line-height:120%;
+	background:none;
+}
+
+body {
+	background: #000000;
+	width: 100%;
+	position: fixed;
+	min-width: 600px;
+	min-height: 400px;}
+
+body.highscores {
+	position: static;
+}
+
+#startScreen {
+	width: 80%;
+	margin: 0 auto;
+	padding: 10% 0;
+}
+
+#startScreen .logo {
+	margin: 0 auto 2em;
+	display: block;
+	width: 80%;
+	max-width: 700px;
+	position: relative;
+	z-index: 100;
+}
+
+#mainMenu {
+	margin: 0 auto;
+	width: 10em;
+}
+
+button, a.button {
+	background: none;
+	border: none;
+	padding: .5em 0;
+	font-family: 'Press Start 2P', sans-serif;
+	display: inline-block;
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+	position: relative;
+}
+
+a.button {
+	width: 13em;
+}
+
+a.button:hover {
+	cursor: pointer;
+}
+
+button#start {
+	position: fixed;
+	bottom: 3em;
+	left: 50%;
+	transform: translateX(-50%);
+	animation: blink 1.5s infinite;
+}
+
+.blink {
+	animation: blink 1.5s infinite;
+}
+
+menu a.button:hover:before {
+	display: block;
+	content: '>';
+	background: none;
+	border: none;
+	padding: .5em 0;
+	margin: 0 auto;
+	font-family: 'Press Start 2P', cursive;
+	display: block;
+	font-size: 20px;
+	color: #ffffff;
+	position: absolute;
+	top: 0;
+
+}
+
+#c0 {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background:#000000;
+	
+}
+
+h1#lvlRdy {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: none;
+	color: #f33838;	
+	z-index: 100;
+}
+
+section#startLvl {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: #f33838;	
+	z-index: 100;
+	text-align: center;
+	display: none;
+}
+
+section#startLvl h2 {
+	font-size: 60px;
+	margin-top: 20px;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	padding: 20px;
+}
+
+#scoreWrap {
+	font-size: 14px;
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	background: rgba(0, 0, 0, 0.9);
+	padding: .3em;
+}
+
+#scoreWrap span {
+	font-size: 14px;
+}
+
+#gameOver,
+#highscores {
+	top: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+	text-align: center;
+}
+
+#gameOver {
+	display: none;
+	position: fixed;
+}
+
+#highscores {
+	position: absolute;
+}
+
+#gameOver .logo,
+#highscores .logo {
+	width: 500px;
+}
+
+#gameOver h1,
+#highscores h1 {
+	font-size: 48px;
+	padding: 1em 0 .5em;
+}
+
+#gameOver h2 {
+	padding: 1em 0;
+}
+
+#gameOver .score {
+	color: #ffbb00;
+}
+
+form h2 {
+	display: inline-block;
+}
+
+#submitHighscore input#name {
+	background: transparent;
+	color:#ffffff;
+	font-family: 'Press Start 2P', cursive;
+	font-weight: 400;
+	font-size: 20pt;
+	border: none;
+	display: inline-block;
+	width: 3.5em;
+}
+
+#submit {
+	display: block;
+	background: transparent;
+	color:#ffffff;
+	font-family: 'Press Start 2P', cursive;
+	font-weight: 400;
+	font-size: 20pt;
+	border: none;
+	width: auto;
+	margin: 1em auto;
+}
+
+#submit:hover {
+	cursor: pointer;
+}
+
+#highscores table {
+	margin: 0 auto;
+	padding: 1em 0 5em;
+}
+
+#highscores td {
+	text-transform: uppercase;
+	padding-bottom: .5em;
+}
+
+tr.newScore * {
+	color: yellow;
+}
+
+#highscores td {
+	font-size: 20px;
+}
+
+#highscores td:last-child {
+	padding-left: 2em;
+	text-transform: none;
+}
+
+#highscores td:first-child {
+	padding-right: .5em;	
+	text-align: right;
+}
+
+#playWrapper {
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgba(0, 0, 0, 0.9);
+	z-index: 100;
+}
+
+#play {
+	display: block;
+	padding: 2em 4em 3em;
+	font-size: 20px;
+}
+
+
+@keyframes blink {
+  0%   { opacity: 0; }
+  30%  { opacity: 0; }
+  31%  { opacity: 1; }
+  100% { opacity: 1; }
+}

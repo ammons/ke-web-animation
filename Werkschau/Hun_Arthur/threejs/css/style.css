@@ -1,0 +1,254 @@
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    color:white;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/**/
+/**/
+/* Generals */
+/**/
+/**/
+
+h3 {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 24px;
+    
+}
+
+p, a{
+    font-size: 15px;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    list-style-type: none;
+}
+li{
+    list-style-type: none;
+    display: inline-block;
+}
+
+.fa {
+    margin-left: 5px;
+}
+/**/
+/**/
+/* Overlay style */
+/**/
+/**/
+.overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: black;
+    opacity: 0.4;
+}
+.info{
+    width: 40%;
+    height: 40%;
+    margin: auto;
+    font-size: 18px;
+}
+
+/* Overlay closing cross */
+.overlay .overlay-close {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	overflow: hidden;
+	border: none;
+	background: url(../img/cross.png) no-repeat center center;
+	text-indent: 200%;
+	color: transparent;
+	outline: none;
+	z-index: 100;
+}
+
+/* Menu style */
+.overlay nav {
+
+	position: relative;
+	top: 50%;
+	height: 60%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+
+/* Effects */
+.overlay-hugeinc {
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: opacity 0.5s, visibility 0s 0.5s;
+	transition: opacity 0.5s, visibility 0s 0.5s;
+}
+
+.overlay-hugeinc.open {
+	opacity: 1;
+	visibility: visible;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.overlay-hugeinc nav {
+	-webkit-perspective: 1200px;
+	perspective: 1200px;
+}
+
+.overlay-hugeinc nav ul {
+	opacity: 0.4;
+	-webkit-transform: translateY(-25%) rotateX(35deg);
+	transform: translateY(-25%) rotateX(35deg);
+	-webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+	transition: transform 0.5s, opacity 0.5s;
+}
+
+.overlay-hugeinc.open nav ul {
+	opacity: 1;
+	-webkit-transform: rotateX(0deg);
+	transform: rotateX(0deg);
+}
+
+.overlay-hugeinc.close nav ul {
+	-webkit-transform: translateY(25%) rotateX(-35deg);
+	transform: translateY(25%) rotateX(-35deg);
+}
+
+@media screen and (max-height: 30.5em) {
+	.overlay nav {
+		height: 70%;
+		font-size: 34px;
+	}
+	.overlay ul li {
+		min-height: 34px;
+	}
+}
+
+
+/**/
+/**/
+/**/
+/*BUTTON*/
+/**/
+/**/
+
+.button {
+	float: left;
+	min-width: 50px;
+	max-width: 100px;
+	display: block;
+	margin: 20px;
+	padding: 9px;
+	border: none;
+	background: none;
+	color: inherit;
+	vertical-align: middle;
+	position: fixed;
+	z-index: 100;
+	-webkit-backface-visibility: hidden;
+	-moz-osx-font-smoothing: grayscale;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    
+}
+.button:focus {
+	outline: none;
+}
+.button > span {
+	vertical-align: middle;
+}
+
+
+.button--border-thin {
+	border: 2px solid;
+}
+
+.button--ujarak {
+	-webkit-transition: border-color 0.4s, color 0.4s;
+	transition: border-color 0.4s, color 0.4s;
+    color: white;
+}
+.button--ujarak::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: white;
+	z-index: -1;
+	opacity: 0;
+	-webkit-transform: scale3d(0.7, 1, 1);
+	transform: scale3d(0.7, 1, 1);
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+	transition: transform 0.4s, opacity 0.4s;
+	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.button--ujarak,
+.button--ujarak::before {
+	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+.button--ujarak:hover {
+	color: black;
+	border-color: black;
+}
+.button--ujarak.button--inverted:hover {
+	color: #37474F;
+	border-color: #fff;
+}
+.button--ujarak:hover::before {
+	opacity: 1;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Help little Liza</title>
+    <!-- <script src="p5.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.6/p5.min.js"></script>
+    <!--  <script src="p5.sound.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.6/addons/p5.sound.min.js"></script>
+    <style>body{padding:0; margin:0; overflow:hidden;}</style>
+
+</head>
+<body>
+    <script>
+        var status = 0; 
+        //status: Status des Spiels (ersetzt sämtliche Booleans voranzeige, sieg, fade)
+        // 0 : Voranzeige mit Button "Of course!"
+        // 0.5: Fade
+        // 1 : Voranzeige mit Button "I'm ready"
+        // 2 : Fade
+        // 3 : Topfschlagen
+        // 4 : Sieg mit Buttons "Try again", "That's boring"
+        // 5 : Fade zu status == 3
+        // 6 : Fade zu status == 0
+
+        var scale; //Skalierungsfaktor für Längen
+
+        var erstens = false;
+        var topf_x;
+        var topf_y;
+        var topf_r;
+        var song;
+        var sound;
+        var r;
+        var g;
+        var b;
+        var img;
+        var img2;
+        var img3;
+        
+        var button;
+        var button4;
+        var button2;
+        var button3;
+        var zaehler = -1;
+        var klick_size;
+        var klick = false;
+        var klick_x;
+        var klick_y;
+        
+        var fade_lauf = 0;
+
+        //button1_ Try harder!
+        var button1_x;
+        var button1_y;
+        var button1_width;
+        var button1_height;
+        var button1_lauf = 0;
+        var button1_img;
+        var button1_da = false;
+        var button1_wand = false;
+
+        //button2_ Of course!
+        var button2_x;
+        var button2_y;
+        var button2_width;
+        var button2_height;
+        var button2_lauf = 0;
+		var button2_img;
+        var button2_da = false;
+        var button2_wand = false;
+
+        //button3_ I'm ready!
+        var button3_x;
+        var button3_y;
+        var button3_width;
+        var button3_height;
+        var button3_lauf = 0;
+        var button3_img;
+        var button3_da = false;
+        var button3_wand = false;
+
+        //button4_ Try again!
+        var button4_x;
+        var button4_y;
+        var button4_width;
+        var button4_height;
+        var button4_lauf = 0;
+        var button4_img;
+        var button4_da = false;
+        var button4_wand = false;
+
+        //button5_ Nah, that's boring.
+        var button5_x;
+        var button5_y;
+        var button5_width;
+        var button5_height;
+        var button5_lauf = 0;
+        var button5_img;
+        var button5_da = false;
+        var button5_wand = false;
+
+
+        function preload() {
+            song = loadSound('Topftrommel.mp3');
+            sound = loadSound('Sound02.mp3');
+            img = loadImage("img/cursor2.png");
+            img2 = loadImage("img/help_liza.png");
+            img3 = loadImage("img/rules.png");
+            button2_img = loadImage("img/ofcourse.png");
+            button3_img = loadImage("img/imready.png");
+            button4_img = loadImage("img/tryagain.png");
+            button5_img = loadImage("img/thatsboring.png");
+            button1_img = loadImage("img/tryharder.png");
+        }
+
+        function setup(){
+            createCanvas(windowWidth, windowHeight);
+            reverb = new p5.Reverb();
+            scale = pow(width*height/1280/1024, 0.5); //r² = 37.5² * (width*height)/(1024*768)
+
+            start();
+
+        }
+
+        function start(){
+            status = 0; // 0 : Voranzeige mit Button "Of course!"
+            background(255, 255, 255);
+            image(img2, width/2-400, 50);
+            topf_r = 55*scale;
+            button2_x = width/2-40; //Of course
+            button2_y = 350;
+            button2_width = 150;
+            button2_height = 50;
+            button3_x = width/2-40; //I'm ready
+            button3_y = 450;
+            button3_width = 150;
+            button3_height = 50;
+            button4_x = 50; //Try again
+            button4_y = 170;
+            button4_width = 150;
+            button4_height = 50;
+            button5_x = 50; //Thats boring
+            button5_y = 310;
+            button5_width = 150;
+            button5_height = 50;
+            button1_x = 50; //Try harder
+            button1_y = 245;
+            button1_width = 150;
+            button1_height = 50;
+
+            button2_da = true;
+            zaehler = -1;            
+        }
+
+        function ofcourse (){
+            button2_da = false;
+            status = 0.5;
+
+            r = 255;
+            g = 255;
+            b = 255;
+        }
+
+        function ofcourseFadeEnd(){
+            status = 1; // 1 : Voranzeige mit Button "I'm ready"
+            background(255, 255, 255);
+            image(img3, width/2-500, 50);
+
+            button3_da = true;
+
+            cursor();
+        }
+
+        function imready (){
+            button3_da = false;
+            status = 2; // 2 : Fade
+            r = 0;
+            g = 0;
+            b = 0;
+            noCursor();
+        } // Voranzeige Ende
+
+        function draw(){
+            if (status == 0){ // 0 : Voranzeige mit Button "Of course!"
+                background(255, 255, 255);
+                image(img2, width/2-400, 50);
+            }
+            if (status == 1){ // 1 : Voranzeige mit Button "I'm ready"
+                background(255, 255, 255);
+                image(img3, width/2-500, 50);
+            }
+            // Übergang
+            if (status == 2 || status == 5 || status == 6 || status == 0.5){ // 0.5 : Fade // 2 : Fade  // 5 : Fade zu status == 3 // 6 : Fade zu status == 0
+                // Ende des Übergangs ?
+                if (fade_lauf >= 15){
+                    fade_lauf = 0;
+                    if (status == 2 || status == 5){
+                        status = 3;
+                        topf_x = random(width);
+                        topf_y = random(height);
+
+                        noCursor();
+                    }
+                    else {
+                        if(status == 6){start();}
+                        else{ofcourseFadeEnd();}
+                    }
+                }
+                else {
+                    fade_lauf +=1;
+                    background(r, g, b, 48);
+                }
+            }
+
+            if ( status == 3 || status == 4) {
+                
+                    background(r, g, b);
+                    strokeWeight(2);
+                    //stroke(104, 151, 187);
+                    //fill(104, 151, 187, 127);
+                    stroke(0,0,0);
+                    fill(0,0,0, 127);
+                    ellipse(topf_x, topf_y, topf_r*2, topf_r*2);
+                    
+                    //Animation Klick
+                    if (klick) {
+                        var klick_size_max = 100;
+                        klick_size = klick_size + 4;
+                        fill(255, 255, 255, 100 * (1 - klick_size / klick_size_max));
+                        stroke(255, 255, 255, 255 * (1 - klick_size / klick_size_max));
+                        ellipse(klick_x, klick_y, klick_size, klick_size);
+                        if (klick_size > klick_size_max) {
+                            klick = false;
+                        }
+                    }
+
+                    if (status == 4) {
+                        textSize(20);
+                        noStroke();
+                        fill(0);
+                        textFont("Helvetica");
+                        if (zaehler != 1) {
+                            text("You only missed " + zaehler + " times!!", 50, 100);
+                        }
+                        else {
+                            text("You only missed " + zaehler + " time!!", 50, 100);
+                        }
+
+                        if (zaehler == 0) {text("Are you sure you didn't cheat?", 50, 135);}
+                        if (zaehler >= 1 && zaehler <= 3){text("This is incredible!", 50, 135);}
+                        if (zaehler >= 4 && zaehler <= 9){text("Thank you for your great help!", 50, 135);}
+                        if (zaehler >= 10 && zaehler <= 20){text("Thank you for your help.", 50, 135);}
+                        if (zaehler >= 21) {text("Well, at least you tried.", 50, 135);}
+
+                    }
+                
+            }
+            if ( status == 3) {drawWandCursor(true)}
+            //+++++++++++++++++++++++++++BUTTONS++++++++++++++++++++++++++++++++++++++++++++++++++++
+            //++++++++++++++ button2 +++++++++++++++++++ of course
+            if (button2_da == true){
+                
+                image(button2_img, button2_x, button2_y);
+
+                if ((mouseX > button2_x) && (mouseX < button2_x + button2_width) && (mouseY > button2_y) && (mouseY < button2_y + button2_height)) {
+                    cursor(HAND);
+                    button2_wand = true;
+                }
+                else {
+                    if (button2_wand == true) {
+                        cursor();
+                        button2_wand = false;
+                    }
+                }
+            }
+
+            //++++++++++++++ button3 +++++++++++++++++++ i'm ready
+            if (button3_da == true){
+                
+                image(button3_img, button3_x, button3_y);
+
+                if ((mouseX > button3_x) && (mouseX < button3_x + button3_width) && (mouseY > button3_y) && (mouseY < button3_y + button3_height)) {
+                    drawWandCursor(true);
+                    button3_wand = true;
+                }
+                else {
+                    if (button3_wand == true) {
+                        cursor();
+                        button3_wand = false;
+                    }
+                }
+            }
+            //++++++++++++++ button4 +++++++++++++++++++ try again
+            if (button4_da == true){
+                
+                image(button4_img, button4_x, button4_y);
+
+                if ((mouseX > button4_x) && (mouseX < button4_x + button4_width) && (mouseY > button4_y) && (mouseY < button4_y + button4_height)) {
+                    drawWandCursor(true);
+                    button4_wand = true;
+                }
+                else {
+                    if (button4_wand == true) {
+                        cursor();
+                        button4_wand = false;
+                    }
+                }
+            }
+            //++++++++++++++ button5 +++++++++++++++++++ that's boring
+            if (button5_da == true){
+                
+                image(button5_img, button5_x, button5_y);
+
+                if ((mouseX > button5_x) && (mouseX < button5_x + button5_width) && (mouseY > button5_y) && (mouseY < button5_y + button5_height)) {
+                    cursor(HAND);
+                    button5_wand = true;
+                }
+                else {
+                    if (button5_wand == true) {
+                        cursor();
+                        button5_wand = false;
+                    }
+                }
+            }
+            //++++++++++++++ button1 +++++++++++++++++++ try harder
+            if (button1_da == true){
+                
+                image(button1_img, button1_x, button1_y);
+
+                if ((mouseX > button1_x) && (mouseX < button1_x + button1_width) && (mouseY > button1_y) && (mouseY < button1_y + button1_height)) {
+                    drawWandCursor(true);
+                    button1_wand = true
+                }
+                else {
+                    if (button1_wand == true) {
+                        cursor();
+                        button1_wand = false
+                    }
+                }
+            }
+
+
+        }
+
+        function mousePressed() {
+            if (status != 0 && status != 1 && status  != 0.5 ) { //hier kein Topfschlagen
+                if (erstens == true) {
+                    erstens = false;
+                }
+                else {
+
+                var d = dist(mouseX, mouseY, topf_x, topf_y);
+
+                if (status == 3) {
+                    zaehler = zaehler + 1;
+
+                    //Animation Klick
+                    klick = true;
+                    klick_size = 0;
+                    klick_x = mouseX;
+                    klick_y = mouseY;
+
+
+                    if (d <= topf_r) {
+                        sieg();
+
+                    }
+                    else {
+                        var n = 32; //Neigungsordnung zu d=37.5 . Je höher n, desto stärker steigt die Steigung der Lautstärke in der Nähe des Kreises -- erweiterte Wurzelfunktion
+                        var f = 1 - pow(d - topf_r, 1 / n) / pow(pow(width, 2) + pow(height, 2), 0.5 / n); // f = 1 bei d = 37.5, f = 0 bei d = Diagonalelänge des Fensters*/
+                        reverb.process(sound, 1.5, 0.9);
+                        reverb.amp((pow(f - 1, 5)));
+                        if (sound.isPlaying()) {
+                            sound.amp(f);
+                            sound.stop();
+                            sound.play();
+                        } else {
+                            sound.amp(f);
+                            sound.play();
+                        }
+
+                    }
+                }
+                }
+            }
+            //++++++++++++++BUTTONS++++++++++++++
+            //button2 Of course!
+            if ((button2_da == true)&&(mouseX > button2_x)&&(mouseX < button2_x + button2_width)&&(mouseY > button2_y)&&(mouseY < button2_y + button2_height)){
+                ofcourse();
+                cursor();
+            }
+            //button3 I'm ready
+            if ((button3_da == true)&&(mouseX > button3_x)&&(mouseX < button3_x + button3_width)&&(mouseY > button3_y)&&(mouseY < button3_y + button3_height)){
+                imready();
+            }
+            //button4 Try again!
+            if ((button4_da == true)&&(mouseX > button4_x)&&(mouseX < button4_x + button4_width)&&(mouseY > button4_y)&&(mouseY < button4_y + button4_height)){
+                tryagain();
+            }
+            //button5 Nah, that's boring.
+            if ((button5_da == true)&&(mouseX > button5_x)&&(mouseX < button5_x + button5_width)&&(mouseY > button5_y)&&(mouseY < button5_y + button5_height)){
+                thatsboring();
+            }
+            //button1 Try harder!
+            if ((button1_da == true)&&(mouseX > button1_x)&&(mouseX < button1_x + button1_width)&&(mouseY > button1_y)&&(mouseY < button1_y + button1_height)){
+                topf_r *= 0.8;
+                tryagain();
+            }
+        }
+
+        function sieg() {
+            if (song.isPlaying()) {
+                song.stop();
+            }
+            song.play();
+            r = 255;
+            g = 255;
+            b = 255;
+
+            status = 4;
+            cursor();
+            
+
+            button4_da = true;
+            button5_da = true;
+            button1_da = true;
+
+            erstens = true;
+
+        }
+
+        function tryagain(){
+
+            r = 0;
+            g = 0;
+            b = 0;
+
+            button4_da = false;
+            button5_da = false;
+            button1_da = false;
+
+            status = 5;
+
+            zaehler = -1;
+            noCursor();
+
+        }
+
+        function thatsboring(){
+            //Übergang
+            status = 6;
+
+            button4_da = false;
+            button5_da = false;
+            button1_da = false;
+
+            r = 255;
+            g = 255;
+            b = 255;
+        }
+
+        function drawWandCursor(on) {
+            if (on == true) {
+                img.x = constrain(mouseX, 0, width);
+                img.y = constrain(mouseY, 0, height);
+                image(img, img.x - img.width / 2, img.y - img.height / 2, 0);
+                noCursor();
+
+            } else {
+                cursor();
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

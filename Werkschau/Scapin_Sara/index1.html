@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Chewing Gum</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.6/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.6/addons/p5.sound.min.js"></script>
+    <style> body {  margin: 0;  background-color: black;  }</style>
+</head>
+<body>
+
+<script>
+
+    function preload() {
+        monroe = loadImage("mm.png");
+        bubble = loadImage("bubble.png")
+        sound = loadSound('blip.mp3');
+    }
+
+    function particle() {
+        this.x = x;
+        this.y = y;
+        this.radius = random(10,30);
+        this.vx = 0 + random(-15,15);
+        this.vy = 0 + random(-15,15);
+    }
+    function createParticles() {
+        circles = [];
+        for (var i = 0; i < 100; i++) {
+            circles.push(new particle());
+        }
+    }
+    function setup() {
+
+        createCanvas(innerWidth, innerHeight);
+        background(0, 0, 0);
+        imageMode(CENTER);
+        image(monroe, innerWidth/2, innerHeight/2, innerWidth, innerHeight);
+        exploded = false;
+        x = innerWidth * .53;
+        y = innerHeight * .78;
+        radius = 20;
+
+        reverb = new p5.Reverb();
+        reverb.process(sound, 1.5, 0.9);
+
+        createParticles();
+    }
+
+    function draw() {
+
+        if (radius <= 300) {
+            radius += 3;
+            image(monroe, innerWidth/2, innerHeight/2, innerWidth, innerHeight);
+            image(bubble, x, y, radius, radius);
+        } else {
+            if (!exploded){
+                sound.play();
+                exploded = true;
+            }
+            image(monroe, innerWidth/2, innerHeight/2,innerWidth, innerHeight);
+            explode();
+        }
+
+    }
+
+    function explode() {
+
+
+        for (var j = 0; j < circles.length; j++) {
+            var c = circles[j];
+            image(bubble, c.x, c.y, c.radius, c.radius);
+            c.x += c.vx;
+            c.y += c.vy;
+
+            if (c.x > innerWidth || c.x < 0 || c.y > innerHeight || c.y < 0) {
+                circles.splice(j, 1);
+            }
+            if (circles.length < 1){
+                createParticles();
+                radius = 0;
+                exploded = false;
+                break;
+            }
+        }
+
+    }
+
+
+</script>
+</body>
+</html> 

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>test-p5js</title>
+    <link rel="stylesheet" href="p5js/style.css"/>
+    <script src="p5js/script/p5.min.js"> </script>
+    <script src="p5js/script/p5.sound.min.js"></script>
+    <script src="p5js/script/p5.dom.js"></script>
+
+</head>
+
+<body>
+<div class="instructions">
+    <h1>Instructions</h1>
+    <p>"A,Z,E,R" for the chord<br>"Q,S,D,F" for the bass<br>"W,X,C,V" for the drum</p>
+    <p class="p2">If you want a melody you can choose between 1,2,3,4 on your keyboard</p>
+    <p class="p3">Put your mouse up and down<br>and see what happen !</p>
+
+
+
+</div>
+<div>
+    <h1 class="gauche">-</h1>
+</div>
+<div>
+    <h1 class="droite">+</h1>
+</div>
+<div>
+    <h1 class="haut">-</h1>
+</div>
+<div>
+    <h1 class="bas">+</h1>
+</div>
+
+<script class="canvas">
+
+    var mic, recorder, soundFile;
+    var state = 0;
+
+    var chord1;
+    var chord2;
+    var chord3;
+    var chord4;
+    var chordloop;
+    var bass1;
+    var bass2;
+    var bass3;
+    var bass4;
+    var bassloop;
+    var drum1;
+    var drum2;
+    var drum3;
+    var drum4;
+    var drumloop;
+    var drumloop2;
+
+
+    var button1;
+    var button2;
+    var button3;
+    var button4;
+    var button5;
+    var button6;
+    var button7;
+    var button8;
+    var button9;
+    var button10;
+    var button11;
+    var button12;
+    var button13;
+
+    var blackb1;
+    var blackb2;
+    var blackb3;
+    var blackb4;
+
+
+    function setup() {
+        createCanvas(windowWidth, windowHeight);
+        background(255);
+
+
+        soundFormats('mp3');
+        chord1 = loadSound('sound/chord1.mp3');
+        chord2 = loadSound('sound/chord2.mp3');
+        chord3 = loadSound('sound/chord3.mp3');
+        chord4 = loadSound('sound/chord4.mp3');
+        chordloop = loadSound('sound/chordloop.mp3');
+        bass1 = loadSound('sound/bass1.mp3');
+        bass2 = loadSound('sound/bass2.mp3');
+        bass3 = loadSound('sound/bass3.mp3');
+        bass4 = loadSound('sound/bass4.mp3');
+        bassloop = loadSound('sound/bassloop.mp3');
+        drum1 = loadSound('sound/drum1.mp3');
+        drum2 = loadSound('sound/drum2.mp3');
+        drum3 = loadSound('sound/drum3.mp3');
+        drum4 = loadSound('sound/drum4.mp3');
+        drumloop = loadSound('sound/drumloop.mp3');
+        drumloop2 = loadSound('sound/drumloop2.mp3');
+
+        button1 = new button1(width/2, height/2, 45);
+        button2 = new button2(width/2, height/2, 45);
+        button3 = new button3(width/2, height/2, 45);
+        button4 = new button4(width/2, height/2, 45);
+        button5 = new button5(width/2, height/2, 45);
+        button6 = new button6(width/2, height/2, 45);
+        button7 = new button7(width/2, height/2, 45);
+        button8 = new button8(width/2, height/2, 45);
+        button9 = new button9(width/2, height/2, 45);
+        button10 = new button10(width/2, height/2, 45);
+        button11 = new button11(width/2, height/2, 45);
+        button12 = new button12(width/2, height/2, 45);
+        button13 = new button13(width/2, height/2, 45);
+
+        blackb1 = new blackb1(width/2, height/2, 45);
+        blackb2 = new blackb2(width/2, height/2, 45);
+        blackb3 = new blackb3(width/2, height/2, 45);
+        blackb4 = new blackb4(width/2, height/2, 45);
+
+        noCursor();
+
+        mic = new p5.AudioIn();
+        mic.start();
+        recorder = new p5.SoundRecorder();
+        recorder.setInput(mic);
+        soundFile = new p5.SoundFile();
+
+    }
+
+
+
+
+    function draw() {
+        background(255);
+        line(490, 210, 490, 470);
+        fill(0);
+        button1.display(mouseX, mouseY);
+        button2.display(mouseX, mouseY);
+        button3.display(mouseX, mouseY);
+        button4.display(mouseX, mouseY);
+        button5.display(mouseX, mouseY);
+        button6.display(mouseX, mouseY);
+        button7.display(mouseX, mouseY);
+        button8.display(mouseX, mouseY);
+        button9.display(mouseX, mouseY);
+        button10.display(mouseX, mouseY);
+        button11.display(mouseX, mouseY);
+        button12.display(mouseX, mouseY);
+        button13.display(mouseX, mouseY);
+
+        blackb1.display(mouseX, mouseY);
+        blackb2.display(mouseX, mouseY);
+        blackb3.display(mouseX, mouseY);
+        blackb4.display(mouseX, mouseY);
+
+        ellipse(mouseX, mouseY, 10, 10);
+
+
+        var volume = map(mouseX, 0, width, 0, 1);
+        volume = constrain(volume, 0, 1);
+        chord1.amp(volume);
+        chord2.amp(volume);
+        chord3.amp(volume);
+        chord4.amp(volume);
+        bass1.amp(volume);
+        bass2.amp(volume);
+        bass3.amp(volume);
+        bass4.amp(volume);
+        drum1.amp(volume);
+        drum2.amp(volume);
+        drum3.amp(volume);
+        drum4.amp(volume);
+
+        var speed = map(mouseY, 0.1, height, 0, 2);
+        speed = constrain(speed, 0.01, 4);
+        chord1.rate(speed);
+        chord2.rate(speed);
+        chord3.rate(speed);
+        chord4.rate(speed);
+        bass1.rate(speed);
+        bass2.rate(speed);
+        bass3.rate(speed);
+        bass4.rate(speed);
+        drum1.rate(speed);
+        drum2.rate(speed);
+        drum3.rate(speed);
+        drum4.rate(speed);
+
+
+    }
+
+
+
+
+    function keyTyped() {
+        if (key === 'a'){
+            chord1.play();
+        }
+        if (key ==='z'){
+            chord2.play();
+        }
+        if (key ==='e'){
+            chord3.play();
+        }
+        if (key ==='r'){
+            chord4.play();
+        }
+        if (key ==='q'){
+            bass1.play();
+        }
+        if (key ==='s'){
+            bass2.play();
+        }
+        if (key ==='d'){
+            bass3.play();
+        }
+        if (key ==='f'){
+            bass4.play();
+        }
+        if (key ==='w'){
+            drum1.play();
+        }
+        if (key ==='x'){
+            drum2.play();
+        }
+        if (key ==='c'){
+            drum3.play();
+        }
+        if (key ==='v'){
+            drum4.play();
+        }
+        if (key ==='1'){
+            chordloop.play();
+        }
+        if (key ==='2'){
+            bassloop.play();
+        }
+        if (key ==='3'){
+            drumloop.play();
+        }
+        if (key ==='4'){
+            drumloop2.play();
+        }
+
+        if (key ==='t' && mic.enabled) {
+            recorder.record(soundFile);
+        }
+
+        if (key ==='y'){
+            recorder.stop();
+            state++;
+        }
+
+        if (key ==='u'){
+            soundFile.play();
+            saveSound(soundFile, 'mySound.wav');
+            state++;
+        }
+    }
+
+
+
+     button1 = function(x_, y_, r_) {
+        var x = 537;
+        var y = 239;
+        var r = r_;
+
+
+        this.display = function keyTyped() {
+            if (key ==='a') {
+                fill(210);
+            } else {
+                fill(0, 0, 255);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+
+     button2 = function(x_, y_, r_) {
+
+        var x = 597;
+        var y = 239;
+        var r = r_;
+
+
+
+        this.display = function keyTyped() {
+            if (key ==='z') {
+                fill(210);
+            } else {
+                fill(0, 0, 255);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+     button3 = function(x_, y_, r_) {
+
+        var x = 657;
+        var y = 239;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+
+        this.display = function keyTyped() {
+            if (key ==='e') {
+                fill(210);
+            } else {
+                fill(0, 0, 255);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+     button4 = function(x_, y_, r_) {
+
+        var x = 537;
+        var y = 295;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='q') {
+                fill(210);
+            } else {
+                fill(0, 0, 255);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+     button5 = function(x_, y_, r_) {
+        var x = 597;
+        var y = 295;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='s') {
+                fill(210);
+            } else {
+                fill(0, 0, 255);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+     button6 = function(x_, y_, r_) {
+        var x = 657;
+        var y = 295;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='d') {
+                fill(210);
+            } else {
+                fill(0, 0, 255);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+     button7 = function(x_, y_, r_) {
+        var x = 537;
+        var y = 350;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='w') {
+                fill(210);
+            } else {
+                fill(0, 0, 255);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+     button8 = function(x_, y_, r_) {
+        var x = 597;
+        var y = 350;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='x') {
+                fill(210);
+            } else {
+                fill(0, 0, 255);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+     button9 = function(x_, y_, r_) {
+        var x = 657;
+        var y = 350;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='c') {
+                fill(210);
+            } else {
+                fill(0, 0, 255);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+    button10 = function(x_, y_, r_) {
+        var x = 717;
+        var y = 239;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='r') {
+                fill(210);
+            } else {
+                fill(0, 0, 255);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+
+    button11 = function(x_, y_, r_) {
+        var x = 717;
+        var y = 295;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='f') {
+                fill(210);
+            } else {
+                fill(0, 0, 255);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+    button12 = function(x_, y_, r_) {
+        var x = 717;
+        var y = 350;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='v') {
+                fill(210);
+            } else {
+                fill(0, 0, 255);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+
+    blackb1 = function(x_, y_, r_) {
+        var x = 537;
+        var y = 440;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='1') {
+                fill(210);
+            } else {
+                fill(0);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+    blackb2 = function(x_, y_, r_) {
+        var x = 597;
+        var y = 440;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='2') {
+                fill(210);
+            } else {
+                fill(0);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+    blackb3 = function(x_, y_, r_) {
+        var x = 657;
+        var y = 440;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='3') {
+                fill(210);
+            } else {
+                fill(0);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+    blackb4 = function(x_, y_, r_) {
+        var x = 717;
+        var y = 440;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyTyped() {
+            if (key ==='4') {
+                fill(210);
+            } else {
+                fill(0);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+
+    button13 = function(x_, y_, r_) {
+        var x = 450;
+        var y = 440;
+        var r = r_;
+
+        this.contains = function(mx, my) {
+            if (dist(mx, my, x, y) < r) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        this.display = function keyPressed() {
+            if (key ==='t') {
+                fill(255,0,0);
+            } else {
+                fill(0);
+            }
+            noStroke();
+            ellipse(x, y, r, r);
+        };
+    };
+</script>
+
+
+
+</body>
+
+</html>

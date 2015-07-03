@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="three.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="locale">_ Local</div>
+    <p id="demo"></p>
+    <div class="utc">_ UTC</div>
+    <p id="demo2"></p>
+    <div class="ny">_ New-York</div>
+    <p id="demo3"></p>
+    <div class="tokyo">_ Tokyo</div>
+    <p id="demo4"></p>
+     <div class="sao">_ Sao Paulo</div>
+      <p id="demo5"></p>
+      <div class="mosc">_ Moscou</div>
+       <p id="demo6"></p>
+
+    <script>
+        var myVar = setInterval(function () {
+            myTimer()
+        }, 1000);
+
+         //local
+        function myTimer() {
+            var d = new Date();
+            document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+
+            //n-york
+            var d = new Date();
+            d.setHours(d.getHours() - 6);
+            document.getElementById("demo3").innerHTML = d.toLocaleTimeString();
+
+            //utc
+            var d = new Date();
+            d.setHours(d.getHours() - 2);
+            document.getElementById("demo2").innerHTML = d.toLocaleTimeString();
+
+            //tokyo
+            var d = new Date();
+            d.setHours(d.getHours() + 7);
+            document.getElementById("demo4").innerHTML = d.toLocaleTimeString();
+            
+            //saopaulo
+            var d = new Date();
+            d.setHours(d.getHours() - 5);
+            document.getElementById("demo5").innerHTML = d.toLocaleTimeString();
+            
+             //moscou
+            var d = new Date();
+            d.setHours(d.getHours() + 1);
+            document.getElementById("demo6").innerHTML = d.toLocaleTimeString();
+        }
+    </script>
+
+    <script>
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        var geometry = new THREE.BoxGeometry(1, 2, 1);
+        var material = new THREE.MeshBasicMaterial({
+            color: 0xfffffffff
+        });
+        var cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 3
+
+        function render() {
+            requestAnimationFrame(render);
+            //cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        render();
+    </script>
+</body>
+
+</html>

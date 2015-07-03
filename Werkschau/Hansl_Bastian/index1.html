@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hyper Ball</title>
+		<link rel="author" href="http://ba573.de">
+		<script src="js/box2d-web-2.1.a.3.js"></script>
+		<script src="js/functions.js"></script>
+		<script src="js/prefix.js"></script>
+		<link rel="stylesheet" href="hyper.css" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<canvas id="c0"></canvas>
+		<header>
+			<aside id="scoreWrap">Score: <span class="score">999999</span></aside>
+		</header>
+		<section id="startScreen">
+			<img class="logo" src="img/logo.svg" alt="Hyper Ball">
+			<menu id="mainMenu">
+				<a class="button" href="highscores.php">Highscores</a><br>
+				<img id="arrowkeys" src="img/arrows.png" alt="arrows"><p>Use the arrow keys to change the direction of gravity!</p>
+			</menu>
+		</section>
+		<section id="startLvl">
+			<h1>Level <span id="lvl"></span></h1>
+			<h2 id="countdown">3</h2>
+		</section>
+		<button id="start">» Press Space To Start</button>
+		<h1 id="lvlRdy">Awesome!</h1>
+		<section id ="gameOver">
+			<img class="logo" src="img/logo.svg" alt="Hyper Ball">
+			<h1 class="blink">Game Over!</h1>
+			<h2>Your final score:</h2>
+			<p class="score">999999</p>
+			<form id="submitHighscore" action="submit.php" method="post">
+				<h2>Enter your name:</h2> <input id="name" name="name" type="text" maxlength="3" autofocus>
+				<input hidden id="score" name="score" value="">
+				<input type="submit" id="submit" value="> submit">
+			</form>
+		</section>			
+		<script type="text/javascript">
+		// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+		window.requestAnimFrame = (function(){
+			return	window.requestAnimationFrame	|| 
+			window.webkitRequestAnimationFrame		|| 
+			window.mozRequestAnimationFrame			|| 
+			window.oRequestAnimationFrame			|| 
+			window.msRequestAnimationFrame		 	|| 
+			function(/* function */ callback, /* DOMElement */ element){
+				window.setTimeout(callback, 1000 / 60);
+			};
+		})();
+		
+		var 
+			startScreen 		= document.getElementById('startScreen'),
+			gameOver			= document.getElementById('gameOver'),
+			startMsg 			= document.getElementById('start'),
+			startLvlMsg			= document.getElementById('startLvl'),
+			lvlCount 			= document.getElementById('lvl'),
+			countdownMsg		= document.getElementById('countdown'),
+			lvlRdyMsg 			= document.getElementById('lvlRdy'),
+			timeMsg 			= document.getElementById('time'),
+			scoreOutput 		= document.getElementsByClassName('score'),
+			ballImg 			= new Image(),
+			glassImg 			= new Image(),
+			glassCrackImg		= new Image(),
+			tilesetImage 		= new Image(),
+			score 				= 999999,
+			hitMultiplier		= 1,
+			lvl 				= 1,
+			SCALE 				= 30,
+			NULL_CENTER 		= {x:null, y:null},
+			running 			= false,
+			lvlPause 			= true,
+			tileSize 			= 32,      	// The size of a tile (32×32)
+			rowTileCount 		= 22,   	// The number of tiles in a row of our background
+			colTileCount 		= 36,   	// The number of tiles in a column of our background
+			imageNumTiles 		= 30,  		// The number of tiles per row in the tileset image
+			initialState,
+			hr0, hr1, min0, min1, mend, mstart, sec0, sec1, x, end_time1, start_time0,
+			message = [
+				"Awesome!", 
+				"Great!", 
+				"You are a legend!!",
+				"Wow, BRAVO",
+				"Unbelievable!",
+				"You did it!",
+				"Finally...",
+				"That's too easy...",
+				"Well done!",
+				"Good job!",
+				"Many fast, much wow.",
+				"Nearly choked that one. Lol."
+			];
+			tilesetImage.src = 'img/tileset.png';
+			ballImg.src 	 = 'img/ball.png';
+			glassImg.src 	 = 'img/glass.png';
+			glassCrackImg.src= 'img/glass_crack.png';
+		
+		var ground = 
+		[
+			[
+				[   4,   3,   3,   3,   3,   3,  97,  98,  99,   3,   3,   3,   3,   3,   3,  97,   3,   3,  97,  98,  99,  97,   3,   3,   3,  97 , 97,  98,  99,   3,   3,   3,   3,   3,   3,   5],
+				[  34, 187, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 154, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 156,  35],
+				[ 122, 184, 123, 124, 124, 124, 124, 125, 782, 782, 782, 782, 782, 782, 782, 782, 782, 184, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782,  93,  94,  94,  94,  95, 184,  92],
+				[ 150, 185, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,   6, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 817, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 817, 782, 782, 782, 782, 185, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 188, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 218, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 185, 787, 815, 845, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 248, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782,  41, 130, 131, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 817, 782, 782, 782, 782, 782, 782, 782, 782, 185, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 815, 845, 782, 782, 782, 782, 782, 816, 782, 185, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 186, 787, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 817, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  90],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 185,  92],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 186, 123,  94,  66,  94,  94,  94,  94,  94,  94,  94,  94,  94,  66,  94,  66,  94,  94,  94,  94,  66,  94,  94,  66,  94,  94,  94,  94,  94,  94,  94,  66,  95, 186, 151],
+				[ 310, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 311]
+				
+			],
+			[
+				[   4,   3,   3,   3,   3,   3,  97,  98,  99,   3,   3,   3,   3,   3,   3,  97,   3,   3,  97,  98,  99,  97,   3,   3,   3,  97 , 97,  98,  99,   3,   3,   3,   3,   3,   3,   5],
+				[  34, 187, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 156,  35],
+				[ 122, 184, 123, 124, 124, 124, 124, 125, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782,  93,  94,  94,  94,  95, 184,  92],
+				[ 150, 185, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,   6, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 817, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 817, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 787, 815, 845, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 817, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 153, 152, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 156, 782, 782, 782, 782, 187, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 188, 782, 782, 782, 817, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  90],
+				[ 122, 185,  36, 218, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 185,  92],
+				[ 150, 185,  36, 248, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 186, 123,  94,  66,  94,  94,  94,  94,  94,  94,  94,  94,  94,  66,  94,  66,  94,  94,  94,  94,  66,  94,  94,  66,  94,  94,  94,  94,  94,  94,  94,  66,  95, 186, 151],
+				[ 310, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 311]
+			],
+			[
+				[   4,   3,   3,   3,   3,   3,  97,  98,  99,   3,   3,   3,   3,   3,   3,  97,   3,   3,  97,  98,  99,  97,   3,   3,   3,  97 , 97,  98,  99,   3,   3,   3,   3,   3,   3,   5],
+				[  34, 187, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 156,  35],
+				[ 122, 185, 123, 124, 124, 124, 124, 125, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782,  93,  94,  94,  94,  95, 184,  92],
+				[ 150, 185, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,   6, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 817, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 817, 154, 157, 157, 157, 157, 157, 157, 157, 154, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 184, 782, 782, 782, 782, 782, 787, 782, 184, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 782, 782, 782, 782, 816, 782, 782, 185, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 185, 782, 782, 782, 782, 787, 815, 845, 186, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 782, 782, 782, 188, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 817, 782, 782, 782, 782, 185, 782, 782, 782, 218, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 815, 845, 782, 782, 782, 186, 782, 816, 782, 248, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 154, 157, 157, 157, 157, 157, 157, 157, 154, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 184, 782, 221, 159, 160, 161, 221, 782, 184, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 186, 782, 251, 189, 190, 191, 251, 782, 186, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 157, 157, 157, 157, 157, 157, 157, 157, 157, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 817, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  90],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 185,  92],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 186, 123,  94,  66,  94,  94,  94,  94,  94,  94,  94,  94,  94,  66,  94,  66,  94,  94,  94,  94,  66,  94,  94,  66,  94,  94,  94,  94,  94,  94,  94,  66,  95, 186, 151],
+				[ 310, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 311]
+			],
+			[
+				[   4,   3,   3,   3,   3,   3,  97,  98,  99,   3,   3,   3,   3,   3,   3,  97,   3,   3,  97,  98,  99,  97,   3,   3,   3,  97 , 97,  98,  99,   3,   3,   3,   3,   3,   3,   5],
+				[  34, 187, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 156,  35],
+				[ 122, 184, 123, 124, 124, 124, 124, 125, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782,  93,  94,  94,  94,  95, 184,  92],
+				[ 150, 185, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,   6, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 817, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 817, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 787, 815, 845, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 817, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 815, 845, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 817, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 817, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 188, 782, 782, 185,  90],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 218, 782, 816, 185,  92],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 248, 782, 782, 185,  92],
+				[ 120, 186, 123,  94,  66,  94,  94,  94,  94,  94,  94,  94,  94,  94,  66,  94,  66,  94,  94,  94,  94,  66,  94,  94,  66,  94,  94,  94,  94,  94,  94,  94,  66,  95, 186, 151],
+				[ 310, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 311]
+			],
+			[
+				[   4,   3,   3,   3,   3,   3,  97,  98,  99,   3,   3,   3,   3,   3,   3,  97,   3,   3,  97,  98,  99,  97,   3,   3,   3,  97 , 97,  98,  99,   3,   3,   3,   3,   3,   3,   5],
+				[  34, 187, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 156,  35],
+				[ 122, 184, 123, 124, 124, 124, 124, 125, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782,  93,  94,  94,  94,  95, 184,  92],
+				[ 150, 185, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,   6, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 817, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 154, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 185, 151],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 184, 782, 782, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 185, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 185, 782, 782, 782, 423, 424, 425, 426, 427, 428, 429, 845, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 188, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 185, 782, 782, 782, 453, 454, 455, 456, 457, 458, 459, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 218, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 817, 185, 782, 782, 782, 483, 484, 485, 486, 487, 488, 489, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 248, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 815, 185, 782, 782, 782, 513, 514, 149, 149, 149, 518, 519, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782,  41, 130, 131, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 185, 782, 782, 782, 180, 182, 181, 182, 181, 181, 183, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 185, 782, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 186, 782, 782, 782, 782, 782, 782, 782, 817, 782, 782, 782, 782, 782, 782, 782, 787, 782, 782, 782, 782, 782, 782, 782, 782, 185, 151],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 187, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 156, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  90],
+				[ 120, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 185,  36, 782, 782, 782, 782, 817, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  90],
+				[ 122, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 816, 185,  92],
+				[ 150, 185,  36, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 782, 185,  92],
+				[ 120, 186, 123,  94,  66,  94,  94,  94,  94,  94,  94,  94,  94,  94,  66,  94,  66,  94,  94,  94,  94,  66,  94,  94,  66,  94,  94,  94,  94,  94,  94,  94,  66,  95, 186, 151],
+				[ 310, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 281, 311]
+			]
+			
+		]
+		;
+ 		
+		function drawImage() {
+			var l = lvl - 1;
+			for (var r = 0; r < rowTileCount; r++) {
+		    	for (var c = 0; c < colTileCount; c++) {
+		        	var tile = ground[l][r][c];
+		    	    var tileRow = (tile / imageNumTiles) | 0; // Bitwise OR operation
+		    	    var tileCol = (tile % imageNumTiles) | 0;
+		    	    ctx.drawImage(tilesetImage, (tileCol * tileSize), (tileRow * tileSize), tileSize, tileSize, (c * tileSize), (r * tileSize), tileSize, tileSize);
+		    	}
+			}
+		}
+			
+		function start_timer() {
+		    var i = 1, today = new Date();
+		    
+		    mstart = today.getTime();
+		    hr0 = today.getHours();
+		    x = (hr0 < 10) ? "0" + hr0: hr0;
+		    start_time0 = x + ":";
+		    min0 = today.getMinutes();
+		    x = (min0 < 10) ? "0" + min0: min0;
+		    start_time0 += "" + x + ":";
+		    sec0 = today.getSeconds();
+		    x = (sec0 < 10) ? "0" + sec0: sec0;
+		    start_time0 += "" + x;
+		}
+		 
+		function calc_elapsed_time() {
+		    var i = 1, today = new Date();
+		    var elapsed_time, msec;
+		    
+		    mend = today.getTime();
+		    hr1 = min1 = sec1 = 0;
+		    x = today.getHours();
+		    hr1 = (x < 10) ? "0" + x: x;
+		    x = today.getMinutes();
+		    min1 = (x < 10) ? "0" + x: x;
+		    x = today.getSeconds();
+		    sec1 = (x < 10) ? "0" + x: x;
+		    end_time1 = hr1 + ':' + min1 + ':' + sec1;
+		    msec = mend - mstart;
+		    x = (msec % 1000);
+		    elapsed_time = (msec - x) / 1000;
+		    x = (x > 500) ? 1 : 0;
+		    elapsed_time += x;
+		    return Math.floor(msec);
+		}
+		
+		function reset_timer() {
+			hr0 = hr1 = min0 = min1 = mend = mstart = sec0 = sec1 = x = 0;
+			end_time1 = start_time0 = "";
+		}
+ 
+		function Entity(id, x, y, angle, center, color, strength) {
+			this.id = id;
+			this.x = x;
+			this.y = y;
+			this.angle = angle || 0;
+			this.center = center;
+			this.color = color || '#ffffff';	
+			
+			this.isHit = false;
+			this.strength = strength;
+			this.dead = false;
+		}
+		
+		Entity.prototype.hit = function(impulse, source) {
+			this.isHit = true;
+			if(this.id == "glass"){
+				this.color = ctx.createPattern(glassCrackImg, 'repeat');	
+			}
+			if (this.strength) {
+				this.strength -= impulse;
+				if (this.strength <= 0) {
+					this.dead = true
+				}
+			}
+		}
+		Entity.prototype.update = function(state) {
+			this.x = state.x;
+			this.y = state.y;
+			this.center = state.c;
+			this.angle = state.a;
+		}
+		Entity.build = function(def) {
+			if (def.radius) {return new CircleEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.strength, def.radius);}
+			else if (def.polys) {return new PolygonEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.strength, def.polys);}
+			else {return new RectangleEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.strength, def.halfWidth, def.halfHeight);}
+		}
+		function CircleEntity(id, x, y, angle, center, color, strength, radius) {
+			color = color;
+			Entity.call(this, id, x, y, angle, center, color, strength);
+			this.radius = radius;
+		}
+		CircleEntity.prototype = new Entity();
+		CircleEntity.prototype.constructor = CircleEntity;
+		CircleEntity.prototype.draw = function(ctx) {
+			ctx.save();
+			ctx.translate(this.x * SCALE, this.y * SCALE);
+			ctx.rotate(this.angle);
+			ctx.translate(-(this.x) * SCALE, -(this.y) * SCALE);
+			ctx.fillStyle = this.color;
+			ctx.beginPath();
+			ctx.arc(this.x * SCALE, this.y * SCALE, this.radius * SCALE, 0, Math.PI * 2, true);
+			ctx.fill();
+			ctx.restore();
+		}
+		
+		function RectangleEntity(id, x, y, angle, center, color, strength, halfWidth, halfHeight) {
+			Entity.call(this, id, x, y, angle, center, color, strength);
+			this.halfWidth = halfWidth;
+			this.halfHeight = halfHeight;
+		}
+		RectangleEntity.prototype = new Entity();
+		RectangleEntity.prototype.constructor = RectangleEntity;
+		RectangleEntity.prototype.draw = function(ctx) {
+			ctx.save();
+			ctx.translate(this.x * SCALE, this.y * SCALE);
+			ctx.rotate(this.angle);
+			ctx.translate(-(this.x) * SCALE, -(this.y) * SCALE);
+			ctx.fillStyle = this.color;
+			ctx.fillRect((this.x-this.halfWidth) * SCALE,
+									 (this.y-this.halfHeight) * SCALE,
+									 (this.halfWidth*2) * SCALE,
+									 (this.halfHeight*2) * SCALE);
+			ctx.restore();
+			
+			//Entity.prototype.draw.call(this, ctx);
+		}
+		
+		function PolygonEntity(id, x, y, angle, center, color, strength, polys) {
+			Entity.call(this, id, x, y, angle, center, color, strength);
+			this.polys = polys;
+		}
+		PolygonEntity.prototype = new Entity();
+		PolygonEntity.prototype.constructor = PolygonEntity;
+		PolygonEntity.prototype.draw = function(ctx) {
+			ctx.save();
+			ctx.translate(this.x * SCALE, this.y * SCALE);
+			ctx.rotate(this.angle);
+			ctx.translate(-(this.x) * SCALE, -(this.y) * SCALE);
+			ctx.fillStyle = this.color;
+			for (var i = 0; i < this.polys.length; i++) {
+				var points = this.polys[i];
+				ctx.beginPath();
+				ctx.moveTo((this.x + points[0].x) * SCALE, (this.y + points[0].y) * SCALE);
+				for (var j = 1; j < points.length; j++) {
+					 ctx.lineTo((points[j].x + this.x) * SCALE, (points[j].y + this.y) * SCALE);
+				}
+				ctx.lineTo((this.x + points[0].x) * SCALE, (this.y + points[0].y) * SCALE);
+				ctx.closePath();
+				ctx.fill();
+			}
+			ctx.restore();
+			
+		}
+		
+		var world = {};
+		var bodiesState = null;
+		var box = null;
+		
+		function update(animStart) {
+			
+			box.update();
+			
+			bodiesState = box.getState();
+			
+			var graveyard = [];
+			
+			for (var id in bodiesState) {
+				var entity = world[id];
+				
+				if (entity && world[id].dead) {
+					box.removeBody(id);
+					graveyard.push(id);
+				} else if (entity) {
+					entity.update(bodiesState[id]);
+				}
+			}
+			
+			for (var i = 0; i < graveyard.length; i++) {
+				delete world[graveyard[i]];
+			}
+		}
+		
+
+		canvas = document.getElementById("c0");
+		ctx = canvas.getContext("2d");
+		
+		var canvasWidth  = ctx.canvas.width  = 1152;
+		var canvasHeight = ctx.canvas.height = 704;	
+
+		function draw() {
+			ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+			drawImage();
+			for (var id in world) {
+				var entity = world[id];
+				entity.draw(ctx);
+			}
+			
+		} 
+		function newScore(z){
+			score -= z;
+			if(score < 0){score = 0;}
+
+			score = new Array(+6 + 1 - (score + '').length).join('0') + score;
+			
+			for (i = 0; i < scoreOutput.length; i++) {
+				scoreOutput[i].innerHTML = score;		
+			}
+			document.getElementById("score").value = score;
+		}
+		function lvlUp(){
+			
+			lvlRdyMsg.innerHTML = message[Math.floor((Math.random() * message.length))];
+			lvlRdyMsg.style.display = "block";
+			
+			var z = calc_elapsed_time();
+			newScore(z);
+			
+			bodiesState = box.getState();
+			var graveyard = [];
+			for (var id in bodiesState) {
+				var entity = world[id];
+				box.removeBody(id);
+				graveyard.push(id);
+			}
+			for (var i = 0; i < graveyard.length; i++) {
+				delete world[graveyard[i]];
+			}
+			
+			if (lvl < 5){
+				lvlPause = true;
+				startMsg.style.display = "block";
+				window.addEventListener('keydown', function(e) {
+					if(e.keyCode == 32 && lvlPause){
+						lvl++;
+						startLvl();
+					}
+				}, false);	
+			}
+			else {
+				window.setTimeout(function(){
+					document.getElementById('c0').style.background = "#000000";
+					ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+					lvlRdyMsg.style.display = "none";
+					gameOver.style.display = "block";
+				}, 3000);
+			}			
+		}
+		function setLvl(){
+			reset_timer();						
+			switch (lvl) {
+				case 1:
+				initialState = [
+				    {id: "walls", x: 0, y: 0, polys: [
+				        [{x: ctx.canvas.width / SCALE - 64 / SCALE, y: 0}, {x: ctx.canvas.width / SCALE, y: 0}, {x: ctx.canvas.width / SCALE, y: ctx.canvas.height / SCALE}, {x: ctx.canvas.width / SCALE - 64 / SCALE, y: ctx.canvas.height / SCALE}], // right
+				        [{x: 0, y: 0}, {x: 64 / SCALE, y: 0}, {x: 64 / SCALE, y: ctx.canvas.height / SCALE}, {x: 0, y: ctx.canvas.height / SCALE}] // left
+				    ], color: "rgba(255, 255, 100, 0)"},
+				    {id: "roof",
+				        x: canvas.width / SCALE / 2, 
+				    	y: 32 / SCALE, 
+				    	halfHeight: 32 / SCALE, 
+				    	halfWidth: ctx.canvas.width / 2 / SCALE, 
+						color: "rgba(255, 255, 100, 0)"},
+				    {id: "ground",
+					    x: canvas.width / SCALE / 2, 
+				    	y: (canvas.height - 32) / SCALE , 
+				    	halfHeight: 32 / SCALE, 
+				    	halfWidth: ctx.canvas.width / 2 / SCALE, 
+						color: "rgba(255, 255, 100, 0)"},
+				  
+				    {id: "ball",
+				    	x: 100 / SCALE, 
+				    	y: 100 / SCALE, 
+				    	radius: 16 / SCALE, 
+				    	color: ctx.createPattern(ballImg, 'repeat')},
+				    {id: "target", 
+				    	x: ctx.canvas.width / SCALE - 144 / SCALE, 
+				    	y: 240 / SCALE, 
+				    	halfHeight: 48 / SCALE, 
+				    	halfWidth: 16 / SCALE, 
+				    	color: "rgba(50, 255, 100, 0)"
+				    },
+				    {id: "obstacles", 
+				    	x: canvas.width / SCALE / 2 - 16 / SCALE, 
+				    	y: 0, 
+				    	halfHeight: 448 / SCALE, 
+				    	halfWidth: 16 / SCALE, 
+				    	color: "rgba(255, 255, 100, 0)"}
+				];
+				break;
+				case 2:
+				initialState = [
+				    {id: "walls", x: 0, y: 0, polys: [
+				        [{x: ctx.canvas.width / SCALE - 64 / SCALE, y: 0}, {x: ctx.canvas.width / SCALE, y: 0}, {x: ctx.canvas.width / SCALE, y: ctx.canvas.height / SCALE}, {x: ctx.canvas.width / SCALE - 64 / SCALE, y: ctx.canvas.height / SCALE}], // right
+				        [{x: 0, y: 0}, {x: 64 / SCALE, y: 0}, {x: 64 / SCALE, y: ctx.canvas.height / SCALE}, {x: 0, y: ctx.canvas.height / SCALE}] // left
+				    ], color: "rgba(255, 255, 100, 0)"},
+				    {id: "roof",
+				        x: canvas.width / SCALE / 2, 
+				    	y: 32 / SCALE, 
+				    	halfHeight: 32 / SCALE, 
+				    	halfWidth: ctx.canvas.width / 2 / SCALE, 
+						color: "rgba(255, 255, 100, 0)"},
+				    {id: "ground",
+					    x: canvas.width / SCALE / 2, 
+				    	y: (canvas.height - 32) / SCALE , 
+				    	halfHeight: 32 / SCALE, 
+				    	halfWidth: ctx.canvas.width / 2 / SCALE, 
+						color: "rgba(255, 255, 100, 0)"},
+				  
+				    {id: "ball",
+				    	x: 100 / SCALE, 
+				    	y: 100 / SCALE, 
+				    	radius: 16 / SCALE, 
+				    	color: ctx.createPattern(ballImg, 'repeat')},
+				    {id: "target", 
+				    	x: 112  / SCALE, 
+				    	y: ctx.canvas.height / SCALE - 112 / SCALE, 
+				    	halfHeight: 48 / SCALE, 
+				    	halfWidth: 16 / SCALE, 
+				    	color: "rgba(50, 255, 100, 0)"
+				    },
+				    {id: "obstacles", x:0, y:0, polys: [
+				        [
+				        {x: 64 / SCALE, y: 352 / SCALE}, 
+				        {x: 512 / SCALE, y: 352 / SCALE},
+				        {x: 512 / SCALE, y: 384 / SCALE}, 
+				        {x: 64 / SCALE, y: 384 / SCALE}
+				        ],						        
+				        [
+				        {x: 640 / SCALE, y: 352 / SCALE}, 
+				        {x: 1088 / SCALE, y: 352 / SCALE},
+				        {x: 1088 / SCALE, y: 384 / SCALE}, 
+				        {x: 640 / SCALE, y: 384 / SCALE}
+				        ]
+				    ], color: "rgba(255, 100, 100, 0)"}
+				];
+				break;
+				case 3:
+				initialState = [
+				{id: "walls", x: 0, y: 0, polys: [
+				        [{x: ctx.canvas.width / SCALE - 64 / SCALE, y: 0}, {x: ctx.canvas.width / SCALE, y: 0}, {x: ctx.canvas.width / SCALE, y: ctx.canvas.height / SCALE}, {x: ctx.canvas.width / SCALE - 64 / SCALE, y: ctx.canvas.height / SCALE}], // right
+				        [{x: 0, y: 0}, {x: 64 / SCALE, y: 0}, {x: 64 / SCALE, y: ctx.canvas.height / SCALE}, {x: 0, y: ctx.canvas.height / SCALE}] // left
+				    ], color: "rgba(255, 255, 100, 0)"},
+				    {id: "roof",
+				        x: canvas.width / SCALE / 2, 
+				    	y: 32 / SCALE, 
+				    	halfHeight: 32 / SCALE, 
+				    	halfWidth: ctx.canvas.width / 2 / SCALE, 
+						color: "rgba(255, 255, 100, 0)"},
+				    {id: "ground",
+					    x: canvas.width / SCALE / 2, 
+				    	y: (canvas.height - 32) / SCALE , 
+				    	halfHeight: 32 / SCALE, 
+				    	halfWidth: ctx.canvas.width / 2 / SCALE, 
+						color: "rgba(255, 255, 100, 0)"},
+				  
+				    {id: "ball",
+				    	x: 100 / SCALE, 
+				    	y: 100 / SCALE, 
+				    	radius: 16 / SCALE, 
+				    	color: ctx.createPattern(ballImg, 'repeat')},
+				    {id: "target", 
+				    	x: ctx.canvas.width / SCALE / 2 - 16 / SCALE,
+				    	y: ctx.canvas.height / SCALE / 2 - 16 / SCALE, 
+				    	halfHeight: 48 / SCALE, 
+				    	halfWidth: 16 / SCALE, 
+				    	color: "rgba(50, 255, 100, 0)"
+				    },
+				    {id: "obstacles", x:0, y:0, polys: [
+				        [
+				        {x: 448 / SCALE, y: 160 / SCALE}, 
+				        {x: 704 / SCALE, y: 160 / SCALE},
+				        {x: 704 / SCALE, y:	192 / SCALE}, 
+				        {x: 448 / SCALE, y: 192 / SCALE}
+				        ],						        
+				        [
+				        {x: 704 / SCALE, y: 160 / SCALE}, 
+				        {x: 704 / SCALE, y: 288 / SCALE},
+				        {x: 672 / SCALE, y:	288 / SCALE}, 
+				        {x: 672 / SCALE, y: 160 / SCALE}
+				        ],
+				        [
+				        {x: 704 / SCALE, y: 384 / SCALE}, 
+				        {x: 704 / SCALE, y: 512 / SCALE},
+				        {x: 672 / SCALE, y:	512 / SCALE}, 
+				        {x: 672 / SCALE, y: 384 / SCALE}
+				        ],
+				        [
+				        {x: 448 / SCALE, y: 480 / SCALE}, 
+				        {x: 704 / SCALE, y: 480 / SCALE},
+				        {x: 704 / SCALE, y:	512 / SCALE}, 
+				        {x: 448 / SCALE, y: 512 / SCALE}
+				        ],
+				        [
+				        {x: 412 / SCALE, y: 160 / SCALE}, 
+				        {x: 448 / SCALE, y: 160 / SCALE},
+				        {x: 448 / SCALE, y:	512 / SCALE}, 
+				        {x: 412 / SCALE, y: 512 / SCALE}
+				        ]
+				    ], color: "rgba(255, 255, 255, 0)"}
+				];
+				break;
+				case 4:
+				initialState = [
+				    {id: "walls", x: 0, y: 0, polys: [
+				        [{x: ctx.canvas.width / SCALE - 64 / SCALE, y: 0}, {x: ctx.canvas.width / SCALE, y: 0}, {x: ctx.canvas.width / SCALE, y: ctx.canvas.height / SCALE}, {x: ctx.canvas.width / SCALE - 64 / SCALE, y: ctx.canvas.height / SCALE}], // right
+				        [{x: 0, y: 0}, {x: 64 / SCALE, y: 0}, {x: 64 / SCALE, y: ctx.canvas.height / SCALE}, {x: 0, y: ctx.canvas.height / SCALE}] // left
+				    ], color: "rgba(255, 255, 100, 0)"},
+				    {id: "roof",
+				        x: canvas.width / SCALE / 2, 
+				    	y: 32 / SCALE, 
+				    	halfHeight: 32 / SCALE, 
+				    	halfWidth: ctx.canvas.width / 2 / SCALE, 
+						color: "rgba(255, 255, 100, 0)"},
+				    {id: "ground",
+					    x: canvas.width / SCALE / 2, 
+				    	y: (canvas.height - 32) / SCALE , 
+				    	halfHeight: 32 / SCALE, 
+				    	halfWidth: ctx.canvas.width / 2 / SCALE, 
+						color: "rgba(255, 255, 100, 0)"},
+				  
+				    {id: "ball",
+				    	x: 100 / SCALE, 
+				    	y: 100 / SCALE, 
+				    	radius: 16 / SCALE, 
+				    	color: ctx.createPattern(ballImg, 'repeat')},
+				    {id: "target", 
+				    	x: 1008 / SCALE, 
+				    	y: ctx.canvas.height / SCALE - 112 / SCALE, 
+				    	halfHeight: 48 / SCALE, 
+				    	halfWidth: 16 / SCALE, 
+				    	color: "rgba(50, 255, 100, 0)"
+				    },
+				    {id: "glass",
+					    x: 880 / SCALE, 
+				    	y: ctx.canvas.height / 2 / SCALE, 
+				    	halfHeight: ctx.canvas.height / 2 / SCALE - 64 / SCALE, 
+				    	halfWidth: 16 / SCALE, 
+						color: ctx.createPattern(glassImg, 'repeat'), strength: 30}
+				];
+				break;
+				case 5:
+				initialState = [
+				    {id: "walls", x: 0, y: 0, polys: [
+				        [{x: ctx.canvas.width / SCALE - 64 / SCALE, y: 0}, {x: ctx.canvas.width / SCALE, y: 0}, {x: ctx.canvas.width / SCALE, y: ctx.canvas.height / SCALE}, {x: ctx.canvas.width / SCALE - 64 / SCALE, y: ctx.canvas.height / SCALE}], // right
+				        [{x: 0, y: 0}, {x: 64 / SCALE, y: 0}, {x: 64 / SCALE, y: ctx.canvas.height / SCALE}, {x: 0, y: ctx.canvas.height / SCALE}] // left
+				    ], color: "rgba(255, 255, 100, 0)"},
+				    {id: "roof",
+				        x: canvas.width / SCALE / 2, 
+				    	y: 32 / SCALE, 
+				    	halfHeight: 32 / SCALE, 
+				    	halfWidth: ctx.canvas.width / 2 / SCALE, 
+						color: "rgba(255, 255, 100, 0)"},
+				    {id: "ground",
+					    x: canvas.width / SCALE / 2, 
+				    	y: (canvas.height - 32) / SCALE , 
+				    	halfHeight: 32 / SCALE, 
+				    	halfWidth: ctx.canvas.width / 2 / SCALE, 
+						color: "rgba(255, 255, 100, 0)"},
+				  
+				    {id: "ball",
+				    	x: 304 / SCALE, 
+				    	y: 144 / SCALE, 
+				    	radius: 16 / SCALE, 
+				    	color: ctx.createPattern(ballImg, 'repeat')},
+				    {id: "target", 
+				    	x: 1008 / SCALE, 
+				    	y: 304 / SCALE, 
+				    	halfHeight: 48 / SCALE, 
+				    	halfWidth: 16 / SCALE, 
+				    	color: "rgba(50, 255, 100, 0)"
+				    },
+				    {id: "glass", x:0, y:0, polys: [
+				        [
+				        {x: 256 / SCALE, y: 64 / SCALE}, 
+				        {x: 288 / SCALE, y: 64 / SCALE},
+				        {x: 288 / SCALE, y: 192 / SCALE}, 
+				        {x: 256 / SCALE, y: 192 / SCALE}
+				        ]
+				    ], color: ctx.createPattern(glassImg, 'repeat'), strength: 30},
+				    {id: "obstacles", x:0, y:0, polys: [
+				        [
+				        {x: 288 / SCALE, y: 160 / SCALE}, 
+				        {x: 1088 / SCALE, y: 160 / SCALE},
+				        {x: 1088 / SCALE, y: 192 / SCALE}, 
+				        {x: 288 / SCALE, y: 192 / SCALE}
+				        ],
+				        [
+				        {x: 288 / SCALE, y: 192 / SCALE}, 
+				        {x: 320 / SCALE, y: 192 / SCALE},
+				        {x: 320 / SCALE, y: 512 / SCALE}, 
+				        {x: 288 / SCALE, y: 512 / SCALE}
+				        ],
+				        [
+				        {x: 320 / SCALE, y: 480 / SCALE}, 
+				        {x: 768 / SCALE, y: 480 / SCALE},
+				        {x: 768 / SCALE, y: 512 / SCALE}, 
+				        {x: 320 / SCALE, y: 512 / SCALE}
+				        ]
+				    ], color: "rgba(255, 255, 255, 0)"}
+				];
+				break;
+				default:
+				initialState = [
+				    {id: "walls", x: 0, y: 0, polys: [
+				        [{x: 0, y: 0}, {x: ctx.canvas.width / SCALE, y: 0}, {x: ctx.canvas.width / SCALE, y: .5}, {x: 0, y: .5}], // roof
+				        [{x: ctx.canvas.width / SCALE - 0.5, y: 0}, {x: ctx.canvas.width / SCALE, y: 0}, {x: ctx.canvas.width / SCALE, y: ctx.canvas.height / SCALE}, {x: ctx.canvas.width / SCALE - 0.5, y: ctx.canvas.height / SCALE}], // right
+				        [{x: 0, y: ctx.canvas.height / SCALE - 0.5}, {x: ctx.canvas.width / SCALE, y: ctx.canvas.height / SCALE - 0.5}, {x: ctx.canvas.width / SCALE, y: ctx.canvas.height / SCALE}, {x: 0, y: ctx.canvas.height / SCALE}], // ground
+				        [{x: 0, y: 0}, {x: 0.5, y: 0}, {x: 0.5, y: ctx.canvas.height / SCALE}, {x: 0, y: ctx.canvas.height / SCALE}] // left
+				    ], color: "#000000"},
+				    {id: "ball", x: 100 / SCALE, y: 100 / SCALE , radius: 0.5, color: "#ff00ff"},
+				   // {id: "obstacles", x:17, y: ctx.canvas.height / SCALE - 1, halfHeight: 2, halfWidth: 0.10},
+				   // {id: "glass", x:17, y: ctx.canvas.height / SCALE - 5, halfHeight: 0.25, halfWidth: 2, strength: 10},
+				    {id: "target", 
+						x: ctx.canvas.width / 2 / SCALE, 
+				    	y: ctx.canvas.height / 2 / SCALE, 
+				    	halfHeight: 1, 
+				    	halfWidth: 2, 
+				    }
+				];
+			}
+			running = true;
+		}
+		
+		function init() {
+			lvlRdyMsg.style.display = "none";
+			for (var i = 0; i < initialState.length; i++) {
+				world[initialState[i].id] = Entity.build(initialState[i]);
+			}
+			box = new bTest(60, false, canvasWidth, canvasHeight, SCALE);
+			box.setBodies(world);
+			box.addContactListener({
+				EndContact: function(idA, idB) {
+					var entityA = world[idA];
+					var entityB = world[idB];
+					if(
+						((entityB.id == "ball") && (entityA.id == "target")) || 
+						((entityB.id == "target") && (entityA.id == "ball"))) {
+						lvlUp();	
+					}
+					if(
+						(entityB.id == "ball") && 
+						(entityA.id == "obstacles" || 
+						 entityA.id == "walls" || 
+						 entityA.id == "roof" || 
+						 entityA.id == "ground")) {
+						newScore(1000 * hitMultiplier);
+						hitMultiplier++;
+					}
+				},
+				PostSolve: function(idA, idB, impulse) {
+					if (impulse < 0.1) return;
+					var entityA = world[idA];
+					var entityB = world[idB];
+					entityA.hit(impulse, entityB);
+					entityB.hit(impulse, entityA);
+				}
+			});
+			// change Gravity on Userinput
+			window.addEventListener('keydown', function(e) {
+				switch (e.keyCode) {
+					case 37: box.changeGravity(-10, 0); break;
+					case 38: box.changeGravity(0, -10); break;
+					case 39: box.changeGravity(10, 0);  break;
+					case 40: box.changeGravity(0, 10);  break;
+					default: return false;
+				}
+			}, false);	
+		}
+		function startLvl() {
+			lvlPause = false;
+			hitMultiplier		= 1,
+			lvlRdyMsg.style.display = "none";
+			startMsg.style.display = "none";
+			startScreen.style.display = "none";
+			lvlCount.innerHTML = lvl;
+			startLvlMsg.style.display = "block";
+			var counter = 3;
+			drawImage();
+			countdownMsg.innerHTML = counter.toString();
+			var countdown = setInterval(function() {
+			    counter--;
+			    if(counter < 0) {
+					startLvlMsg.style.display = "none";
+					setLvl();
+					init(lvl);
+					start_timer();
+					(function loop(animStart) {
+					   update(animStart);
+					   draw();
+					   requestAnimFrame(loop);
+					})();
+			        clearInterval(countdown);
+			    } else {
+			        countdownMsg.innerHTML = counter.toString();
+			    }
+			}, 1000);
+		}
+		document.addEventListener("DOMContentLoaded", function() {
+			window.addEventListener('keydown', function(e) {
+				if(e.keyCode == 32 && !running && lvlPause){
+					document.getElementById('c0').style.background = "#201d20";
+					startLvl();
+					}
+			}, false);
+		}, false);
+		</script>
+	</body>
+</html>

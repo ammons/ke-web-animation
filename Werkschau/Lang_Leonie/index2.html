@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Mehr sehen</title>
+    <link rel="stylesheet" href="style.css"/>
+
+    <script src="p5.min.js"></script>
+    <script>
+
+        var xspacing = 0.05;
+        var w;
+        var theta = 0.5;
+        var amplitude = 55.0;
+        var period = 500.0;
+        var dx;
+        var yvalues;
+
+        function setup() {
+            createCanvas(innerWidth, innerHeight);
+            w = width+10;
+            dx = (TWO_PI / period) * xspacing;
+            yvalues = new Array(floor(w/xspacing));
+            frameRate(30);
+        }
+
+        function draw() {
+            calcWave();
+            renderWave();
+        }
+
+        function calcWave() {
+            theta += 55.05;
+
+
+            var x = theta;
+            for (var i = 0; i < yvalues.length; i++) {
+                yvalues[i] = sin(x)*amplitude;
+                x+=dx;
+            }
+        }
+
+        function renderWave() {
+            noStroke();
+            fill(255);
+
+            for (var x = 0; x < yvalues.length; x++) {
+                ellipse(x*xspacing, height/2+yvalues[x], 4, 8);
+            }
+        }
+
+
+
+
+    </script>
+    <style>
+    
+    </style>
+
+
+</head>
+<body style="background-image: url(http://pecora-nera.eu/wp-content/uploads/2014/02/Meer-Nebel.jpg);">
+
+</body>
+</html>
+
+
+
+
+

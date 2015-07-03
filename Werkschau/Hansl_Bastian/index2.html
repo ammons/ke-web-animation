@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="de_DE">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Bastian Hansl">
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<title>Rubik's Cube</title>
+		<script type="text/javascript" src="js/three.min.js"></script>
+		<script type="text/javascript" src="js/ext.js"></script>
+		<script type="text/javascript" src="js/rubik.js"></script>
+    </head>
+    <body>
+	    <aside id="hl">
+		    <h1>Rubik's Cube</h1>
+		    <h3>3 x 3 x 3</h3>
+		</aside>
+	    <aside id="container"></aside>
+		<main>
+			<h2>&mdash;&mdash;&mdash; Controls</h2>
+			<p>Press the following keys to rotate the respective faces clockwise.<br> (Shift + Key: rotate counter-clockwise)</p>
+			<ul>
+				<li><span class="ctrl">u</span>Up   <img src="img/cubies/up.png" alt="Cubie"</li>
+				<li><span class="ctrl">d</span>Down <img src="img/cubies/down.png" alt="Cubie"</li>
+				<li><span class="ctrl">l</span>Left <img src="img/cubies/left.png" alt="Cubie"</li>
+				<li><span class="ctrl">r</span>Right<img src="img/cubies/right.png" alt="Cubie"</li>
+				<li><span class="ctrl">f</span>Front<img src="img/cubies/front.png" alt="Cubie"</li>
+				<li><span class="ctrl">b</span>Back <img src="img/cubies/back.png" alt="Cubie"</li>
+			</ul>
+			<p><span class="ctrl">X</span><span class="ctrl">Y</span><span class="ctrl">Z</span> rotate the cube</p>
+			<button id="btn-refresh">SCRAMBLE</button>
+		</main>
+    </body>
+    <script>
+	
+		window.onload = function()
+		{
+			init();
+			addToDOM();
+			fillScene();
+			animate();
+		}
+        
+        var renderer, scene;
+        var camera, cameraControls;
+        var clock = new THREE.Clock();
+
+        var cubies = [];
+        var objects = [];
+		var text = [];
+		
+        function init(){
+            var canvasWidth = window.innerWidth - 350;
+            var canvasHeight = window.innerHeight;
+            var aspectRatio = canvasWidth / canvasHeight;
+
+			renderer = Detector.webgl? new THREE.WebGLRenderer({ antialias: true }): errorMessage();
+            renderer.gammaInput = true;
+            renderer.gammaOutput = true;
+            renderer.setClearColor(0x000000);
+            renderer.setSize(canvasWidth, canvasHeight);
+
+            camera = new THREE.PerspectiveCamera(45, aspectRatio, 0.1, 20000);
+            camera.position.set(400, 800, 800);
+
+            cameraControls = new THREE.OrbitControls(camera, renderer.domElement);
+			
+            addEventListeners();
+        }
+
+
+		function errorMessage()
+		{
+			alert("Snap! It seems WebGL is either not supported or your GPU is blacklisted! Switching to Canvas Renderer... Will get slow!");
+			return new THREE.CanvasRenderer();
+		}
+		
+        function fillScene(){
+            scene = new THREE.Scene();
+            createLights();
+
+            cubies = new createCubies();
+						
+            pivot = new THREE.Object3D();
+            scene.add(pivot);
+
+            for (var i = 0; i < cubies.length; i++)
+			{
+			    scene.add(cubies[i]);
+			}
+        }
+
+		var obj;
+        function createLights(){
+		    
+		    obj = new THREE.Object3D();
+			
+			var ambilight = new THREE.AmbientLight( 0x333333 ); 
+			
+			var spotlight  = new THREE.SpotLight(0xFFFFFF, 0.5);
+			spotlight.position.set(1000,500,0);
+			spotlight.angle = 80 * Math.PI / 180
+			spotlight.exponent = 60;
+			spotlight.target.position.set(0,0,0);
+			
+			
+			var spotlight2 = new THREE.SpotLight(0xffffff, 0.5);
+			spotlight2.position.set(-1000,500,0);
+			spotlight2.angle = 80 * Math.PI / 180
+			spotlight2.exponent = 60;
+			spotlight2.target.position.set(0,0,0);
+			
+			obj.add(spotlight);
+			obj.add(spotlight2);
+			obj.add(ambilight);
+			scene.add(obj);
+		}
+        function addToDOM(){
+            var container = document.getElementById("container");
+            container.appendChild(renderer.domElement);
+
+            stats = new Stats();
+            stats.domElement.style.position = 'absolute';
+            stats.domElement.style.top = '0px';
+			stats.domElement.style.left = '10px'; 
+            container.appendChild(stats.domElement);
+        }
+		
+        function animate(){
+            window.requestAnimationFrame(animate);
+            render();
+        }
+		
+        function detachAndReset(){
+            for (var i = 0; i < active.length; i++)
+                THREE.SceneUtils.detach(active[i], pivot, scene);
+
+            active.length = 0;
+            activeCount = 0;
+			
+			for(var i in attached)
+				attached[i] = false;
+				
+            pivot.rotation.x = 0;
+            pivot.rotation.y = 0;
+            pivot.rotation.z = 0;
+        }
+
+        function render(){
+
+            var delta = clock.getDelta();
+            cameraControls.update(delta);
+            stats.update();
+			
+			obj.position.copy(camera.position);
+            var endAnimation = false;
+			
+			if (attached["right"] === true)
+            {
+                pivot.rotation.x -= 0.091;
+				 
+                if (pivot.rotation.x <= -Math.PI / 2.0)
+                {
+                    pivot.rotation.x = -Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+
+            if (attached["up"] === true)
+            {
+                pivot.rotation.y -= 0.091;
+				
+                if (pivot.rotation.y <= -Math.PI / 2.0)
+                {
+                    pivot.rotation.y = -Math.PI / 2.0;
+					endAnimation = true;
+                }
+            }
+
+            if (attached["front"] === true)
+            {
+                pivot.rotation.z -= 0.091;
+				
+                if (pivot.rotation.z <= -Math.PI / 2.0)
+                {
+                    pivot.rotation.z = -Math.PI / 2.0;
+					endAnimation = true;
+                }
+            }
+
+            if (attached["rightP"] === true)
+            {
+                pivot.rotation.x += 0.091;
+				
+                if (pivot.rotation.x >= Math.PI / 2.0)
+                {
+                    pivot.rotation.x = Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+
+            if (attached["upP"] === true)
+            {
+                pivot.rotation.y += 0.091;
+				
+                if (pivot.rotation.y >= Math.PI / 2.0)
+                {
+                    pivot.rotation.y = Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+
+            if (attached["frontP"] === true)
+            {
+                pivot.rotation.z += 0.091;
+				
+                if (pivot.rotation.z >= Math.PI / 2.0)
+                {
+                    pivot.rotation.z = Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+
+            if (attached["left"] === true)
+            {
+                pivot.rotation.x += 0.091;
+				
+                if (pivot.rotation.x >= Math.PI / 2.0)
+                {
+                    pivot.rotation.x = Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+
+            if (attached["down"] === true)
+            {
+                pivot.rotation.y += 0.091;
+				
+                if (pivot.rotation.y >= Math.PI / 2.0)
+                {
+                    pivot.rotation.y = Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+
+            if (attached["back"] === true)
+            {
+                pivot.rotation.z += 0.091;
+                if (pivot.rotation.z >= Math.PI / 2.0)
+                {
+                    pivot.rotation.z = Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+
+            if (attached["leftP"] === true)
+            {
+                pivot.rotation.x -= 0.091;
+				 
+                if (pivot.rotation.x <= -Math.PI / 2.0)
+                {
+                    pivot.rotation.x = -Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+
+            if (attached["downP"] === true)
+            {
+                pivot.rotation.y -= 0.091;
+			
+                if (pivot.rotation.y <= -Math.PI / 2.0)
+                {
+                    pivot.rotation.y = -Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+
+            if (attached["backP"] === true)
+            {
+                pivot.rotation.z -= 0.091;
+				
+                if (pivot.rotation.z <= -Math.PI / 2.0)
+                {
+                    pivot.rotation.z = -Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+
+            if (attached["middle"] === true)
+            {
+                pivot.rotation.x -= 0.091;
+				
+                if (pivot.rotation.x <= -Math.PI / 2.0)
+                {
+                    pivot.rotation.x = -Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+
+            if (attached["middleP"] === true)
+            {
+                pivot.rotation.x += 0.091;
+				
+                if (pivot.rotation.x >= Math.PI / 2.0)
+                {
+                    pivot.rotation.x = Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+
+			if (attached["X"] === true)
+            {
+                pivot.rotation.x -= 0.091;
+                if (pivot.rotation.x <= -Math.PI / 2.0)
+                {
+                    pivot.rotation.x = -Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+			
+			if (attached["Y"] === true)
+            {
+                pivot.rotation.y -= 0.091;
+                if (pivot.rotation.y <= -Math.PI / 2.0)
+                {
+                    pivot.rotation.y = -Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+			
+			if (attached["Z"] === true){
+                pivot.rotation.z -= 0.091;
+                if (pivot.rotation.z <= -Math.PI / 2.0)
+                {
+                    pivot.rotation.z = -Math.PI / 2.0;
+                    endAnimation = true;
+                }
+            }
+			
+            renderer.render(scene, camera);
+            if (endAnimation)
+                detachAndReset();
+        }
+	</script>
+</html>
+

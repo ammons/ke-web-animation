@@ -1,0 +1,217 @@
+
+  body {
+
+      margin: 0;
+
+  }
+
+  canvas {
+
+      width: 100%;
+
+      height: 100%
+
+  }
+
+  #demo {
+
+      font-family: monospace;
+
+      float: inherit;
+
+      font-size: 50px;
+
+      margin-top: 50px;
+
+  }
+
+  .locale {
+
+      position: fixed;
+
+      left: 20px;
+
+      color: white;
+
+      font-family: monospace;
+
+      float: inherit;
+
+      font-size: 14px;
+
+      margin-top: 83px;
+
+      margin-left: 265px;
+
+  }
+
+  #demo2 {
+
+      font-family: monospace;
+
+      float: inherit;
+
+      font-size: 50px;
+
+      margin-top: 150px;
+
+  }
+
+  .utc {
+
+      position: fixed;
+
+      left: 20px;
+
+      color: white;
+
+      font-family: monospace;
+
+      float: inherit;
+
+      font-size: 14px;
+
+      margin-top: 185px;
+
+      margin-left: 265px;
+
+  }
+
+  #demo3 {
+
+      font-family: monospace;
+
+      float: inherit;
+
+      font-size: 50px;
+
+      margin-top: 250px;
+
+  }
+
+  .ny {
+
+      position: fixed;
+
+      left: 20px;
+
+      color: white;
+
+      font-family: monospace;
+
+      float: inherit;
+
+      font-size: 14px;
+
+      margin-top: 285px;
+
+      margin-left: 265px;
+
+  }
+
+  #demo4 {
+
+      font-family: monospace;
+
+      float: inherit;
+
+      font-size: 50px;
+
+      margin-top: 350px;
+
+  }
+
+  .tokyo {
+
+      position: fixed;
+
+      left: 20px;
+
+      color: white;
+
+      font-family: monospace;
+
+      float: inherit;
+
+      font-size: 14px;
+
+      margin-top: 385px;
+
+      margin-left: 265px;
+
+  }
+
+#demo5 {
+
+      font-family: monospace;
+
+      float: inherit;
+
+      font-size: 50px;
+
+      margin-top: 450px;
+
+  }
+
+ .sao {
+
+      position: fixed;
+
+      left: 20px;
+
+      color: white;
+
+      font-family: monospace;
+
+      float: inherit;
+
+      font-size: 14px;
+
+      margin-top: 485px;
+
+      margin-left: 265px;
+
+  }
+
+
+#demo6 {
+
+      font-family: monospace;
+
+      float: inherit;
+
+      font-size: 50px;
+
+      margin-top: 550px;
+
+  }
+
+ .mosc {
+
+      position: fixed;
+
+      left: 20px;
+
+      color: white;
+
+      font-family: monospace;
+
+      float: inherit;
+
+      font-size: 14px;
+
+      margin-top: 585px;
+
+      margin-left: 265px;
+
+  }
+
+  p {
+
+      position: fixed;
+
+      left: 40px;
+
+      color: white;
+
+  }
