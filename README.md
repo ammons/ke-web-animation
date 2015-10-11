@@ -42,22 +42,22 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 - Grundkenntnisse in HTML, CSS und Javascript
 
 
-
 ## Übersicht
-
-####Woche 01 (03/23) Einführungsveranstaltung
-####Woche 02 (04/13) 
-####Woche 03 (04/20) 
-####Woche 04 (04/27) 
-####Woche 05 (05/04) 
-####Woche 06 (05/11) 
-####Woche 07 (05/18) 
-####Woche 08 (05/25) 
-####Woche 09 (06/01) 
-####Woche 10 (06/08)
-####Woche 11 (06/15) 
-####Woche 12 (06/22) 
-####Woche 13 (06/29) 
+####Woche #01  12.10. / Einführungsveranstaltung
+####Woche #02  19.10.
+####Woche #03  26.10.
+####Woche #04  02.11.
+####Woche #05  09.11.
+####Woche #06  16.11.
+####Woche #07  23.11.
+####Woche #08  30.11.
+####Woche #09  07.12
+####Woche #10  14.12
+####Woche #xx  21.12 / entfällt
+####Woche #xx  28.12 / entfällt
+####Woche #xx  04.01 / muss entfallen (Ersatztermin)
+####Woche #11  11.01.
+####Woche #12  18.01
 
 
 ## Evaluation
