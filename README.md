@@ -55,7 +55,7 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 ####Woche #10  14.12
 ####Woche #xx  21.12 / entfällt
 ####Woche #xx  28.12 / entfällt
-####Woche #xx  04.01 / muss entfallen (Ersatztermin)
+####Woche #xx  04.01 / entfällt (Ersatztermin)
 ####Woche #11  11.01.
 ####Woche #12  18.01
 
