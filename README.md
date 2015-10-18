@@ -101,25 +101,9 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 
 ## Ressourcen
 
-**Headline 1**
-- [Test 1](http://www.html5canvastutorials.com/tutorials/html5-canvas-element/)
-- [Test 2](http://www.peterkroener.de/eine-kleine-canvas-einfuehrung/)
-
 
 **Anwendungsbeispiele**
-- https://boda.sensors.jp/
-- https://www.google.de/maps/
-- https://photosynth.net/preview/
-- https://streetart.withgoogle.com/de/audio-tours
-- http://a-way-to-go.com/
-- http://lights.helloenjoy.com/
-- http://bartekdrozdz.com/project/soundviz
-- http://www.findyourwaytooz.com/
-- http://www.ro.me/
-- http://spacecraftforall.com/a-new-orbit
-- http://riskeverything.nike.com/
-- http://alteredqualia.com/three/examples/webgl_materials_skin.html
-- http://www.overthetinyhills.com/
+
 
 **Beyond Canvas**
 - http://www.overthetinyhills.com/
