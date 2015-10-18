@@ -103,19 +103,19 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 
 
 **Anwendungsbeispiele**
-
-- http://www.thisiscolossal.com/2014/06/dizzying-geometric-gifs-by-david-whyte/
-- http://beesandbombs.tumblr.com/
-- http://9-squares.tumblr.com/
-- http://www.thisiscolossal.com/2015/04/9-squares-gif-collab/
-- http://giphy.com/search/3d-geometry/8
-- http://giphy.com/gifs/animation-artists-on-tumblr-sam-lyon-OgU6JXSIufeg0
-- http://jellygummies.com/
-- http://jellygummies.tumblr.com/post/89313084933/free-ticket-to-cute-town-you-can-get-this-wee
-- https://vimeo.com/jellygummies#_=_
-- http://tv.giphy.com/?username=victorcourtright
-- http://www.victoranimation.com/
-- http://portfolio.darkigloo.com/Sans-Crap
+- **GIF Animations**
+	- http://www.thisiscolossal.com/2014/06/dizzying-geometric-gifs-by-david-whyte/
+	- http://beesandbombs.tumblr.com/
+	- http://9-squares.tumblr.com/
+	- http://www.thisiscolossal.com/2015/04/9-squares-gif-collab/
+	- http://giphy.com/search/3d-geometry/8
+	- http://giphy.com/gifs/animation-artists-on-tumblr-sam-lyon-OgU6JXSIufeg0
+	- http://jellygummies.com/
+	- http://jellygummies.tumblr.com/post/89313084933/free-ticket-to-cute-town-you-can-get-this-wee
+	- https://vimeo.com/jellygummies#_=_
+	- http://tv.giphy.com/?username=victorcourtright
+	- http://www.victoranimation.com/
+	- http://portfolio.darkigloo.com/Sans-Crap
 
 
 **Beyond Canvas**
