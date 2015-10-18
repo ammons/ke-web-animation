@@ -101,6 +101,10 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 
 ## Ressourcen
 
+**Javascript Libraries**
+- https://greensock.com/products/
+- http://p5js.org/
+- http://p5play.molleindustria.org/
 
 **Anwendungsbeispiele**
 - **GIF Animations**
@@ -116,7 +120,8 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- http://tv.giphy.com/?username=victorcourtright
 	- http://www.victoranimation.com/
 	- http://portfolio.darkigloo.com/Sans-Crap
-
+- **Animation Studio**
+	- http://animade.tv/
 
 **Beyond Canvas**
 - http://www.overthetinyhills.com/
