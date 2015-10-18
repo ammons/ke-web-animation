@@ -125,11 +125,6 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- http://www.studiosoi.de/#/work/
 	- http://www.aardman.com
 
-**Beyond Canvas**
-- http://www.overthetinyhills.com/
-- http://learningthreejs.com/data/2013-04-30-closing-the-gap-between-html-and-webgl/index.html
-- http://learningthreejs.com/blog/2013/04/30/closing-the-gap-between-html-and-webgl/
-- http://acko.net/blog/making-mathbox/
 
 **Timline Editoren**
 - **Adobe Edge Animate**
