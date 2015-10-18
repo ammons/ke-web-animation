@@ -122,6 +122,8 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- http://portfolio.darkigloo.com/Sans-Crap
 - **Animation Studio**
 	- http://animade.tv/
+	- http://www.studiosoi.de/#/work/
+	- http://www.aardman.com
 
 **Beyond Canvas**
 - http://www.overthetinyhills.com/
