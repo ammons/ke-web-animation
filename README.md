@@ -50,7 +50,7 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- historische Entwicklung 
 	- Tools
 ####Woche #03  26.10.
-	-  
+	- 
 ####Woche #04  02.11.
 ####Woche #05  09.11.
 ####Woche #06  16.11.
