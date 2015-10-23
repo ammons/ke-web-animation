@@ -43,9 +43,13 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 
 
 ## Übersicht
-####Woche #01  12.10. / Einführungsveranstaltung
-####Woche #02  19.10.
-####Woche #03  26.10.
+####Woche #01  12.10. / 
+	-Einführungsveranstaltung
+####Woche #02  19.10. / 
+	- Keyframe Animation / 
+	- historische Entwicklung / 
+	- Tools
+####Woche #03  26.10. / 
 ####Woche #04  02.11.
 ####Woche #05  09.11.
 ####Woche #06  16.11.
