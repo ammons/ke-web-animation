@@ -12,13 +12,22 @@
     <style>
         body {
             margin: 0;
-            background-color: coral;
+            background-color: darkblue;
         }
         
         #box {
+            position: absolute;
             background-color: red;
             width: 100px;
             height: 100px;
+            left: 0px;
+            top: 0px;
+        }
+        #box2 {
+            position: absolute;
+            background-color: greenyellow;
+            left: 200px;
+            top: 200px;
         }
     </style>
 
@@ -27,21 +36,20 @@
 <body>
     <script>
         $( document ).ready(function() {
-            console.log( "ready!" );
-            $box = $("box");
-            $box.fadeOut();
-            console.log();
+            console.log( "ready!");
+            //$box = $("box");
+
             $( "#box" ).click(function() {
-                $( "#box" ).fadeOut( "slow", function() {
-                    console.log("Animation Complete");
-                });
+                //TweenMax.to("#box", 2.3, { left:"200px", top:"200px", width:"500px", height:"500px"});
+                TweenMax.to("#box", 2, {backgroundColor:"#ffFF00", width:"50%", height:"50%", top:"100px", ease:Power2.easeInOut});
+
+                console.log("box clicked");
             });
         });
     </script>
 
-    <div id="box">
-    </div>
-
+    <div id="box"></div>
+    <div id="box2"></div>
 
 </body>
 
