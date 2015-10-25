@@ -9,6 +9,12 @@ __Sammlung zum Kurs Konzeption & Entwurf - "Web-Animation" an der Hochschule-Mai
 #### Kursinhalt
 Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzten Zeit deutlich zurückgegangen, und ein gewisser Konformismus zu spüren ist, ist die Animation von Web Inhalten mittlerweile eine etablierte und vielgenutzte Gestaltungsebene. Zur Umsetzung stehen enorm viele technische Ansätze zur Verfügung. Es gibt ausgereifte Timeline Animations-Programme, mächtige Javascript Bibliotheken und immer ausgefeiltere Unterstützung durch den Web-Standart CSS. Wir verschaffen uns einen Überblick über Gestaltungsmöglichkeiten und Techniken, und greifen dann einen Ansatz heraus mit dem wir unsere Gestaltungsideen in überschaubare konzeptionelle Studien fassen.
 
+#### Aufgabe
+- Erarbeiten Sie 3 interaktive Animationen mit einem Intro, einem Hauptteil und einem Schluss, zu jeweils einem abstrakten Begriff wie „Schnelligkeit", „Chaos", „Freude", etc..
+- Das Intro sollte ohne Benutzer Interaktion automatisch starten
+- Spätestens vor dem Schlussteil soll noch einmal eine Benutzer-Interaktion vorgesehen werden.
+- Verwenden Sie dafür Bildmaterial in Form von Bitmaps (PNG, JPG, etc.) und Vectorgraphiken (Text, SVG, etc.).
+- Versuchen Sie die Animation so anzulegen, dass sie proportional skalierter bleibt.
 
 #### Lehrform:
 - Seminar, Workshop

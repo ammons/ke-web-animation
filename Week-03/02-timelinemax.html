@@ -40,7 +40,7 @@
             margin: 0px,0px;       
             padding: 0px,0px;       
             display:inline-block;
-            line-height:180px;
+            line-height:200px;
             text-align:center;
             color:#333;
             font-size:94px;
@@ -64,21 +64,25 @@
 
             var box1 = $("#box1");
             var box2 = $("#box2");
+            var e = $(".e");
 
 
             var tl = new TimelineMax();
             
             tl.to(box1, 0.5, {width:"100%", ease:Sine.easeInOut})            
-            .to(box1, 1.5, {height:"300px", ease:Elastic.easeOut})            
-            .from(box2, 0.3, {opacity:0.0, width:"0%", ease:Sine.easeInOut}, "-=0.8")
-            .from(box2, 0.9, {backgroundColor:"#0000FF", ease:Sine.easeInOut}, "-=0.0")
-            .staggerFrom(["#e1", "#e2", "#e3", "#e4"], 0.7, {opacity:0, y:20}, 0.3);
+            .to(box1, 2.5, {height:"300px", ease:Elastic.easeOut})            
+            .from(box2, 0.5, {opacity:0.0, width:"0%", ease:Sine.easeInOut}, "-=0.8")
+            .staggerFrom(["#e1", "#e2", "#e3", "#e4"], 0.7, {opacity:0, y:40}, 0.3,"-=0.3");
             
             tl.call(myFunction);
 
             function myFunction(){
                 //alert("hello");
             }
+            e.hover(
+                function() {  TweenLite.to($(this), 0.3, {scale:1.2}); },
+                function() {  TweenLite.to($(this), 0.15, {scale:1}); }
+            );
         });
     </script>
 
