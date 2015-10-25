@@ -15,6 +15,8 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 - Spätestens vor dem Schlussteil soll noch einmal eine Benutzer-Interaktion vorgesehen werden.
 - Verwenden Sie dafür Bildmaterial in Form von Bitmaps (PNG, JPG, etc.) und Vectorgraphiken (Text, SVG, etc.).
 - Versuchen Sie die Animation so anzulegen, dass sie proportional skalierter bleibt.
+- Behalten Sie die Dateigrößen im Auge und optimieren Sie sie gegegebenfalls.
+- Setzen Sie nur lokal referenzierte Assets ein.
 
 #### Lehrform:
 - Seminar, Workshop
