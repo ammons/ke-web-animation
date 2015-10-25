@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tweenmax</title>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>-->
+    <!--<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+    <script src="lib/gsap/TweenMax.min.js"></script>
+    <script src="lib/jquery-1.11.3.min.js"></script>
+    <script src="01-tweenmax.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            background-color: coral;
+        }
+        
+        #box {
+            background-color: red;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+        $( document ).ready(function() {
+            console.log( "ready!" );
+            $box = $("box");
+            $box.fadeOut();
+            console.log();
+            $( "#box" ).click(function() {
+                $( "#box" ).fadeOut( "slow", function() {
+                    console.log("Animation Complete");
+                });
+            });
+        });
+    </script>
+
+    <div id="box">
+    </div>
+
+
+</body>
+
+</html>
