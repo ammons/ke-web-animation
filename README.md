@@ -53,7 +53,7 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- Aufgabenstellung
 	- Setup Arbeitsrechner
 	- Einführung HTML/CSS/JS Basics
-	- Einführung GSAP
+	- Einführung Greensocks Animation Platform (GSAP)
 ####Woche #04  02.11.
 ####Woche #05  09.11.
 ####Woche #06  16.11.
