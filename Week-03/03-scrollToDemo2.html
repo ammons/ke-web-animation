@@ -1,0 +1,118 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Snorkl.tv | GreenSock Animation Demo</title>
+    <script src="js/gsap/TweenMax.min.js"></script>
+	<script src="js/gsap/plugins/ScrollToPlugin.min.js"></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	
+	<style type="text/css">
+		html,
+		body {}
+		
+		body {
+			background-color: #000000;
+			margin: 20px;
+			padding: 0px;
+			color: #CCCCCC;
+			font-family: Verdana, Geneva, sans-serif;
+		}
+		
+		.bigBox {
+			width: 400px;
+			height: 200px;
+			background-color: #900;
+			margin-top: 20px;
+			margin-left: 250px;
+		}
+		
+		h1 {
+			font-size: 48px;
+		}
+		
+		#nav {
+			position: fixed;
+			top: 10px;
+			left: 10px;
+			padding: 10px;
+			background-color: #09F;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="nav">
+		<p><a href="#" class="box2link">Scroll to box 2</a></p>
+		<p><a href="#" class="box7link">Scroll to box 7</a></p>
+	</div>
+	<div class="bigBox">
+		<h1>Box 1</h1>
+	</div>
+	<div class="bigBox" id="box2">
+		<h1>Box 2</h1>
+	</div>
+	<div class="bigBox">
+		<h1>Box 3</h1>
+	</div>
+	<div class="bigBox">
+		<h1>Box 4</h1>
+	</div>
+	<div class="bigBox">
+		<h1>Box 5</h1>
+	</div>
+	<div class="bigBox">
+		<h1>Box 6</h1>
+	</div>
+	<div class="bigBox" id="box7">
+		<h1>Box 7</h1>
+	</div>
+	<div class="bigBox">
+		<h1>Box 8</h1>
+	</div>
+	<div class="bigBox">
+		<h1>Box 9</h1>
+	</div>
+	<div class="bigBox">
+		<h1>Box 10</h1>
+	</div>
+	<div class="bigBox">
+		<h1>Box 11</h1>
+	</div>
+	<div class="bigBox">
+		<h1>Box 12</h1>
+	</div>
+	<script language="JavaScript" type="text/javascript">
+		$(function() {
+   
+	
+	$(".box2link").bind('click', { id: '#box2' }, scroller);
+	$(".box7link").bind('click', { id: '#box7' }, scroller);
+	
+	function scroller(event){
+		var scrollYPos = $(event.data.id).offset().top;
+		event.preventDefault();
+		TweenLite.to(window, 2, {scrollTo:{y:scrollYPos, x:0}, ease:Power4.easeOut})
+		}	
+	
+});
+	</script>
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17739739-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+	</script>
+</body>
+
+</html>
