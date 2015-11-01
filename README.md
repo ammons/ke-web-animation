@@ -117,6 +117,9 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 
 ## Ressourcen
 
+- https://ihatetomatoes.net/wp-content/uploads/2015/08/GreenSock-Cheatsheet2.png
+
+
 **Javascript Libraries**
 - https://greensock.com/products/
 - http://p5js.org/
