@@ -8,11 +8,16 @@
     <script src="js/gsap/TimelineMax.min.js"></script>
     <script src="js/jquery/jquery-1.11.3.min.js"></script>
     <script src="js/02-timelinemax.js"></script>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <link rel="stylesheet" href="css/02-style.css">
 
     <style>
         body {
             background:#1d1d1d;
+            color:white;
+            overflow: hidden;
         }
         
         .demo {
@@ -49,6 +54,7 @@
             margin: auto;
             text-align: center;
         }
+        
     </style>
 
 </head>
@@ -80,6 +86,33 @@
             }
             window.onmousewheel = function(){
                 console.log(window.scrollY);;
+            }
+
+            // controls
+
+            $( "#slider" ).slider({
+                range: false,
+                min: 0,
+                max: 100,
+                step:.1,
+                slide: function ( event, ui ) {
+                    tl.totalProgress( ui.value/100 ).pause();
+                }
+            });	
+                        
+            function updateSlider() {
+                slider.slider("value", tl.totalProgress() * 100);
+            } 				  
+            
+            playBtn.click(function(e) {
+                if(tl.totalProgress() === 1){
+                    tl.restart();
+                } else {
+                    tl.paused( !tl.paused() );
+                }
+            });
+            function showNav(){
+                TweenLite.to([nav, playBtn], 0.2, {autoAlpha:1});
             }
         });
     </script>
