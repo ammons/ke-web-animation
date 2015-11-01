@@ -1,0 +1,90 @@
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timeline-Animation</title>
+    <script src="js/gsap/TweenMax.min.js"></script>
+    <script src="js/gsap/TimelineMax.min.js"></script>
+    <script src="js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="js/02-timelinemax.js"></script>
+    <link rel="stylesheet" href="css/02-style.css">
+
+    <style>
+        body {
+            background:#1d1d1d;
+        }
+        
+        .demo {
+            position:relative;
+            margin:150px auto;
+            width:620px;
+            height:28px;
+            background-color:#121212;
+            border-radius:12px;
+            overflow:hidden;
+            border:solid 4px #121212;
+        }
+        
+        .circle {
+            width:20px;
+            height:20px;
+            background-color:#86cc01;
+            position:absolute;
+            border-radius:50%;
+            display:inline-block;
+            left:-20px;
+            top:4px;
+        }
+        button {
+            background-color: dimgray;
+            border: 0;
+            padding: 10px;
+            margin: 0 10px;
+            width: 120px;
+            cursor: pointer;
+        }
+        .nav {
+            width: 600px;
+            margin: auto;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="demo">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    <div class="nav">
+        <button id="pause">pause</button>
+    </div>
+
+    <script>
+        $( document ).ready(function() {
+
+            var pauseBtn = document.getElementById("pause"),
+            
+            tl = new TimelineMax();
+            tl.staggerTo(".circle", 1.5, {x:640, repeat:-1, repeatDelay:0.5, force3D:true, ease:SlowMo.ease.config(0.2, 0.5)}, 0.15)
+            
+            pauseBtn.onclick = function() {
+                tl.paused( !tl.paused() );
+                pauseBtn.innerHTML = tl.paused() ? "play" : "pause";
+                //TweenMax.to(tl, 4, {timeScale:0});
+            }
+            window.onmousewheel = function(){
+                console.log(window.scrollY);;
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

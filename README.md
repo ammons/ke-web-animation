@@ -63,6 +63,12 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- Einführung HTML/CSS/JS Basics
 	- Einführung Greensocks Animation Platform (GSAP)
 ####Woche #04  02.11.
+	- Beispiele Web-Animation
+	- JavaScript Grundlagen > Events & Eventhandlers
+	- GSAP - TimelineMax
+	- Kursteilnehmer stellen Konzeptideen vor
+	- kurze Pause
+	- Einzelbesprechungen
 ####Woche #05  09.11.
 ####Woche #06  16.11.
 ####Woche #07  23.11.

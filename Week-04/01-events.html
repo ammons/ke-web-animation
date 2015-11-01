@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Basics - Events & EventHandlers</title>
+
+    <style>
+        #box1 {
+            background-color: yellow;
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 20%;
+            height: 20%;
+        }
+        body {
+            margin: 0;
+            background-color: black;
+        }
+    </style>
+    
+
+</head>
+
+<body onclick="test2()">
+    <div id="box1">
+    </div>
+</body>
+
+<script>
+    document.getElementById("box1").addEventListener("click", test1);
+    function test1( event ){
+        console.clear();
+        console.log( "function test1 fired ");
+        console.log( "mouse clicked: " + event.detail + " times");
+        event.stopPropagation();
+    }
+    function test2( event ){
+        console.log( "function test2 fired");
+    }
+    console.log( "document ready!");
+</script>
+
+</html>
+
+
+
+
