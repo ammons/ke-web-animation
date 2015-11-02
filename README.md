@@ -157,11 +157,20 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 - **Adobe Flash Professional**
 	- https://helpx.adobe.com/de/flash/
 
-**Code Versionierung**
+
+**Code Versionierung with GIT**
 - [A GIT Guide](http://rogerdudler.github.io/git-guide/)
 - [GIT Documentation](http://git-scm.com/documentation)
 - [Github Tutorial for Beginners (Mac & PC)](https://www.youtube.com/watch?v=0fKg7e37bQE) 
 - [Github Tutorial by Github](https://try.github.io/levels/1/challenges/1) 
+
+
+**Installing Git on Windows PC
+- http://www.chambaud.com/2013/07/08/adding-git-to-path-when-using-github-for-windows/
+- https://www.drupal.org/node/1997092
+- http://stackoverflow.com/questions/26620312/installing-git-in-path-with-github-client-for-windows
+- http://coapp.org/developers/git.html
+- http://code.tutsplus.com/tutorials/git-on-windows-for-newbs--net-25847
 
 
 **Javascript**
@@ -172,12 +181,15 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript
 - http://www.jstherightway.org/
 
+
 **Dev-Tools Tutorials** 
 - http://www.developerfusion.com/article/139949/debugging-javascript-with-firebug/
 - https://developer.chrome.com/extensions/tut_debugging
 
+
 **Creative Coding**
 - https://www.youtube.com/watch?v=eBV14-3LT-g
+
 
 **Further Reading**
 - https://www.khanacademy.org/computing/computer-programming
@@ -189,5 +201,6 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 - http://worrydream.com/LearnableProgramming/
 - http://worrydream.com/
 - brad Victor Talk https://vimeo.com/36579366
+
 
 **Inspirational**
