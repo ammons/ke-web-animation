@@ -165,7 +165,7 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 - [Github Tutorial by Github](https://try.github.io/levels/1/challenges/1) 
 
 
-**Installing Git on Windows PC
+**Installing Git on Windows PC**
 - http://www.chambaud.com/2013/07/08/adding-git-to-path-when-using-github-for-windows/
 - https://www.drupal.org/node/1997092
 - http://stackoverflow.com/questions/26620312/installing-git-in-path-with-github-client-for-windows
