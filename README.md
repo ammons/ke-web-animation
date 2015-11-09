@@ -70,6 +70,11 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- kurze Pause
 	- Einzelbesprechungen
 ####Woche #05  09.11.
+	- Beispiele Web-Animation
+	- JavaScript GSAP Library > TimelineMax()
+	- Kursteilnehmer stellen Konzeptideen vor
+	- kurze Pause
+	- Einzelbesprechungen
 ####Woche #06  16.11.
 ####Woche #07  23.11.
 ####Woche #08  30.11.

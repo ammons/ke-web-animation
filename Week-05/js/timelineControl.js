@@ -74,6 +74,7 @@ function controlTimeline( timeline ) {
 			console.log("label #" + i + ": " + labels[i].name + ", time: " + labels[i].time);
 		}		
 	}
+	
 	function getCurrentLabel(){
 		return timeline.currentLabel();
 	}
