@@ -17,15 +17,16 @@
     </style>
 
     <script>
-        function test1( ){
-            console.log( "function test1 fired");
+        function test1( variable ){            
+            console.log( "function test1 fired " + variable );
         }
-       // test1();
+              // test1( "hallo", "text2" );
+
     </script>
     
 </head>
 
-<body>
+<body onclick="test1('hallooo')">
     <div id="box1" onContextMenu="test1()">
     </div>
 </body>
