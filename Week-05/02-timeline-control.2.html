@@ -67,20 +67,34 @@
     <script>
         $( document ).ready(function() {
             
+            function test( whichTL, where2go ){
+              console.log("test");  
+            };
+            function timelineSeek( timeline, label ) {
+                console.log("timeline: " + timeline + "label: " + label);  
+                timeline.play( label );
+            }
+            
             tl = new TimelineMax( { repeat:1, force3D:true } );
             tl
                 .addLabel("eins", "1.5")
                 .addLabel("zwei", "2.5")
+                //.add( test, "2.0")
+                //.add( timelineSeek,'+=0.1',[tl,'slide-01-loop'])
             ;
 
             tl1 = new TimelineMax();
-            tl1.staggerTo(".circle", 1.5, {x:640, repeat:1, force3D:true, ease:SlowMo.ease.config(0.2, 0.5)}, 0.15)
+            tl1
+                .staggerTo(".circle", 1.5, { x:640, repeat:1, force3D:true, ease:SlowMo.ease.config(0.2, 0.5)}, 0.15 )
+                //.add( timelineSeek, '+=0.1', [ tl, 'zwei' ] )
+            ;
 
             element = $(".demo2");            
             tl2 = new TimelineMax( { repeat:2, ease:Power0.easeNone } );
             tl2
                 .addLabel("first-turn")
                 .add(  TweenMax.to( element, 1, {left:"+=200px"}) )
+                //.addCallback( test(), "-=0.5")
                 .addLabel("second-turn")
                 .add(  TweenMax.to( element, 1, {top:"+=200px"}) )
                 .addLabel("third-turn")
