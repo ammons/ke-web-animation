@@ -1,6 +1,7 @@
 
 function controlTimeline( timeline ) {
 
+
 	var mx = 0;
 	var windowWidth = window.innerWidth;
 	var progress = 0;
@@ -18,10 +19,12 @@ function controlTimeline( timeline ) {
 		}
 	}
 	
-	window.onmousemove = function (event) {
+	window.onmousemove = function ( event ) {
+		
 		mx = event.clientX;
 		progress = mx / windowWidth;
-		if (shiftKeyPressed) {
+		
+		if ( shiftKeyPressed ) {
 			//timeline.seek( totalAnimationTime * ( event.clientX / window.innerWidth ) ).pause();
 			timeline.totalProgress( progress ).pause();
 			//getCurrentLabel();
