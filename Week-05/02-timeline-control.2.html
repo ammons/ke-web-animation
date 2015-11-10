@@ -67,6 +67,8 @@
     <script>
         $( document ).ready(function() {
             
+            //---------------------------------------------------------------------------------
+            
             function test( whichTL, where2go ){
               console.log("test");  
             };
@@ -75,7 +77,9 @@
                 timeline.play( label );
             }
             
-            tl = new TimelineMax( { repeat:1, force3D:true } );
+            //---------------------------------------------------------------------------------
+            
+            tl = new TimelineMax( {  force3D:true } );
             tl
                 .addLabel("eins", "1.5")
                 .addLabel("zwei", "2.5")
@@ -90,7 +94,7 @@
             ;
 
             element = $(".demo2");            
-            tl2 = new TimelineMax( { repeat:2, ease:Power0.easeNone } );
+            tl2 = new TimelineMax( {  ease:Power0.easeNone } );
             tl2
                 .addLabel("first-turn")
                 .add(  TweenMax.to( element, 1, {left:"+=200px"}) )
@@ -105,8 +109,9 @@
                                                 
             tl
                 .add(tl1)
-                .add(tl2, "+1")
+                .add(tl2)
             ;
+            
             controlTimeline( tl );
 
         });
