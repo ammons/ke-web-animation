@@ -1,0 +1,123 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timeline-Animation</title>
+    <script src="js/gsap/TweenMax.min.js"></script>
+    <script src="js/gsap/TimelineMax.min.js"></script>
+    <script src="js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="js/timelineControl.js"></script>
+
+
+    <style>
+        body {
+            background: #1d1d1d;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .demo {
+            position: relative;
+            margin: 100px auto;
+            width: 620px;
+            height: 28px;
+            background-color: #121212;
+            border-radius: 12px;
+            overflow: hidden;
+            border: solid 4px #121212;
+        }
+
+        .demo2 {
+            position: absolute;
+            top: 200px;
+            left: 100px;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        
+        .circle {
+            width: 20px;
+            height: 20px;
+            background-color: #86cc01;
+            position: absolute;
+            border-radius: 50%;
+            display: inline-block;
+            left: -20px;
+            top: 4px;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+
+    <div class="demo">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <div class="demo2">
+    </div>
+
+    <script>
+        $( document ).ready(function() {
+            
+            //---------------------------------------------------------------------------------
+            
+            function test( whichTL, where2go ){
+              console.log("test");  
+            };
+            function timelineSeek( timeline, label ) {
+                console.log("timeline: " + timeline + "label: " + label);  
+                timeline.play( label );
+            }
+            
+            //---------------------------------------------------------------------------------
+            
+            tl = new TimelineMax( {  force3D:true } );
+            tl
+                .addLabel("eins", "1.5")
+                .addLabel("zwei", "2.5")
+                //.add( test, "2.0")
+                //.add( timelineSeek,'+=0.1',[tl,'slide-01-loop'])
+            ;
+
+            tl1 = new TimelineMax();
+            tl1
+                .staggerTo(".circle", 1.5, { x:640, repeat:1, force3D:true, ease:SlowMo.ease.config(0.2, 0.5)}, 0.15 )
+                //.add( timelineSeek, '+=0.1', [ tl, 'zwei' ] )
+            ;
+
+            element = $(".demo2");            
+            tl2 = new TimelineMax( {  ease:Power0.easeNone } );
+            tl2
+                .addLabel("first-turn")
+                .add(  TweenMax.to( element, 1, {left:"+=200px"}) )
+                //.addCallback( test(), "-=0.5")
+                .addLabel("second-turn")
+                .add(  TweenMax.to( element, 1, {top:"+=200px"}) )
+                .addLabel("third-turn")
+                .add(  TweenMax.to( element, 1, {left:"-=200px"}) )
+                .addLabel("fourth-turn")
+                .add(  TweenMax.to( element, 1, {top:"-=200px"}) )
+            ;
+                                                
+            tl
+                .add(tl1)
+                .add(tl2)
+            ;
+            
+            controlTimeline( tl );
+
+        });
+    </script>
+
+
+</body>
+
+</html>
