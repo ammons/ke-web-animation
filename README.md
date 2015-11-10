@@ -209,3 +209,5 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 
 
 **Inspirational**
+- http://demo.22soup.co.uk/GreenSock-ShockinglyGreen-js/src/minified/plugins/
+- http://letsgoluce.com/assets/js/libs/gs/plugins/
