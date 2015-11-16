@@ -77,7 +77,9 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- Einzelbesprechungen
 ####Woche #06  16.11.
 	- Beispiele Web-Animation
-	- JavaScript GSAP Library > TimelineMax()
+	- JavaScript GSAP Library: 
+		- TweenMax()
+		- TimelineMax()		
 	- Kursteilnehmer stellen Arbeitsfortschritte vor
 	- kurze Pause
 	- Einzelbesprechungen
@@ -95,17 +97,17 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 ## Evaluation
 - Regular Assignments 35%
 - Participation and Attendance 35%
-- Final Projects 30%
+- Finale Projects 30%
 
 ## Tools
 
 #### Code Editoren:
-- Sublime Text  http://www.sublimetext.com/
+- VisualStudio Code https://code.visualstudio.com/
 - Webstorm  
 	- https://www.jetbrains.com/webstorm/?fromMenu
 	- https://www.jetbrains.com/student/
 - Brackets  http://brackets.io/
-- VisualStudio Code https://code.visualstudio.com/
+- Sublime Text  http://www.sublimetext.com/
 
 #### Browser
 - Google Chrome  https://www.google.de/chrome/browser/desktop/
@@ -162,6 +164,8 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 
 
 **Timline Editoren**
+- **Tumult Hype**
+	- http://tumult.com/hype/
 - **Adobe Edge Animate**
 	- https://creative.adobe.com/de/products/animate
 - **Adobe Flash Professional**
@@ -214,5 +218,4 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 
 
 **Inspirational**
-- http://demo.22soup.co.uk/GreenSock-ShockinglyGreen-js/src/minified/plugins/
-- http://letsgoluce.com/assets/js/libs/gs/plugins/
+
