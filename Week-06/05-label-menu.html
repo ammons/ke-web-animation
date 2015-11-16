@@ -1,0 +1,144 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timeline-Animation</title>
+    <script src="js/gsap/TweenMax.min.js"></script>
+    <script src="js/gsap/TimelineMax.min.js"></script>
+    <script src="js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="js/timelineControl.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/dark-hive/jquery-ui.css" rel="stylesheet">
+
+
+    <style>
+        body {
+            background: #1d1d1d;
+            color: white;
+            overflow: hidden;
+        }
+        
+        ul {
+            position: absolute;
+            width: 120px;
+            left: 0px;
+            top: 150px;
+        }
+        
+        li {
+            width: 120px;
+            height: 20px;
+            background-color: #333;
+            color: #777;
+            border-radius: 2px;
+            font-family: sans-serif;
+            display: inline-block;
+            margin: 2px;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <div>
+        <ul>
+            <li class="eins">eins</li>
+            <li class="zwei">zwei</li>
+            <li class="drei">drei</li>
+            <li class="vier">vier</li>
+            <li class="fünf">fünf</li>
+        </ul>
+    </div>
+
+
+    <script>
+        $( document ).ready(function() {
+            
+            function eins(){
+                TweenMax.to( "body", 0.4, {backgroundColor:"#f00"}), "-=0"
+                console.log("eins playing ");   
+            }
+            function zwei(){
+                TweenMax.to( "body", 0.4, {backgroundColor:"#ff0"}), "-=0"
+                console.log("zwei playing ");   
+            }
+            function drei(){
+                TweenMax.to( "body", 0.4, {backgroundColor:"#f0f"}), "-=0"
+                console.log("drei playing ");   
+            }
+            function vier(){
+                TweenMax.to( "body", 0.4, {backgroundColor:"#00f"}), "-=0"
+                console.log("vier playing ");   
+            }
+            function fünf(){
+                TweenMax.to( "body", 0.4, {backgroundColor:"#000"}), "-=0"
+                console.log("fünf playing ");   
+            }
+
+            //---------------------------------------------------------------------------------
+
+            $("li").each( function( index, element ){
+                var tl = new TimelineLite( { paused:true } );
+                tl.to(element, 0.2, { width:120, padding:20 } )
+                .to(element, 0.2, {backgroundColor:"#555", color:"white"}, "-=0.1")
+                element.animation = tl;
+                name = "" + element.innerHTML;
+                $("." + element.innerHTML).click( eval(name) );
+                //console.log("index: " + index + " ." + name);
+            })
+            
+            $("li").hover(over, out);
+            
+            function over(){
+                this.animation.play();  
+            }
+            function out(){
+                this.animation.reverse();
+            }
+                        
+            //---------------------------------------------------------------------------------
+
+
+            function timelineSeek( timeline, label ) {
+                console.log("timeline: " + timeline + "label: " + label);  
+                timeline.play( label );
+            }
+            
+            //---------------------------------------------------------------------------------
+            
+            //tl = new TimelineMax( {  force3D:true, onUpdate: updateSlider } );
+            tl = new TimelineMax( {  force3D:true, ease:Power0.easeInOut } );
+            tl
+                .addLabel("Eins", "0.0")
+                //.add(  TweenMax.to( "body", 1, {backgroundColor:"#f00"}), "-=0" )
+                .add( eins, "0.0")
+                .addLabel("Zwei", "1.0")
+                //.add(  TweenMax.to( "body", 1, {backgroundColor:"#ff0"}), "-=0" )
+                .add( zwei, "1.0")
+                .addLabel("Drei", "2.0")
+                //.add(  TweenMax.to( "body", 1, {backgroundColor:"#f0f"}), "-=0" )
+                .add( drei, "2.0")
+                .addLabel("Vier", "3.0")
+                //.add(  TweenMax.to( "body", 1, {backgroundColor:"#00f"}), "-=0" )
+                .add( vier, "3.0")
+                .addLabel("Fünf", "4.0")
+                //.add(  TweenMax.to( "body", 1, {backgroundColor:"#000"}), "-=0" )
+                .add( fünf, "4.0")
+                //.add( timelineSeek,'+=0.1',[tl,'slide-01-loop'])
+            ;
+
+            //---------------------------------------------------------------------------------
+
+            controlTimeline( tl );
+            
+        });
+    </script>
+
+
+</body>
+
+</html>

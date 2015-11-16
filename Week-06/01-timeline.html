@@ -8,6 +8,9 @@
     <script src="js/jquery/jquery-1.11.3.min.js"></script>
     <script src="js/timelineControl.js"></script>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/dark-hive/jquery-ui.css" rel="stylesheet" >
+
 
     <style>
         body {
@@ -26,7 +29,7 @@
             overflow: hidden;
             border: solid 4px #121212;
         }
-
+        
         .demo2 {
             position: absolute;
             top: 200px;
@@ -34,6 +37,7 @@
             width: 100px;
             height: 100px;
             background-color: red;
+            transform-origin: 50% 50%;
         }
         
         .circle {
@@ -46,7 +50,20 @@
             left: -20px;
             top: 4px;
         }
+        /*#controls {
+            position: absolute;
+            top: 90%;
+            left: 50%;
+            width: 310px;
+            transform: translate(-50%, 0px);
+        }*/
         
+        *:focus {
+            outline: none;
+            -moz-box-shadow: none;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
     </style>
 
 </head>
@@ -64,6 +81,8 @@
     <div class="demo2">
     </div>
 
+
+
     <script>
         $( document ).ready(function() {
             
@@ -79,6 +98,7 @@
             
             //---------------------------------------------------------------------------------
             
+            //tl = new TimelineMax( {  force3D:true, onUpdate: updateSlider } );
             tl = new TimelineMax( {  force3D:true } );
             tl
                 .addLabel("eins", "1.5")
@@ -87,20 +107,21 @@
                 //.add( timelineSeek,'+=0.1',[tl,'slide-01-loop'])
             ;
 
-            tl1 = new TimelineMax();
+            tl1 = new TimelineMax( {  } );
             tl1
                 .staggerTo(".circle", 1.5, { x:640, repeat:1, force3D:true, ease:SlowMo.ease.config(0.2, 0.5)}, 0.15 )
                 //.add( timelineSeek, '+=0.1', [ tl, 'zwei' ] )
             ;
 
             element = $(".demo2");            
-            tl2 = new TimelineMax( {  ease:Power0.easeNone } );
+            tl2 = new TimelineMax( { ease:Power0.easeNone } );
             tl2
                 .addLabel("first-turn")
                 .add(  TweenMax.to( element, 1, {left:"+=200px"}) )
                 //.addCallback( test(), "-=0.5")
                 .addLabel("second-turn")
-                .add(  TweenMax.to( element, 1, {top:"+=200px"}) )
+                // .add(  TweenMax.to( element, 1, {top:"+=200px"}) )
+                .add(  TweenMax.to( element, 1, {rotation:"180"}), "-=0" )
                 .addLabel("third-turn")
                 .add(  TweenMax.to( element, 1, {left:"-=200px"}) )
                 .addLabel("fourth-turn")
@@ -111,9 +132,9 @@
                 .add(tl1)
                 .add(tl2)
             ;
-            
-            controlTimeline( tl );
 
+            controlTimeline( tl );
+            
         });
     </script>
 

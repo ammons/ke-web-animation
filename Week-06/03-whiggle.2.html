@@ -1,0 +1,157 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timeline-Animation</title>
+    <script src="js/gsap/TweenMax.min.js"></script>
+    <script src="js/gsap/TimelineMax.min.js"></script>
+    <script src="js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="js/timelineControl.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/dark-hive/jquery-ui.css">
+
+
+
+    <style>
+        html,
+        body {
+            background-color: #222;
+            margin: 0;
+            padding: 0;
+            font-family: Signika Negative, sans-serif;
+            font-weight: 300;
+            height: 100%;
+        }
+        
+        
+        #demo {
+            display: table;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #field {
+            position: relative;
+            display: table-cell;
+            background-color: black;
+            border-style: dotted;
+            border-color: dimgray;
+            border-width: 1px;
+            height: 100%;
+            overflow: hidden;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        #box {
+            color: black;
+            font-size: 24px;
+            padding: 10px 10px;
+            border: 2px solid black;
+            width: 40px;
+            background: #9af600;
+            background: linear-gradient(to bottom, #9af600 0%, #71B200 100%);
+            display: inline-block;
+            border-radius: 20px;
+        }
+        
+        #field p {
+            position: absolute;
+            color: #999;
+            top: 0px;
+            padding: 0px 20px;
+            text-align: left;
+            z-index: -1000;
+        }
+        
+        #controls {
+            position: absolute;
+            color: #999;
+            width: 100%;
+            bottom: 20px;
+            text-align: center;
+        }
+        
+        button {
+            margin: 3px;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="demo">
+
+        <div id="field">
+            <p>Whiggle Test.</p>
+            <div id="box"></div>
+
+            <div id="controls">
+                <button id="move">wander (position)</button>
+                <button id="rotate">rotate</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $( document ).ready(function() {
+            
+            var $box = $("#box"),
+                $field = $("#field"),
+                rotation = 0,
+                rotationX = 0, 
+                rotationY = 0,
+                rotationZ = 0,
+                wanderTween, 
+                ignoreRollovers, 
+                rotateTween;
+            
+            //set a perspective on the container so we can see the 3D-ness
+            TweenLite.set($field, {perspective: 500});
+            //offset the origin on the z-axis to make the spins more interesting.
+            TweenLite.set($box, {transformOrigin:"center center -150px"});
+     
+            //pulsate the box using scaleX and scaleY
+            //TweenMax.to($box, 0.7, {scaleX:0.8, scaleY:0.8, force3D:true, yoyo:true, repeat:-1, ease:Power1.easeInOut});
+
+            TweenLite.set($box, {rotationZ:70});
+            TweenMax.to($box, 0.2, {rotationZ:110, force3D:true, yoyo:true, repeat:-1, ease:Power1.easeInOut});
+            
+
+            $("#rotate").click(function() {
+                if (rotateTween) {
+                    rotateTween.kill();
+                    rotateTween = null;
+                    TweenLite.to($field, 0.5, { rotationZ:0 });
+                } else {
+                    rotateTween = TweenMax.to($field, 2.2, {rotationZ:110, force3D:true, yoyo:true, repeat:-1, ease:Power1.easeInOut});
+                }
+            });
+                        
+            $("#move").click(function() {
+                if (wanderTween) {
+                    wanderTween.kill();
+                    wanderTween = null;
+                    TweenLite.to($box, 0.5, {x:0, y:0});
+                } else {
+                    wander();
+                }
+            });
+            
+            //randomly choose a place on the screen and animate there, then do it again, and again.
+            function wander() {
+                var x = (($field.width() - $box.width()) / 2) * (Math.random() * 1.8 - 0.9),
+                    y = (($field.height() - $box.height()) / 2) * (Math.random() * 1.4 - 0.7);
+                wanderTween = TweenLite.to($box, 2.5, {x:x, y:y, ease:Power1.easeInOut, onComplete:wander});
+            }
+
+        });
+    </script>
+
+
+</body>
+
+</html>

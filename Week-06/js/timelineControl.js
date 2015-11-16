@@ -6,13 +6,21 @@ function controlTimeline( timeline ) {
 	var windowWidth = window.innerWidth;
 	var progress = 0;
 	var shiftKeyPressed = false;
-	var totalAnimationTime = timeline.duration();
-	console.log( "timeline: totalAnimationTime -> " + totalAnimationTime );
+	//var totalAnimationTime = timeline.duration();
+	//var $slider = $(".slider");
+	//var controls = $(".controls");
+	//var $display = $("div.display");
 
 	var labels = timeline.getLabelsArray();
+		
 	showLabels();
+	createDisplay();
 
+	timeline.eventCallback( "onUpdate", updateSlider  );
+	timelineCount = timeline.getChildren(false, true, true, 0);
+	console.log(timelineCount.length);
 
+	
 	window.onmousedown = function (event) {
 		if (shiftKeyPressed) {
 			timeline.paused(!timeline.paused());
@@ -36,7 +44,8 @@ function controlTimeline( timeline ) {
 		if (event.keyCode == 16) { 
 			shiftKeyPressed = true; 
 			timeline.totalProgress( progress ).pause();
-			createDisplay();
+			$(".display").show();
+			$(".controls").show();
 		}
 		$("div.display").text("shiftKeyPressed: " + shiftKeyPressed );
 	}
@@ -45,10 +54,13 @@ function controlTimeline( timeline ) {
 		if (event.keyCode == 16) { 
 			shiftKeyPressed = false; 
 			timeline.paused(!timeline.paused());
-			destroyDisplay();
+			$(".display").hide();
+			$(".controls").hide();
 		}
 		$("div.display").text("shiftKeyPressed: " + shiftKeyPressed );
 	}
+
+//--------------------------------------------------------------------------------			
 
 	function createDisplay(){
 		$("<div class='display'></div>")
@@ -65,11 +77,51 @@ function controlTimeline( timeline ) {
 				height: ("20px")
 			})
 			.text("shiftKeyPressed: " + shiftKeyPressed)
-		;		
+			.hide();
+		;
+		$("<div class='controls'><div class='slider'></div></div>")
+			.appendTo("body")
+			.css({
+				position: ("absolute"),
+				backgroundColor: ("#444"),
+				fontFamily: ("sans-serif"),
+				top: ("90%"),
+				left: ("50%"),
+				width: ("90%"),
+				transform: ("translate(-50%, 0px)")
+		}).hide();
+		$(".slider").css({
+			backgroundColor: ("#000"),
+			//width: ("410px"),
+		});
 	}
+
+	//--------------------------------------------------------------------------------			
+	
+	// Create a Slider to Control Playback
+	$(".slider").slider({
+		range: false,
+		min: 0,
+		max: 100,
+		step:.01,
+		slide: function ( event, ui ) {
+			timeline.pause();
+			//adjust the timeline’s progress() based on slider value
+			timeline.progress( ui.value/100 );
+		}
+	});
+
+	// updateSlider function
+	function updateSlider() {
+		$(".slider").slider("value", timeline.progress() *100.000000);
+	}
+
+	//--------------------------------------------------------------------------------			
 	
 	function destroyDisplay(){
-		$("div.display").remove();
+		$(".display").remove();
+		$(".controls").remove();
+		$(".slider").remove();
 	}
 	
 	function showLabels(){
