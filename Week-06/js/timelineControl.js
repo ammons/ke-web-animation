@@ -18,7 +18,7 @@ function controlTimeline( timeline ) {
 
 	timeline.eventCallback( "onUpdate", updateSlider  );
 	timelineCount = timeline.getChildren(false, true, true, 0);
-	console.log(timelineCount.length);
+	//console.log(timelineCount.length);
 
 	
 	window.onmousedown = function (event) {
