@@ -43,6 +43,7 @@
 
 <body>
 
+    <div class="headline">Welcome</div>
 
     <div>
         <ul>
@@ -59,23 +60,28 @@
         $( document ).ready(function() {
             
             function eins(){
-                TweenMax.to( "body", 0.4, {backgroundColor:"#f00"}), "-=0"
+                TweenMax.to( "body", 0.4, { backgroundColor:"#f00" } , "-=0");
+                $(".headline").text("Kapitel Eins");
                 console.log("eins playing ");   
             }
             function zwei(){
-                TweenMax.to( "body", 0.4, {backgroundColor:"#ff0"}), "-=0"
+                TweenMax.to( "body", 0.4, {backgroundColor:"#0ff"}, "-=0" );
+                $(".headline").text("Kapitel Zwei");
                 console.log("zwei playing ");   
             }
             function drei(){
-                TweenMax.to( "body", 0.4, {backgroundColor:"#f0f"}), "-=0"
+                TweenMax.to( "body", 0.4, {backgroundColor:"#f0f"}, "-=0" );
+                $(".headline").text("Kapitel Drei");
                 console.log("drei playing ");   
             }
             function vier(){
-                TweenMax.to( "body", 0.4, {backgroundColor:"#00f"}), "-=0"
+                TweenMax.to( "body", 0.4, {backgroundColor:"#00f"}, "-=0" );
+                $(".headline").text("Kapitel Vier");
                 console.log("vier playing ");   
             }
             function fünf(){
-                TweenMax.to( "body", 0.4, {backgroundColor:"#000"}), "-=0"
+                TweenMax.to( "body", 0.4, {backgroundColor:"#000"}, "-=0" );
+                $(".headline").text("Kapitel Fünf");
                 console.log("fünf playing ");   
             }
 
