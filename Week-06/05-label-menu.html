@@ -82,7 +82,7 @@
             //---------------------------------------------------------------------------------
 
             $("li").each( function( index, element ){
-                var tl = new TimelineLite( { paused:true } );
+                var tl = new TimelineLite( { paused:true, ease:Power1.easeInOut } );
                 tl.to(element, 0.2, { width:120, padding:20 } )
                 .to(element, 0.2, {backgroundColor:"#555", color:"white"}, "-=0.1")
                 element.animation = tl;
@@ -129,6 +129,8 @@
                 //.add(  TweenMax.to( "body", 1, {backgroundColor:"#000"}), "-=0" )
                 .add( fünf, "4.0")
                 //.add( timelineSeek,'+=0.1',[tl,'slide-01-loop'])
+                
+                .pause();
             ;
 
             //---------------------------------------------------------------------------------
