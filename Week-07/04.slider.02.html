@@ -1,0 +1,107 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timeline-Animation</title>
+    <script src="js/gsap/TweenMax.min.js"></script>
+    <script src="js/gsap/TimelineMax.min.js"></script>
+    <script src="js/gsap/plugins/CSSPlugin.min.js"></script>
+    <script src="js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="js/timelineControl.js"></script>
+
+    <style>
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            margin: 0px;
+            padding: 0px;
+            background: #1d1d1d;
+            color: white;
+            width: 100%;
+            height: 100%;
+        }        
+        .container {
+            position: relative;
+            overflow: hidden;
+            background-color: purple;
+            width: 100%;
+            height: 100%;
+            opacity: 1.0;
+        }
+        .view {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 100px;
+            /* let the browser know we plan to animate each view in and out */
+            will-change: transform;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container"></div>
+
+    <script>
+        $( document ).ready(function() {
+            
+            var colors = ["red", "orange", "blue", "green", "fuchsia", "black", "blue", "green", "fuchsia", "black"];
+            var slideCount = colors.length;
+            getWindowSize();
+            createSlides( slideCount, colors );
+
+            tl = new TimelineMax();
+            controlTimeline( tl );
+
+			var container = document.querySelector('.container');
+			container.addEventListener('click', function(){ showSlide( 4 ); }, false );
+
+            function createSlides( slideCount, colors ){
+                for (var i=1; i<=slideCount; i++){
+                    $("<div class='view l"+i+"-view'></div>")
+                        .appendTo(".container")
+                        .css({
+                            backgroundColor: (colors[i-1]),
+                            transform: "translateY("+(i-1)+"00%)",
+                        })
+                        .text("Slide: "+i);
+                }
+            }
+
+			function showSlide( slideNum ) {
+                for (i=1; i<=slideCount; i++){
+                    TweenMax.to(".l"+i+"-view", 0.6, {css:{transform:"translateY("+(i-slideNum)*slideHeight+"px)"}, ease:Power2.easeOut} );
+                }            
+            }
+            $( window ).scroll( function (){
+                console.log("huhuh");
+            });
+
+            $(".container").mousemove( setSlide );
+            function setSlide( event ) {
+                showSlide( getCurrentSlideSector( event ) );
+            };
+
+            function getCurrentSlideSector( event ){
+                currentY = event.clientY;
+                currentSlideCount = slideCount-1;
+                currentSlide = (Math.round(currentY/(slideHeight/currentSlideCount))+1)
+                return currentSlide;
+            };
+            
+            $( window ).resize( function() {
+                getWindowSize()
+            });  
+            function getWindowSize(){
+                slideHeight = window.innerHeight;
+                slideWidth = window.innerWidth;
+                console.clear(); console.log("width: "+slideWidth + " height: " + slideHeight);
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

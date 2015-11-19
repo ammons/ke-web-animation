@@ -109,7 +109,7 @@
             //set a perspective on the container so we can see the 3D-ness
             TweenLite.set($field, {perspective: 500});
             //offset the origin on the z-axis to make the spins more interesting.
-            TweenLite.set($box, {transformOrigin:"center center -150px"});
+            TweenLite.set($box, { transformOrigin:"center center -150px" } );
             //pulsate the box using scaleX and scaleY
             TweenMax.to($box, 1.2, {scaleX:0.8, scaleY:0.8, force3D:true, yoyo:true, repeat:-1, ease:Power1.easeInOut});
             

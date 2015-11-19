@@ -63,6 +63,7 @@ function controlTimeline( timeline ) {
 //--------------------------------------------------------------------------------			
 
 	function createDisplay(){
+
 		$("<div class='display'></div>")
 			.appendTo("body")
 			.css({
