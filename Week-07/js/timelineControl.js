@@ -38,7 +38,7 @@ function controlTimeline(timeline) {
 		var mx = 0;
 		var windowWidth = window.innerWidth;
 		var progress = 0;
-		var shiftKeyPressed = false;
+		shiftKeyPressed = false;
 		//var totalAnimationTime = timeline.duration();
 		//var $slider = $(".slider");
 		//var controls = $(".controls");

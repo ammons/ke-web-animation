@@ -81,17 +81,22 @@
             }
 			function createSlideTimeline( slideNum ) {
                 tl = new TimelineMax();
-                t = 0;
                 for (s=1; s<=slideCount; s++){
                     tl.addLabel ( "position: "+s )
-                    for (i=1; i<=slideCount; i++){
+                  //  for (i=1; i<=slideCount; i++){
                         //tl.add( TweenMax.to(".l"+i+"-view", 0.6, {css:{transform:"translateY("+(i-s)*slideHeight+"px)"}, ease:Power2.easeOut} ) );
-                        tl.add( TweenMax.to( slideArray[i-1], 0.7, {y: (i-s) +"00%", itemOrigin: "0% 0%", ease:Power2.easeOut}, "-0.70" ) )
-                        console.log( "slide: "+ slideArray[i-1] + " "+ (i-s) +"00% " + t++);
-                    }
-                    console.log("------------------------");
+                     //   tl.add( TweenMax.to( slideArray[i-1], 0.7, {y: i-s +"00%", ease:Power2.easeOut} ) );
+
+                        tl
+                            .add( TweenMax.to( slideArray[0], 0.7, {y: 1-s +"00%", ease:Power2.easeOut} ) )
+                            .add( TweenMax.to( slideArray[1], 0.7, {y: 2-s +"00%", ease:Power2.easeOut} ) )
+                            .add( TweenMax.to( slideArray[2], 0.7, {y: 3-s +"00%", ease:Power2.easeOut} ) )
+                            .add( TweenMax.to( slideArray[3], 0.7, {y: 4-s +"00%", ease:Power2.easeOut} ) )
+                 
+                       // console.log(i-s);
+                    //}
+                console.log("------------------------");
                 }
-                tl.pause();
                 controlTimeline( tl );
             }
 
@@ -99,9 +104,8 @@
                 for (i=1; i<=slideCount; i++){
                     //TweenMax.to(".l"+i+"-view", 0.6, {css:{transform:"translateY("+(i-slideNum)*slideHeight+"px)"}, ease:Power2.easeOut} );
                     // TweenMax.to(slideArray[i-1], 0.6, {y:(i-slideNum)*slideHeight+"px", ease:Power2.easeOut} );
-                    TweenMax.to( slideArray[i-1], 0.7, {y: (i-slideNum) +"00%", ease:Power2.easeOut} );
+                    TweenMax.to( slideArray[i-1], 0.7, {y: i-slideNum +"00%", ease:Power2.easeOut} );
                 }            
-                console.log("showSilde");
             }
             // $( window ).scroll( function (){
             //     console.log("huhuh");
@@ -109,9 +113,7 @@
 
             $(".container").mousemove( setSlide );
             function setSlide( event ) {
-                if(!shiftKeyPressed){
-                  // showSlide( getCurrentSlideSector( event ) );                
-                }
+                showSlide( getCurrentSlideSector( event ) );
             };
 
             function getCurrentSlideSector( event ){
