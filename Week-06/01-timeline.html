@@ -89,7 +89,8 @@
             //---------------------------------------------------------------------------------
             
             function test( whichTL, where2go ){
-              console.log("test");  
+              console.log("test"); 
+            //   location.reload();
             };
             function timelineSeek( timeline, label ) {
                 console.log("timeline: " + timeline + "label: " + label);  
@@ -99,7 +100,7 @@
             //---------------------------------------------------------------------------------
             
             //tl = new TimelineMax( {  force3D:true, onUpdate: updateSlider } );
-            tl = new TimelineMax( {  force3D:true } );
+            tl = new TimelineMax(  {  force3D:true } );
             tl
                 .addLabel("eins", "1.5")
                 .addLabel("zwei", "2.5")

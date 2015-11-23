@@ -218,4 +218,8 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 
 
 **Inspirational**
-- https://developers.google.com/web/fundamentals/getting-started/
+- 151123
+	- https://developers.google.com/web/fundamentals/getting-started/
+	- http://webaudioplayground.appspot.com
+	- http://motionographer.com/2015/07/06/user-interface-design-why-motion-matters/
+	
