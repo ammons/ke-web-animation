@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Timeline-Animation</title>
+    <title>Slider Timeline Animation</title>
     <script src="js/gsap/TweenMax.min.js"></script>
     <script src="js/gsap/TimelineMax.min.js"></script>
     <script src="js/gsap/plugins/CSSPlugin.min.js"></script>
@@ -22,24 +22,27 @@
         .container {
             position: relative;
             overflow: hidden;
-            background-color: purple;
+            background-color: #333;
             width: 100%;
             height: 100%;
             opacity: 1.0;
+            padding: 0px;
         }
         .container2 {
             position: relative;
+            padding: 20px;
             /*overflow: hidden;*/
-            background-color: fuchsia;
+            background-color: #444;
             width: 100%;
             height: 100%;
             opacity: 1.0;
+            margin: 1 0;
         }
         .view {
             position: absolute;
             width: 100%;
-            height: 3%;
-            padding: 100px;
+            height: 100%;
+            padding: 20px;
             /* let the browser know we plan to animate each view in and out */
             will-change: transform;
         }
@@ -50,7 +53,9 @@
 <body>
 
     <div class="container"></div>
-    <!--<div class="container2">asdfaäölkölk </div>-->
+    <!--<div class="container">Container #01</div>-->
+    <div class="container2">Container #02</div>
+    <div class="container2">Container #03</div>
 
     <script>
         $( document ).ready(function() {
@@ -62,7 +67,7 @@
             getWindowSize();
             createSlides( slideCount, colors );
            // showSlide(3);
-            createSlideTimeline(  );
+            createSlideTimeline();
 
 			var container = document.querySelector('.container');
 			container.addEventListener('click', function(){ showSlide( 4 ); }, false );
@@ -73,22 +78,22 @@
                         .appendTo(".container")
                         .css({
                             backgroundColor: (colors[i-1]),
-                            transform: "translateY("+(i-1)+"00%)",
+                            transform: "translateX("+(i-1)+"00%)",
                         })
                         .text("Slide: "+i);
                     slideArray.push( ".l"+i+"-view" ); 
                 }
             }
 			function createSlideTimeline( slideNum ) {
-                tl = new TimelineMax( {force3D:true} );
+                tl = new TimelineMax( { force3D:true } );
                 t = 0;
                 for (s=1; s<=slideCount; s++){
                     tl.addLabel ( "position: "+s );                    
                     for (i=1; i<=slideCount; i++){
-                        tl.add( TweenMax.to( slideArray[i-1], 0.7, {y: (i-s) +"00%", ease:Power2.easeOut}, 1 ) );
-                        console.log( "slide: "+ slideArray[i-1] + " "+ (i-s) +"00% " + t++);
+                        tl.add( TweenMax.to( slideArray[i-1], 0.7, {x: (i-s) +"00%", ease:Power2.easeOut}, 1 ) );
+                        // console.log( "slide: "+ slideArray[i-1] + " "+ (i-s) +"00% " + t++);
                     }
-                    console.log("------------------------");
+                    // console.log("------------------------");
                 }
                 tl.pause();
                 controlTimeline( tl );
@@ -96,15 +101,10 @@
 
 			function showSlide( slideNum ) {
                 for (i=1; i<=slideCount; i++){
-                    //TweenMax.to(".l"+i+"-view", 0.6, {css:{transform:"translateY("+(i-slideNum)*slideHeight+"px)"}, ease:Power2.easeOut} );
-                    // TweenMax.to(slideArray[i-1], 0.6, {y:(i-slideNum)*slideHeight+"px", ease:Power2.easeOut} );
-                    TweenMax.to( slideArray[i-1], 0.7, {y: (i-slideNum) +"00%", ease:Power2.easeOut} );
+                    TweenMax.to( slideArray[i-1], 0.7, {x: (i-slideNum) +"00%", ease:Power2.easeOut} );
                 }            
                 console.log("showSilde");
             }
-            // $( window ).scroll( function (){
-            //     console.log("huhuh");
-            // });
 
             $(".container").mousemove( setSlide );
             function setSlide( event ) {
@@ -115,8 +115,9 @@
 
             function getCurrentSlideSector( event ){
                 currentY = event.clientY;
+                currentX = event.clientX;
                 currentSlideCount = slideCount-1;
-                currentSlide = (Math.round(currentY/(slideHeight/currentSlideCount))+1)
+                currentSlide = (Math.round(currentX/(slideWidth/currentSlideCount))+1)
                 return currentSlide;
             };
             
