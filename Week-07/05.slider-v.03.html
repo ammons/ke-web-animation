@@ -56,17 +56,19 @@
     <!--<div class="container">Container #01</div>-->
     <div class="container2">Container #02</div>
     <div class="container2">Container #03</div>
+    <div class="container2">Container #04</div>
 
     <script>
         $( document ).ready(function() {
             
-            var colors = ["red", "orange", "blue", "green"];
+            var colors = ["red", "orange", "blue", "green",  "orange", "blue", "green"];
             var slideCount = colors.length;
             var slideArray = [];
             var tl;
+            
             getWindowSize();
             createSlides( slideCount, colors );
-           // showSlide(3);
+            showSlide(3);
             createSlideTimeline();
 
 			var container = document.querySelector('.container');

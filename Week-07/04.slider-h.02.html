@@ -77,7 +77,7 @@
                             backgroundColor: (colors[i-1]),
                             transform: "translateY("+(i-1)+"00%)",
                         })
-                        .text("Slide: "+i);
+                        .html("Slide: "+i);
                     slideArray.push( ".l"+i+"-view" ); 
                 }
             }
@@ -87,7 +87,7 @@
                 for (s=1; s<=slideCount; s++){
                     tl.addLabel ( "position: "+s );                    
                     for (i=1; i<=slideCount; i++){
-                        tl.add( TweenMax.to( slideArray[i-1], 0.7, {y: (i-s) +"00%", ease:Power2.easeOut}, 1 ) );
+                        tl.add( TweenMax.to( slideArray[i-1], 0.7, {y: (i-s) +"00%", ease:Power2.easeOut}, 0 ) );
                         console.log( "slide: "+ slideArray[i-1] + " "+ (i-s) +"00% " + t++);
                     }
                     console.log("------------------------");

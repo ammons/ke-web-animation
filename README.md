@@ -218,4 +218,4 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 
 
 **Inspirational**
-
+- https://developers.google.com/web/fundamentals/getting-started/
