@@ -1,0 +1,247 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Slider Timeline Animation</title>
+    <script src="js/gsap/TweenMax.min.js"></script>
+    <script src="js/gsap/TimelineMax.min.js"></script>
+    <script src="js/gsap/plugins/CSSPlugin.min.js"></script>
+    <script src="js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/dark-hive/jquery-ui.min.css">
+    <script src="js/timelineControl.js"></script>
+
+    <script src="js/gsap/jquery.gsap.min.js"></script>
+    <script src="js/timelineControl.js"></script>
+    
+
+    <style>
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            margin: 0px;
+            padding: 0px;
+            background: #1d1d1d;
+            color: white;
+            width: 100%;
+            height: 100%;
+        }        
+        .box {
+            position: absolute;
+            top: 200px;
+            left: 100px;
+            width: 100px;
+            height: 100px;
+            background-color: cyan;
+        }
+        .container {
+            position: relative;
+            overflow: hidden;
+            background-color: #333;
+            width: 100%;
+            height: 100%;
+            opacity: 1.0;
+            padding: 0px;
+        }
+        .container2 {
+            position: relative;
+            padding: 20px;
+            /*overflow: hidden;*/
+            background-color: #444;
+            width: 100%;
+            height: 100%;
+            opacity: 1.0;
+            margin: 1 0;
+        }
+        .view {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            /* let the browser know we plan to animate each view in and out */
+            will-change: transform;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container"></div>
+    <div class="container2">Container #02</div>
+    <div class="container2">Container #03</div>
+    <div class="container2">Container #04</div>
+    <div class="box"></div>
+
+    <script>
+        $( document ).ready(function() {
+            console.log("document ready...");
+            
+            // var colors = ["red", "green", "blue", "orange", "yellow", "white"];
+            var colors = ["orange", "green", "blue"];
+            var slideCount = colors.length;
+            var slideArray = [];
+            var currentSlide = 0;
+            var tl = new TimelineMax( { force3D:true } );
+            var tlm = new TimelineMax( { force3D:true } );
+            var tw;
+            var twa = [];         
+        
+
+            
+            function init() {
+                console.log("init()")
+                getWindowSize();
+                createSlides( slideCount, colors );
+                createSlideTimeline( 0.7 );
+                //showSlide(3, 0.7);
+            }
+            init();            
+
+            function main() {
+                requestAnimationFrame(main);
+                console.log("jjkj")
+                // Code goes here
+            }
+            main();
+
+            //-----------------------------------------------------------------------------
+
+            function createSlides( slideCount, colors ){
+                console.log("createSlides " + slideCount + ", " + colors );
+                for (var i=1; i<=slideCount; i++){
+                    $("<div class='view l"+i+"-view'></div>")
+                        .appendTo(".container")
+                        .css({
+                            backgroundColor: (colors[i-1]),
+                            transform: "translateX("+(i-1)+"00%)",
+                        })
+                        .text("Slide: "+i);
+                    slideArray.push( ".l"+i+"-view" ); 
+                }
+            }
+			function createSlideTimeline( duration ) {
+                console.log("createSlideTimeline, duration: " + duration);
+                for (s=1; s<=slideCount; s++){
+                    tlm.add ( "position: "+ s, (s-1)*duration );                    
+                    tl = new TimelineMax( { force3D:true } );
+                    for (i=1; i<=slideCount; i++){
+                        tl.add( TweenMax.to( slideArray[i-1], duration, { x: (i-s) +"00%", ease:Power2.easeOut } ), 0 );
+                    }
+                    tlm.add( tl ).pause();
+                }
+                controlTimeline( tlm );
+            }
+            //-----------------------------------------------------------------------------
+            
+            // //var event = new Event('newSlideSectorEntered');
+            // $.event.trigger({
+            //     type: "newSlideSectorEntered",
+            //     message: "New Sector arrived!",
+            //     time: new Date()
+            // });
+            // $(document).on("newSlideSectorEntered", onEnterSlideSector());
+            // //document.addEventListener('newSlideSectorEntered', onEnterSlideSector( e ), false);
+            // function onEnterSlideSector( e ){
+            //     console.log(">>>> " + e + "  ........................");                
+            // }
+            // $(document).newSlideSectorEntered();
+            // 
+            //------------------------------------------------------------------------------
+
+            $(".container").mousemove( setSlide );
+            function setSlide( event ) {
+                if(!shiftKeyPressed){
+                    //console.log("shiftKeyPressed = false " + "Position: "+ getCurrentSlideSector( event ))
+                    //tlm.seek( "position: " + getCurrentSlideSector( event ) ).pause();
+                    var newSlide = getCurrentSlideSector(event) 
+                    if ( newSlide != currentSlide ){
+                        currentSlide = newSlide;
+                        //console.clear();
+                        console.log("new SlideSector entered..........");
+                        //console.log("shiftKeyPressed = false,  " + tw + ", currentSlide: " + currentSlide + ", currentSector: "+ getCurrentSlideSector(event))
+                        showSlide( currentSlide, 0.7 );                
+                    }
+                } else if (shiftKeyPressed) {
+                    var newSlide = getCurrentSlideSector(event) 
+                    if ( newSlide != currentSlide ){
+                        currentSlide = newSlide;
+                        console.log("new SlideSector entered..........");
+                        if (twa.length > 0) {
+                            stopSlide();
+                            //tw.remove();
+                        //   console.log("shiftKeyPressed = true, " + tw + ", currentSlide: " + currentSlide + ", currentSector: "+ getCurrentSlideSector(event))
+                            //TweenMax.killTweensOf( tw );                        
+                        }
+                    }
+                }
+            };
+			function showSlide( slideNum, duration ) {
+               // tl.pause();
+                twa = [];
+               // stopSlide();
+                for (i=1; i<=slideCount; i++){
+                     tw = TweenMax.to( slideArray[i-1], duration, {x: (i-slideNum) +"00%", ease:Power2.easeOut} );
+                     twa.push( tw );
+                     //TweenMax.to( slideArray[i-1], duration, {x: (i-slideNum) +"00%", ease:Power2.easeOut} );
+                     //tw.add( TweenMax.to( slideArray[i-1], duration, { x: (i-slideNum) +"00%", ease:Power2.easeOut } ), 0 );
+                }
+                console.log("function showSlide()");
+                console.log(twa);
+            }
+            function stopSlide(){
+                console.log("stopSlide");
+                TweenMax.killAll();
+                twa.forEach(function (element, index) {
+                    element.kill();
+                    console.log( element );
+                    console.log( "element: " + element + " index: " + index );
+                });
+                twa = [];
+            }
+            function getCurrentSlideSector( event ){
+                currentY = event.clientY;
+                currentX = event.clientX;
+                // currentSlideCount = slideCount;
+                sectorWidth = ( slideWidth / slideCount );
+                var currentSlide = Math.ceil( currentX / sectorWidth );
+                //console.clear(); 
+                //console.log( "sectorWidth: " + sectorWidth + " currentSlide: " + currentSlide  + " " + Math.ceil(currentSlide));
+                return currentSlide;
+            };
+
+            //-----------------------------------------------------------------------------
+            // HELPER
+            
+            $( window ).resize( function() {
+                getWindowSize()
+            });  
+            function getWindowSize(){
+                slideHeight = window.innerHeight;
+                slideWidth = window.innerWidth;
+                //console.clear(); 
+                //console.log("width: "+slideWidth + " height: " + slideHeight);
+            }
+    
+            //-----------------------------------------------------------------------------
+            // Testanimation
+            
+            element = $(".box");            
+            tl2 = new TimelineMax( {  ease:Power0.easeNone } );
+            tl2
+                .addLabel("first-turn")
+                .add(  TweenMax.to( element, 1, {left:"+=200px"}) )
+                .addLabel("second-turn")
+                .add(  TweenMax.to( element, 1, {top:"+=200px"}) )
+                .addLabel("third-turn")
+                .add(  TweenMax.to( element, 1, {left:"-=200px"}) )
+                .addLabel("fourth-turn")
+                .add(  TweenMax.to( element, 1, {top:"-=200px"}) )
+            ;
+            //-----------------------------------------------------------------------------
+
+        });
+    </script>
+
+
+</body>
+
+</html>

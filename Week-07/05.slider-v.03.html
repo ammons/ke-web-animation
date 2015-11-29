@@ -7,7 +7,13 @@
     <script src="js/gsap/TimelineMax.min.js"></script>
     <script src="js/gsap/plugins/CSSPlugin.min.js"></script>
     <script src="js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/dark-hive/jquery-ui.min.css">
     <script src="js/timelineControl.js"></script>
+
+    <script src="js/gsap/jquery.gsap.min.js"></script>
+    <script src="js/timelineControl.js"></script>
+    
 
     <style>
         body {
@@ -60,21 +66,24 @@
 
     <script>
         $( document ).ready(function() {
+            console.log("document ready...");
             
-            var colors = ["red", "orange", "blue", "green",  "orange", "blue", "green"];
+            var colors = ["red", "orange", "blue"];
             var slideCount = colors.length;
             var slideArray = [];
-            var tl;
+            var tl = new TimelineMax( { force3D:true } );
+            var tw;
             
             getWindowSize();
             createSlides( slideCount, colors );
-            showSlide(3);
             createSlideTimeline();
+            //showSlide(3);
 
 			var container = document.querySelector('.container');
-			container.addEventListener('click', function(){ showSlide( 4 ); }, false );
+			//container.addEventListener('click', function(){ showSlide( 4 ); }, false );
 
             function createSlides( slideCount, colors ){
+                console.log("createSlides " + slideCount + ", " + colors );
                 for (var i=1; i<=slideCount; i++){
                     $("<div class='view l"+i+"-view'></div>")
                         .appendTo(".container")
@@ -87,39 +96,82 @@
                 }
             }
 			function createSlideTimeline( slideNum ) {
-                tl = new TimelineMax( { force3D:true } );
-                t = 0;
+                console.log("createSlideTimeline");
+                duration = 0.7;
+                tlm = new TimelineMax();
+                tl = new TimelineMax();
+                //tlm.totalDuration( 3.0 );
+                //console.log( tlm );
+                
                 for (s=1; s<=slideCount; s++){
-                    tl.addLabel ( "position: "+s );                    
-                    for (i=1; i<=slideCount; i++){
-                        tl.add( TweenMax.to( slideArray[i-1], 0.7, {x: (i-s) +"00%", ease:Power2.easeOut}, 1 ) );
-                        // console.log( "slide: "+ slideArray[i-1] + " "+ (i-s) +"00% " + t++);
-                    }
-                    // console.log("------------------------");
+                    pos = (s-1)*duration;
+                    console.log("pos: " + pos);
+                    tlm.add ( "position: "+ s, parseFloat(pos+1) );                    
+                    tl = new TimelineMax( { force3D:true } );
+                    tl.add( TweenMax.to( slideArray[0], 0.7, { x: (1-s) +"00%", ease:Power2.easeOut } ), 0 );
+                    tl.add( TweenMax.to( slideArray[1], 0.7, { x: (2-s) +"00%", ease:Power2.easeOut } ), 0 );
+                    tl.add( TweenMax.to( slideArray[2], 0.7, { x: (3-s) +"00%", ease:Power2.easeOut } ), 0 );
+                    // for (i=1; i<=slideCount; i++){
+                    //     tl.add( TweenMax.to( slideArray[i-1], 0.7, { x: (i-s) +"00%", ease:Power2.easeOut } ), 0 );
+                    // }
+                    //tl.pause();
+                    tlm.add( tl ).pause();
+                    console.log( tlm, "s " + s );
+                    //console.log( tl );
+                    //console.log( "Childrens: " + tl.getChildren(false, true, true, 0)  + "startTime: " + (s-1) );
+                                                                                         // tl.kill();
                 }
-                tl.pause();
-                controlTimeline( tl );
+                console.log("---------");
+                // console.log( tlm );
+                console.log("---------");
+                //tl.pause();
+                controlTimeline( tlm );
+                //tlm.play();
             }
 
+// 			function createSlideTimeline( slideNum ) {
+//                 console.log("createSlideTimeline");
+//                 tl = new TimelineMax( { force3D:true, ease:Linear.easeNone } );
+//                 for (s=1; s<=slideCount; s++){
+//                     tl.addLabel ( "position: "+ s );                    
+//                     for (i=1; i<=slideCount; i++){
+//                         console.log(s-1)
+//                          tl.add( TweenMax.to( slideArray[i-1], 0.7, { x: (i-s) +"00%", ease:Power2.easeOut } ), s-1 ).pause();
+//                     }
+//                 }
+//                 //tl.pause();
+//                 controlTimeline( tl );
+//             }
+// 
 			function showSlide( slideNum ) {
+                tl.pause();
                 for (i=1; i<=slideCount; i++){
-                    TweenMax.to( slideArray[i-1], 0.7, {x: (i-slideNum) +"00%", ease:Power2.easeOut} );
+                     tw = TweenMax.to( slideArray[i-1], 0.7, {x: (i-slideNum) +"00%", ease:Power2.easeOut} );
                 }            
-                console.log("showSilde");
+                console.log("showSlide");
             }
 
             $(".container").mousemove( setSlide );
             function setSlide( event ) {
                 if(!shiftKeyPressed){
-                   showSlide( getCurrentSlideSector( event ) );                
+                    console.log("shiftKeyPressed = false " + "Position: "+ getCurrentSlideSector( event ))
+                   tlm.seek("position: "+ getCurrentSlideSector( event ));
+                   tlm.pause();
+                   //showSlide( getCurrentSlideSector( event ) );                
+                } else {
+                    //console.log("shiftKeyPressed = true")
+                  //  TweenMax.killTweensOf( tw );
                 }
             };
 
             function getCurrentSlideSector( event ){
                 currentY = event.clientY;
                 currentX = event.clientX;
-                currentSlideCount = slideCount-1;
-                currentSlide = (Math.round(currentX/(slideWidth/currentSlideCount))+1)
+                // currentSlideCount = slideCount;
+                sectorWidth = slideWidth / slideCount;
+                currentSlide = Math.ceil( currentX / sectorWidth );
+                //console.clear(); 
+                //console.log( "sectorWidth: " + sectorWidth + " currentSlide: " + currentSlide  + " " + Math.ceil(currentSlide));
                 return currentSlide;
             };
             
@@ -129,7 +181,8 @@
             function getWindowSize(){
                 slideHeight = window.innerHeight;
                 slideWidth = window.innerWidth;
-                console.clear(); console.log("width: "+slideWidth + " height: " + slideHeight);
+                //console.clear(); 
+                //console.log("width: "+slideWidth + " height: " + slideHeight);
             }
         });
     </script>

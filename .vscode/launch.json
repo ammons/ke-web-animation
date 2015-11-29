@@ -36,6 +36,19 @@
 			// Port to attach to.
 			"port": 5858,
 			"sourceMaps": false
-		}
+		},
+		{
+            "name": "Attach to url with files served from ./out",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "webRoot": "out"
+        },
+		{
+            "name": "Launch index.html",
+            "type": "chrome",
+            "request": "launch",
+            "file": "Week-07/7.slider-v.03.html"
+        }
 	]
 }

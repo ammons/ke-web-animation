@@ -1,0 +1,95 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timeline-Animation</title>
+    <script src="js/gsap/TweenMax.min.js"></script>
+    <script src="js/gsap/TimelineMax.min.js"></script>
+    <script src="js/GreenProp.min.js"></script>
+    <script src="js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="js/timelineControl.js"></script>
+
+
+
+    <style>
+        body {
+            background: #1d1d1d;
+            color: white;
+            overflow: hidden;
+        }
+        
+        #div1 {
+            width: 200px;
+            height: 100px;
+            position: relative;
+            background: #00f;
+            border: solid 2px #fff;
+            border-radius: 5px;
+            margin: 100px auto;
+            margin-bottom: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="div1"></div>
+
+
+
+    <script>
+        $( document ).ready(function() {
+
+            var mx = 0;
+            var my = 0;
+            
+            document.addEventListener('mousemove', onMouseUpdate, false);
+            document.addEventListener('mouseenter', onMouseUpdate, false);
+            
+            function onMouseUpdate (event) {
+                mx = event.clientX;  
+                my = event.clientY;
+                d = Math.round( getDistance( GreenProp.x( div1 ), GreenProp.y( div1 ), mx, my ));
+                console.log("mx: "+ mx + ", my: "+ my + ", d: " + d);
+            };
+           
+
+            var div1 = $("div#div1"),
+            tl1 = new TimelineMax( { force3d:true, repeat:-1, yoyo:true } ),
+            transformOriginObj = { 'left':50, 'top':50 };
+            TweenLite.set(div1, { transformOrign:'50% 50%' });
+            // TweenLite.set(div1, { x:110, y:440, transformOrign:'50% 50%' });
+    
+            tl1
+                .to( div1, 1, { rotation:360,  transformOrigin:'0% 0%', ease:Power1.easeInOut})
+                .to( transformOriginObj, 1, { left:50, top:250, roundProps:'top, left', onUpdate:updateOrigin, ease:Power1.easeInOut}, "-=1")
+    
+            function updateOrigin(){
+                TweenLite.set(div1, {transformOrigin:transformOriginObj.left + '% ' + transformOriginObj.top +  '%'});
+                //TweenLite.set(div1, { transformOrigin: mx + '% ' + my +  '%' });
+            }
+            
+
+           
+        	//---------------------------------------------------------------------------------
+            function getDistance( pt1X, pt1Y, pt2X, pt2Y ){
+                var xs = 0;
+                var ys = 0;
+                xs = pt2X - pt1X;
+                xs = xs * xs;
+                ys = pt2Y - pt1Y;
+                ys = ys * ys;
+                return Math.sqrt( xs + ys );
+            };
+            function getVertDistance( pt1Y, pt2Y ){
+                return pt2Y - pt1Y;
+            };
+                       
+        });
+    </script>
+
+
+</body>
+
+</html>
