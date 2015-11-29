@@ -87,7 +87,8 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 ####Woche #08  30.11.
 	- JavaScript GSAP Library: 
 		- transform-origin
-	- Kursteilnehmer stellen Arbeitsfortschritte vor
+		- tweening p5.js elements
+	- Kursteilnehmer Abschlusspräsentation 1. Aufgabe 
 	- kurze Pause
 	- Einzelbesprechungen
 ####Woche #09  07.12

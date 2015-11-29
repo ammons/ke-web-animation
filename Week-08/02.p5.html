@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timeline-Animation</title>
+    <script src="js/gsap/TweenMax.min.js"></script>
+    <script src="js/gsap/TimelineMax.min.js"></script>
+    <script src="js/p5/p5.min.js"></script>
+    <script src="js/p5/p5.dom.js"></script>
+    <script src="js/jquery/jquery-1.11.3.min.js"></script>
+
+
+
+    <style>
+        body {
+            background: #222;
+            color: white;
+            overflow: hidden;
+        }
+        .myDiv {
+            /*width: 200px;
+            height: 300px;*/
+            left: 40%;
+            position: relative;
+            font-size: 10em;
+            font-family: sans-serif ;
+            color: #ff00ff;
+        }
+        
+        #div1 {
+            width: 200px;
+            height: 100px;
+            position: relative;
+            background: #00f;
+            border: solid 2px #fff;
+            border-radius: 5px;
+            margin: 100px auto;
+            margin-bottom: 0;
+            font-style: sans-serif ;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!--<div id="div1"></div>-->
+
+    <script>
+
+            var canvas, text;
+            
+            function setup() {
+                canvas = createCanvas(displayWidth, displayHeight);
+                canvas.position(0, 0);
+                // noCanvas;
+                
+                img = createImg('http://p5js.org/img/asterisk-01.png');
+                
+                myDiv = createDiv( "red typo perfect" );
+                myDiv.addClass('myDiv');
+                //myDiv.position( 500, 20);
+                //myDiv.style( "font-size", "100px" );
+                //myDiv.style( "font-family", "sans-serif" );
+                //myDiv.style( "color", "#ff00ff" );
+
+               //----------------------------------------------------------------------------------------
+
+               // TweenMax.to( myDiv.elt, 1, {x:400, y:400} );
+               
+               //----------------------------------------------------------------------------------------
+
+                var div1 = img.elt; 
+                tl1 = new TimelineMax( { force3d:true, repeat:-1, yoyo:true } ),
+                transformOriginObj = { 'left':50, 'top':50 };
+                TweenLite.set(div1, { transformOrign:'50% 50%' });
+        
+                tl1
+                    .to( div1, 1, { rotation:360,  transformOrigin:'0% 0%', ease:Power1.easeInOut})
+                    .to( transformOriginObj, 1, { left:50, top:250, roundProps:'top, left', onUpdate:updateOrigin, ease:Power1.easeInOut}, "-=1")
+        
+                function updateOrigin(){
+                    TweenLite.set(div1, {transformOrigin:transformOriginObj.left + '% ' + transformOriginObj.top +  '%'});
+                    //TweenLite.set(div1, { transformOrigin: mouseX + '% ' + mouseY +  '%' });
+                }
+
+            }
+            
+            function draw() {
+                img.position(mouseX, mouseY);
+                img.rotate(mouseX/2.0,mouseY/2.0, mouseX/2.0);
+                //ellipse(mouseX, mouseY, 100, 100);
+                //ellipse(width/4, height/2, 50, 50);
+            }
+                       
+    </script>
+
+
+</body>
+
+</html>
