@@ -85,6 +85,11 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- Einzelbesprechungen
 ####Woche #07  23.11.
 ####Woche #08  30.11.
+	- JavaScript GSAP Library: 
+		- transform-origin
+	- Kursteilnehmer stellen Arbeitsfortschritte vor
+	- kurze Pause
+	- Einzelbesprechungen
 ####Woche #09  07.12
 ####Woche #10  14.12
 ####Woche #xx  21.12 / entfällt
@@ -222,4 +227,6 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- https://developers.google.com/web/fundamentals/getting-started/
 	- http://webaudioplayground.appspot.com
 	- http://motionographer.com/2015/07/06/user-interface-design-why-motion-matters/
-	
+- 151130
+	- http://blog.gannon.tv/2013/01/11/greensock-properties-helper-class-for-javascript-and-jquery/
+	- http://greensock.com/forums/topic/7181-rotation-and-scale-getter-2d3d/#entry26757
