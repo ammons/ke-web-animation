@@ -231,3 +231,15 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 - 151130
 	- http://blog.gannon.tv/2013/01/11/greensock-properties-helper-class-for-javascript-and-jquery/
 	- http://greensock.com/forums/topic/7181-rotation-and-scale-getter-2d3d/#entry26757
+	- https://github.com/processing/p5.js/wiki/Beyond-the-canvas
+	- https://github.com/therewasaguy/p5-music-viz
+		- http://therewasaguy.github.io/p5-music-viz/demos/08_echonestPitchSegment/
+		- http://therewasaguy.github.io/p5-music-viz/demos/01b_amplitude_time/
+		- http://therewasaguy.github.io/p5-music-viz/demos/03_time_domain_oscilloscope/
+		- http://therewasaguy.github.io/p5-music-viz/demos/05_fft_scaleNeighbors/
+	- https://github.com/shiffman 
+		- http://shiffman.net/teaching/a2z/
+		- https://github.com/shiffman/Programming-from-A-to-Z-F14
+		- http://shiffman.net/teaching/a2z/visualization/#dom
+	- Helpers
+		- https://github.com/tapio/live-server
