@@ -38,6 +38,7 @@ function controlTimeline(timeline) {
 
 			mx = event.clientX;
 			progress = mx / windowWidth;
+
 			if (shiftKeyPressed) {
 				timeline.totalProgress(progress).pause();
 			}
