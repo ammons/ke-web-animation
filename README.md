@@ -243,3 +243,9 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 		- http://shiffman.net/teaching/a2z/visualization/#dom
 	- Helpers
 		- https://github.com/tapio/live-server
+		
+		
+**Cleanup unused objects in git repository**
+	- git reflog expire --expire=now --all
+	- git repack -ad  # Remove dangling objects from packfiles
+	- git prune       # Remove dangling loose objects
