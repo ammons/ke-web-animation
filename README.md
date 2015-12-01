@@ -130,6 +130,8 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 
 #### Local Server
 - https://github.com/processing/p5.js/wiki/Local-server
+- live-server
+	- https://github.com/tapio/live-server
 - SimpleHTTPServer
 	- https://github.com/lmccart/itp-creative-js/wiki/SimpleHTTPServer
 - Servi
@@ -229,6 +231,7 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- http://webaudioplayground.appspot.com
 	- http://motionographer.com/2015/07/06/user-interface-design-why-motion-matters/
 - 151130
+	- https://css-tricks.com/svg-animation-on-css-transforms/
 	- http://blog.gannon.tv/2013/01/11/greensock-properties-helper-class-for-javascript-and-jquery/
 	- http://greensock.com/forums/topic/7181-rotation-and-scale-getter-2d3d/#entry26757
 	- https://github.com/processing/p5.js/wiki/Beyond-the-canvas
