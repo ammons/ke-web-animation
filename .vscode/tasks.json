@@ -6,12 +6,69 @@
 // ${fileExtname}: the current opened file's extension
 // ${cwd}: the current working directory of the spawned process
 
+
 {
-	"version": "0.1.0",
-	"command": "Chrome",
-	"osx": {"command": "///Applications/Google Chrome.app/Contents/MacOS/Google Chrome"},
-	"args": ["${file}"]
+    "version": "0.1.0",
+    "command": "bash",
+    "isShellCommand": true,
+    "showOutput": "always",
+    "args": [
+        "-c"
+    ],
+    "tasks": [
+        {
+            "taskName": "My First Command",
+            "suppressTaskName": true,
+            // "isBuildCommand": true,
+			"echoCommand": true,
+            "args": ["gulp serve"]
+        },
+        {
+            "taskName": "My Command Requiring .bash_profile",
+            "suppressTaskName": true,
+            "args": ["open ~/.bash_profile && echo cmd2"]
+        },
+        {
+            "taskName": "My Python task",
+            "suppressTaskName": true,
+            "args": ["/usr/bin/python ${file}"]
+        },
+        {
+            "taskName": "Open File",
+            "suppressTaskName": true,
+            "isBuildCommand": true,
+            "args": ["open ${file}"]
+			// "args": ["cd ${fileDirname} && open ${file}"]
+            // "args": ["live-server ${fileDirname}  --entry-file=${file}"]
+            // "args": ["echo ${file}"]
+        }
+    ]
 }
+
+
+// {
+// 	"version": "0.1.0",
+// 	"command": "Liveserve",
+// 	"osx": {"command": "live-server"},
+// 	"isShellCommand": true
+// 	// "args": ["${file}"]
+// }
+// {
+// 	"version": "0.1.0",
+// 	"command": "Liveserve",
+// 	"osx": {"command": "live-server"},
+// 	"isShellCommand": true
+// 	// "args": ["${file}"]
+// }
+
+
+// {
+// 	"version": "0.1.0",
+// 	"command": "Chrome",
+// 	"osx": {"command": "///Applications/Google Chrome.app/Contents/MacOS/Google Chrome"},
+// 	"args": ["${file}"]
+// }
+
 /*
 {
     "version": "0.1.0",

@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timeline-Animation</title>
+    <script src="js/gsap/TweenMax.min.js"></script>
+    <script src="js/gsap/TimelineMax.min.js"></script>
+    <script src="js/p5/p5.min.js"></script>
+    <script src="js/p5/p5.dom.js"></script>
+    <script src="js/jquery/jquery-1.11.3.min.js"></script>
+
+
+
+    <style>
+        body {
+            background: black;
+            color: white;
+            overflow: hidden;
+            margin: 0;
+        }
+        
+        .myDiv {
+            /*width: 200px;
+            height: 300px;*/
+            left: 40%;
+            position: relative;
+            font-size: 10em;
+            font-family: sans-serif;
+            color: red;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+
+    <!--http://www.princeton.edu/~aatishb/processing/wavemaker/-->
+    
+    <script>
+        var x, y;
+        var t = 0;
+        var phase;
+        var signx,signy;
+        
+        a = 25; //circle radius
+        w = 6; //angular frequency
+        p = 4.5; // pulse frequency
+        
+        function preload(){            
+            // bg = loadImage('http://www.princeton.edu/~aatishb/processing/wavemaker/circles.png');
+            // bg = loadImage('img/circles.png');
+        }
+        
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            stroke(0);
+            fill(255);
+            frameRate(50);
+        }
+        
+        function draw() {
+        
+            background( 0 );
+                    strokeWeight(0);
+            
+            for(var x = 0; x<width+a; x+=1.2*a) {
+                for(var y = 0; y<height+a; y+=1.2*a){
+            
+                    phasex = p*PI*(x/width)
+                    phasey = p*PI*(y/width)
+                    
+                    if(mouseX<width){
+                        signx = (mouseX-width/2)/(width/2);
+                    } else {
+                        signx = 1;
+                    }
+                    
+                    if(mouseY<height) {
+                        signy = (mouseY-height/2)/(height/2);
+                    } else {
+                        signy = 1;
+                    }
+                    
+                    phase = signx*phasex + signy*phasey;
+                
+                    // Draw particles
+                    ellipse(x + a*cos(w*t + phase), y + a*sin(w*t + phase), 5/signx, 5/signx);
+                    // ellipse(x + a*cos(w*t + phase), y + a*sin(w*t + phase), 5/signx, 5/signx);
+                        
+                    //Code for drawing circles
+                    //This bit isn't run because it's preloaded as an image instead to reduce CPU load
+                    /*
+                    strokeWeight(1);
+                    noFill();
+                    ellipse(x , y, 2*a, 2*a);
+                    */          
+                }
+            }
+                        
+            if(w*t>=2*PI) {
+                t=0;
+            }
+            t += 0.005;
+
+        }
+    </script>
+
+
+</body>
+
+</html>
