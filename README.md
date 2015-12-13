@@ -93,11 +93,15 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- Einzelbesprechungen
 ####Woche #09  07.12
 ####Woche #10  14.12
+	- JavaScript
+	- Kursteilnehmer zeigen erste Ergebnisse 2. Aufgabe 
+	- kurze Pause
+	- Einzelbesprechungen
 ####Woche #xx  21.12 / entfällt
 ####Woche #xx  28.12 / entfällt
-####Woche #xx  04.01 / entfällt (Ersatztermin)
-####Woche #11  11.01.
-####Woche #12  18.01
+####Woche #11  04.01
+####Woche #12  11.01
+####Woche #13  18.01
 
 
 ## Evaluation

@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timeline-Animation</title>
+    <script src="js/gsap/TweenMax.min.js"></script>
+    <script src="js/gsap/TimelineMax.min.js"></script>
+    <script src="js/p5/p5.min.js"></script>
+    <script src="js/p5/p5.dom.js"></script>
+    <script src="js/jquery/jquery-1.11.3.min.js"></script>
+
+    <style>
+        body {
+            background: black;
+            color: white;
+            overflow: hidden;
+            margin: 0;
+        }        
+    </style>
+
+</head>
+
+<body>
+
+    <!--http://www.princeton.edu/~aatishb/processing/wavemaker/-->
+    
+    <script>
+        var x, y;
+        var t = 0;
+        var phase;
+        var signx,signy;
+        
+        a = 10; //circle radius
+        
+        
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            stroke(0);
+            fill(255);
+            frameRate(50);
+        }
+        
+        function draw() {
+        
+            background( 0 );
+           // strokeWeight( 0 );
+            
+            for(var x = 0; x<width+a; x+=a) {
+                for(var y = 0; y<height+a; y+=a){
+            
+                    
+                    if(mouseX<width){
+                        signx = (mouseX-width/2)/(width/2);
+                    } else {
+                        signx = 1;
+                    }
+                    
+                    if(mouseY<height) {
+                        signy = (mouseY-height/2)/(height/2);
+                    } else {
+                        signy = 1;
+                    }
+                    
+                    factorX = signx*a;
+                    factorY = signy*a;
+                
+                    // Draw particles
+                    ellipse(x, y , 5*signx, 5*signy);
+                        
+                              
+                }
+            }
+                        
+
+        }
+    </script>
+
+
+</body>
+
+</html>
