@@ -43,8 +43,8 @@
         
             background(0);
         
-            px = map( mouseX, 0, windowWidth, 30, 200);
-            py = map( mouseY, 0, windowHeight, 10, 180);
+             px = map( mouseX, 0, windowWidth, 30, 200);
+             py = map( mouseY, 0, windowHeight, 10, 180);
 
             for(var x = 0; x<width; x+=px) {
                 for(var y = 0; y<height; y+=px){
@@ -53,7 +53,7 @@
                     ellipse(x, y , py, py);
                       
                     // Print Parameter
-                    d.innerHTML = "px: " +px + "<br> fps: " + frameRate();  
+                    // d.innerHTML = "px: " +px + "<br> fps: " + frameRate();  
                 }
             }
                         

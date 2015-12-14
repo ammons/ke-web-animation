@@ -99,7 +99,7 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 	- Einzelbesprechungen
 ####Woche #xx  21.12 / entfällt
 ####Woche #xx  28.12 / entfällt
-####Woche #11  04.01
+####Woche #11  04.01 
 ####Woche #12  11.01
 ####Woche #13  18.01
 
@@ -244,13 +244,22 @@ Wenn auch die gestalterische Expressivität bei der Web-Gestaltung in der letzte
 		- http://therewasaguy.github.io/p5-music-viz/demos/01b_amplitude_time/
 		- http://therewasaguy.github.io/p5-music-viz/demos/03_time_domain_oscilloscope/
 		- http://therewasaguy.github.io/p5-music-viz/demos/05_fft_scaleNeighbors/
-	- https://github.com/shiffman 
+	- Dan Shiffman
+		- https://www.youtube.com/user/shiffman/playlists
+		- p5.js Tutorial 
+			- https://www.youtube.com/watch?v=8j0UDiN7my4&list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA
+		- https://github.com/shiffman 
 		- http://shiffman.net/teaching/a2z/
 		- https://github.com/shiffman/Programming-from-A-to-Z-F14
 		- http://shiffman.net/teaching/a2z/visualization/#dom
+		- http://shiffman.net/teaching/a2z/week1/#beyond
 	- Helpers
 		- https://github.com/tapio/live-server
-	
+- 151214
+	- https://www.kadenze.com/features
+	- http://www.decodeunicode.org/
+	- https://www.khanacademy.org/computing/computer-programming
+	- http://www.patatap.com/
 		
 		
 **cleanup unused objects in git repository**

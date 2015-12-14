@@ -53,9 +53,8 @@
                 for(var j = 0; j < 5; j++){
                     tile = createDiv('x: ' + i*50 + " <br>y: "+j*50);
                     tile.addClass('myTile');
-                    tile.style("top", ""+i*150);
-                    tile.style("left", ""+j*150);
-                    tiles.push(tile); 
+                    tile.style("top", ""+i*250);
+                    tile.style("left", ""+j*250);
                     container.child( tile.elt );
                     container.style( "transformOrigin", "1000 400");
 
@@ -68,10 +67,10 @@
             // container.style("top", ""+mouseY);
             // container.style("left", ""+mouseX);
 
-            x+=.5 % 360;
-            y+=.5 % 360;
-            z+=.5 % 360;
-            container.rotate(x,y,z);
+           x+=.5 % 360;
+           y+=.5 % 360;
+           z+=.5 % 360;
+           container.rotate(x,y,z);
         }
 
     </script>
